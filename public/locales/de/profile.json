@@ -1,0 +1,54 @@
+{
+  "page": {
+    "title": "Profil"
+  },
+  "status": "Status",
+  "account": "Account",
+  "profileSection": {
+    "title": "Profile"
+  },
+  "avatarSection": {
+    "title": "Profilbild",
+    "imgUpload": "Bild hochladen",
+    "imgAriaLabel": "Bild hochladen"
+  },
+  "nameSection": {
+    "title": "Name",
+    "description": "Ihr Konto kann anhand der Informationen, die Sie hier eingeben, gefunden werden.",
+    "firstName": {
+      "label": "Name",
+      "required": "Name ist zwingend notwendig"
+    },
+    "lastName": {
+      "label": "Nachname",
+      "required": "Nachname ist zwingend notwendig"
+    }
+  },
+  "emailSection": {
+    "title": "Emails",
+    "primary": "Hauptadresse",
+    "remove": "Entfernen",
+    "addEmail": {
+      "required": "Email adresse wird benötigt",
+      "invalid": "Invalide email adresse",
+      "label": "Email adresse hinzufügen",
+      "add": "Hinzufügen"
+    },
+    "info": {
+      "loggedIn": "Wird zum login verwendet",
+      "notifications": "Empfängt Notifikationen",
+      "findable": "Kann verwendet werden um Sie auf unserer Platform zu finden",
+      "contact": "Kann von ihren Freunden verwendet werden um Sie zu kontaktieren"
+    }
+  },
+  "phoneSection": {
+    "title": "Telefonnummer",
+    "description": "Diese Nummern können von Ihren Freunden eingesehen werden. Sie könnten sie verwenden, um Sie anzurufen oder Ihnen eine Nachricht zu schicken.",
+    "addPhone": {
+      "label": "Telefonnummer hinzufügen",
+      "required": "Telefonnummer wird benötigt",
+      "add": "Hinzufügen"
+    },
+    "remove": "Entfernen"
+  }
+}

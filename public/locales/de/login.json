@@ -1,0 +1,16 @@
+{
+  "description": "Verfolgen Sie das Wohlbefinden Ihrer Freunde und Familie.",
+  "loginText": "Melden Sie sich an und halten Sie sich über den Sicherheits- und Gesundheitsstatus Ihrer Freunde auf dem Laufenden. Verbinden Sie sich mit Menschen, die Sie auf der ganzen Welt kennen, und informieren Sie sie über Ihre aktuelle Situation. Sehen Sie innerhalb von Sekunden, wie es Ihrer Familie und Ihren Freunden geht.",
+  "loginForm": {
+    "email": {
+      "label": "Email adresse",
+      "invalid": "Invalide email adresse",
+      "required": "Email adresse wird benötigt"
+    },
+    "submit": "Mit Email einloggen"
+  },
+  "loginWithFacebook": "Mit Facebook einloggen",
+  "loginWithTwitter": "Mit Twitter einloggen",
+  "notRegistered": "Neu bei Friend Tracker?",
+  "createAccount": "Account erstellen."
+}

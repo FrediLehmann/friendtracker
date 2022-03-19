@@ -1,0 +1,33 @@
+{
+  "page": { "title": "Friends" },
+  "backToFriends": "Back to friend list",
+  "contactDetails": "Contact details",
+  "contactText": "Take some time to get in touch with {{name}}.",
+  "call": "Call",
+  "email": "Email",
+  "safetyStatus": {
+    "ok": "Safety status: sicher",
+    "nok": "Safety status: unsicher"
+  },
+  "healtStatus": {
+    "good": "Health status: good",
+    "okay": "Health status: okay",
+    "bad": "Health status: bad"
+  },
+  "addFriend": {
+    "title": "Add a friend:",
+    "inputPlaceholder": "Use a email address, phone number or just the name",
+    "addButton": "Add friend"
+  },
+  "friendList": {
+    "lastOnline": "Last sign in:",
+    "removeFriend": "Remove friend",
+    "pendingRequest": "Pending friend request",
+    "sendInvite": "Send invite",
+    "noMember": "Your friend is not yet on Friend Tracker"
+  },
+  "recommendedFriends": {
+    "title": "People you might know:",
+    "addRecommendedFriend": "{{name}} add to friends"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "page": {
+    "title": "Sign up"
+  },
+  "return": "Zurück",
+  "signup": "Sign up",
+  "signupDescription": "Melden Sie sich bei Friend Tracker an, um Freunde und Familie über Ihre Sicherheit und Gesundheit zu informieren. Außerdem können Sie so Ihre Freunde und deren Sicherheitsstatus verfolgen.",
+  "signupForm": {
+    "email": {
+      "label": "Email adresse",
+      "helper": "Die E-Mail-Adresse wird für die Anmeldung verwendet. Aber sie hilft auch Ihren Freunden, Sie leichter zu finden.",
+      "invalid": "Bitte geben Sie eine gültige E-Mail Adresse ein",
+      "required": "Email adresse wird benötigt"
+    },
+    "tos": {
+      "label": "Nutzungsbedingungen",
+      "checkbox": {
+        "agree": "",
+        "link": "Nutzungsbedingungen",
+        "signup": "akzeptieren"
+      },
+      "needsToBeChecked": "Um sich anzumelden, müssen Sie den Nutzungsbedingungen zustimmen."
+    },
+    "submit": "Registrieren Sie sich"
+  }
+}

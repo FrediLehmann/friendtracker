@@ -1,0 +1,44 @@
+{
+  "copy": "Копіювати",
+  "copied": "Скопійовані",
+  "contact": "Контакт",
+  "menu": "Меню",
+  "copyright": {
+    "aboutLink": "Про",
+    "tosLink": "Умови надання послуг"
+  },
+  "headerMinimal": {
+    "contribute": "Сприяють",
+    "support": "Підтримка",
+    "pricing": "Ціноутворення"
+  },
+  "header": {
+    "navigation": {
+      "pages": {
+        "title": "Сторінок",
+        "friends": "Друзів",
+        "settings": "Параметри"
+      },
+      "support": {
+        "title": "Підтримка",
+        "feedback": "Зворотний зв'язок",
+        "contribute": "Сприяють",
+        "donate": "Пожертвувати"
+      }
+    }
+  },
+  "status": {
+    "safety": {
+      "title": "Стан безпеки",
+      "safe": "Сейф",
+      "unsafe": "Небезпечних"
+    },
+    "health": {
+      "title": "Стан здоров'я",
+      "good": "Хороший",
+      "ok": "Добре",
+      "bad": "Поганий"
+    },
+    "safe": "Рятувати"
+  }
+}

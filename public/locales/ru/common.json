@@ -1,0 +1,44 @@
+{
+  "copy": "Копировать",
+  "copied": "Скопировано",
+  "contact": "Связаться с",
+  "menu": "Меню",
+  "copyright": {
+    "aboutLink": "О сайте",
+    "tosLink": "Условия предоставления услуг"
+  },
+  "headerMinimal": {
+    "contribute": "Вклад",
+    "support": "Поддержка",
+    "pricing": "Ценообразование"
+  },
+  "header": {
+    "navigation": {
+      "pages": {
+        "title": "Страницы",
+        "friends": "Друзья",
+        "settings": "Настройки"
+      },
+      "support": {
+        "title": "Поддержка",
+        "feedback": "Обратная связь",
+        "contribute": "Вклад",
+        "donate": "Пожертвовать"
+      }
+    }
+  },
+  "status": {
+    "safety": {
+      "title": "Состояние безопасности",
+      "safe": "Безопасный",
+      "unsafe": "Небезопасно"
+    },
+    "health": {
+      "title": "Состояние здоровья",
+      "good": "Хорошо",
+      "ok": "Окей",
+      "bad": "Плохой"
+    },
+    "safe": "Сохранить"
+  }
+}

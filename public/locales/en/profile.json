@@ -1,0 +1,54 @@
+{
+  "page": {
+    "title": "Profile"
+  },
+  "status": "Status",
+  "account": "Account",
+  "profileSection": {
+    "title": "Profile"
+  },
+  "avatarSection": {
+    "title": "Profile picture",
+    "imgUpload": "Upload image",
+    "imgAriaLabel": "Upload image"
+  },
+  "nameSection": {
+    "title": "Name",
+    "description": "Your account can be found using the information you pass in here.",
+    "firstName": {
+      "label": "First name",
+      "required": "First name is required"
+    },
+    "lastName": {
+      "label": "Last name",
+      "required": "Last name is required"
+    }
+  },
+  "emailSection": {
+    "title": "Emails",
+    "primary": "Primary",
+    "remove": "Remove",
+    "addEmail": {
+      "required": "Email address is required",
+      "invalid": "Invalid email address",
+      "label": "Add email address",
+      "add": "Add"
+    },
+    "info": {
+      "loggedIn": "Is used to log you in",
+      "notifications": "Receives notifications",
+      "findable": "Can be used to find you",
+      "contact": "Can be used by your friends to contact you"
+    }
+  },
+  "phoneSection": {
+    "title": "Phone numbers",
+    "description": "These numbers can be seen by your friends. They might use it to initiate a phone call or send you a message.",
+    "addPhone": {
+      "label": "Add phone number",
+      "required": "Phone number is required",
+      "add": "Add"
+    },
+    "remove": "Remove"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "page": { "title": "Друзів" },
+  "backToFriends": "Повернутися до списку друзів",
+  "contactDetails": "Контактні дані",
+  "contactText": "Знайдіть деякий час, щоб зв'язатися з {{name}}.",
+  "call": "Кликати",
+  "email": "Електронна пошта",
+  "safetyStatus": {
+    "ok": "Стан безпеки: сейф",
+    "nok": "Стан безпеки: Небезпечних"
+  },
+  "healtStatus": {
+    "good": "Стан здоров'я: Хороший",
+    "okay": "Стан здоров'я: Добре",
+    "bad": "Стан здоров'я: Поганий"
+  },
+  "addFriend": {
+    "title": "Додати друга:",
+    "inputPlaceholder": "Використовуйте адресу електронної пошти, номер телефону або просто ім'я",
+    "addButton": "Додати"
+  },
+  "friendList": {
+    "lastOnline": "Останній вхід:",
+    "removeFriend": "Видалити друга",
+    "pendingRequest": "Відкладений запит на дружбу",
+    "sendInvite": "Надіслати запрошення",
+    "noMember": "Ваш друг ще не на Friend Tracker"
+  },
+  "recommendedFriends": {
+    "title": "Люди, яких ви можете знати:",
+    "addRecommendedFriend": "Додати {{name}} до друзів"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "copy": "Kopieren",
+  "copied": "Kopiert",
+  "contact": "Kontaktieren",
+  "menu": "Menu",
+  "copyright": {
+    "aboutLink": "Über uns",
+    "tosLink": "Nutzungsbedingungen"
+  },
+  "headerMinimal": {
+    "contribute": "Mithelfen",
+    "support": "Unterstützen",
+    "pricing": "Preise"
+  },
+  "header": {
+    "navigation": {
+      "pages": {
+        "title": "Seiten",
+        "friends": "Freunde",
+        "settings": "Einstellungen"
+      },
+      "support": {
+        "title": "Hilfe",
+        "feedback": "Feedback",
+        "contribute": "Mithelfen",
+        "donate": "Unterstützen"
+      }
+    }
+  },
+  "status": {
+    "safety": {
+      "title": "Sicherheitsstatus",
+      "safe": "Sicher",
+      "unsafe": "Unsicher"
+    },
+    "health": {
+      "title": "Gesundheit",
+      "good": "Gut",
+      "ok": "Okay",
+      "bad": "Schlecht"
+    },
+    "safe": "Speichern"
+  }
+}

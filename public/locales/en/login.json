@@ -1,0 +1,16 @@
+{
+  "description": "Track the well being of your friends and family.",
+  "loginText": "Sign in and be up to date with your friends security and health status. Connect with people you know from all around the world and let them know about your current situation. See within seconds how your family and friends are doing.",
+  "loginForm": {
+    "email": {
+      "label": "Email address",
+      "invalid": "Invalid email address",
+      "required": "Email address is required"
+    },
+    "submit": "Login with email"
+  },
+  "loginWithFacebook": "Login with Facebook",
+  "loginWithTwitter": "Login with Twitter",
+  "notRegistered": "New to Friend Tracker?",
+  "createAccount": "Create an account."
+}

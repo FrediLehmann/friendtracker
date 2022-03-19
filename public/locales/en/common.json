@@ -1,0 +1,44 @@
+{
+  "copy": "Copy",
+  "copied": "Copied",
+  "contact": "Contact",
+  "menu": "Menu",
+  "copyright": {
+    "aboutLink": "About",
+    "tosLink": "Terms of service"
+  },
+  "headerMinimal": {
+    "contribute": "Contribute",
+    "support": "Support",
+    "pricing": "Pricing"
+  },
+  "header": {
+    "navigation": {
+      "pages": {
+        "title": "Pages",
+        "friends": "Friends",
+        "settings": "Settings"
+      },
+      "support": {
+        "title": "Support",
+        "feedback": "Feedback",
+        "contribute": "Contribute",
+        "donate": "Donate"
+      }
+    }
+  },
+  "status": {
+    "safety": {
+      "title": "Safety status",
+      "safe": "Safe",
+      "unsafe": "Unsafe"
+    },
+    "health": {
+      "title": "Health status",
+      "good": "Good",
+      "ok": "Ok",
+      "bad": "Bad"
+    },
+    "safe": "Safe"
+  }
+}
