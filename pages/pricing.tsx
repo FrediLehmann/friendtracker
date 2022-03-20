@@ -1,4 +1,10 @@
-import { Button, Container, Heading, Text } from "@chakra-ui/react";
+import {
+  Button,
+  ButtonGroup,
+  Container,
+  Heading,
+  Text,
+} from "@chakra-ui/react";
 import { MinimalHeader } from "components";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
@@ -35,6 +41,18 @@ const Pricing: NextPage = () => {
         <Button leftIcon={<CreditCard boxSize="5" />} colorScheme="blue" mt="6">
           {t("content.donateButton")}
         </Button>
+        <Heading as="h3" size="md" maxW={["full", null, "75%"]} mt="10" mb="4">
+          {t("content.startUsingHeading")}
+        </Heading>
+        <Text>{t("content.startUsingText")}</Text>
+        <ButtonGroup>
+          <Button colorScheme="blue" mt="6">
+            {t("content.signIn")}
+          </Button>
+          <Button variant="link" colorScheme="blue" mt="6">
+            {t("content.signUp")}
+          </Button>
+        </ButtonGroup>
       </Container>
     </>
   );

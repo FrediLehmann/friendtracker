@@ -8,6 +8,10 @@
     "firstText": "We believe our service provides a valuable service to various people around the world and we want continue to do so. This includes our commitment to provide this service for free.",
     "donateHeading": "Donate to support our cause",
     "donateText": "Our commitment to provide a free to use platform does not guard us from the costs our service generates. So if you share our believe in the need for our service we kindly ask you to help us stay afloat with a small donation.",
-    "donateButton": "Donate"
+    "donateButton": "Donate",
+    "startUsingHeading": "Join Friend Tracker",
+    "startUsingText": "Sign in and be up to date with your friends security and health status. Connect with people you know from all around the world and let them know about your current situation. See within seconds how your family and friends are doing.",
+    "signIn": "Sign in",
+    "signUp": "Create account"
   }
 }

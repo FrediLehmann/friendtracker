@@ -8,6 +8,10 @@
     "firstText": "Wir glaube dass der Service den wir bereitstellen vielen Menschen auf der ganzen Welt einen Mehrwert bietet. Deshalb wollen wir weiterhin versuchen diesen Dienst kostenfrei bereit zu stellen.",
     "donateHeading": "Spenden sie um uns zu unterstützen",
     "donateText": "Unser Engagement unseren Service umsonst bereit zu stellen verhindert nicht das wir mit Kosten zur Bereitstellung konfrontiert werden. Sollten Sie, wie wir, and den Wert unserer Dienstleistung glauben so unterstützen Sie uns doch mit einer Spende.",
-    "donateButton": "Spenden"
+    "donateButton": "Spenden",
+    "startUsingHeading": "Friend Tracker beitreten",
+    "startUsingText": "Treten Sie Friend Tracker bei um sich über die Situation ihrer Freunde und Familie auf dem laufenden zu halten. Verbinden Sie sich mit Menschen aus der ganzen Welt und informieren Sie sie über Ihre Situation.",
+    "signIn": "Einloggen",
+    "signUp": "Account erstellen"
   }
 }
