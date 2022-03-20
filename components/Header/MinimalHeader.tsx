@@ -40,10 +40,6 @@ export default function MinimalHeader() {
             <DollarSign boxSize="4" />
             <Text>{t("headerMinimal.pricing")}</Text>
           </Button>
-          <Button variant="ghost" gap="2">
-            <CreditCard boxSize="4" />
-            <Text>{t("headerMinimal.support")}</Text>
-          </Button>
           <LanguageSelect />
         </Flex>
       ) : (
@@ -57,11 +53,6 @@ export default function MinimalHeader() {
             variant="ghost"
             icon={<DollarSign boxSize="4" />}
             aria-label={t("headerMinimal.pricing")}
-          />
-          <IconButton
-            variant="ghost"
-            icon={<CreditCard boxSize="4" />}
-            aria-label={t("headerMinimal.support")}
           />
           <LanguageSelect />
         </Flex>
