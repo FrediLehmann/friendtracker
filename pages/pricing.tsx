@@ -28,7 +28,7 @@ const Pricing: NextPage = () => {
         <title>Friend Tracker | {t("page.title")}</title>
       </Head>
       <MinimalHeader />
-      <Container as="main" layerStyle="pageContainer" maxW="container.md">
+      <Container as="main" layerStyle="pageContainer" maxW="container.sm">
         <Heading as="h1">{t("content.mainHeading")}</Heading>
         <Heading as="h2" size="lg" maxW={["full", null, "75%"]} mt="6" mb="4">
           {t("content.secondaryHeading")}
