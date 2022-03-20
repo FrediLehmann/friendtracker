@@ -1,9 +1,10 @@
-import { Container } from "@chakra-ui/react";
+import { Button, Container, Heading, Text } from "@chakra-ui/react";
 import { MinimalHeader } from "components";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { CreditCard } from "components/Icons";
 
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
@@ -21,8 +22,19 @@ const Pricing: NextPage = () => {
         <title>Friend Tracker | {t("page.title")}</title>
       </Head>
       <MinimalHeader />
-      <Container as="main" layerStyle="pageContainer" maxW="container.lg">
-        Pricing
+      <Container as="main" layerStyle="pageContainer" maxW="container.md">
+        <Heading as="h1">{t("content.mainHeading")}</Heading>
+        <Heading as="h2" size="lg" maxW={["full", null, "75%"]} mt="6" mb="4">
+          {t("content.secondaryHeading")}
+        </Heading>
+        <Text>{t("content.firstText")}</Text>
+        <Heading as="h3" size="md" maxW={["full", null, "75%"]} mt="8" mb="4">
+          {t("content.donateHeading")}
+        </Heading>
+        <Text>{t("content.donateHeading")}</Text>
+        <Button leftIcon={<CreditCard boxSize="5" />} colorScheme="blue" mt="6">
+          {t("content.donateButton")}
+        </Button>
       </Container>
     </>
   );

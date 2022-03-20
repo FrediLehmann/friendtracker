@@ -1,0 +1,13 @@
+{
+  "page": {
+    "title": "Pricing"
+  },
+  "content": {
+    "mainHeading": "We're free to use",
+    "secondaryHeading": "The Friend Tracker team is committed to provide our service free of charge.",
+    "firstText": "We believe our service provides a valuable service to various people around the world and we want continue to do so. This includes our commitment to provide this service for free.",
+    "donateHeading": "Donate to support our cause",
+    "donateText": "Our commitment to provide a free to use platform does not guard us from the costs our service generates. So if you share our believe in the need for our service we kindly ask you to help us stay afloat with a small donation.",
+    "donateButton": "Donate"
+  }
+}
