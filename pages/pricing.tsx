@@ -31,7 +31,7 @@ const Pricing: NextPage = () => {
         <Heading as="h3" size="md" maxW={["full", null, "75%"]} mt="8" mb="4">
           {t("content.donateHeading")}
         </Heading>
-        <Text>{t("content.donateHeading")}</Text>
+        <Text>{t("content.donateText")}</Text>
         <Button leftIcon={<CreditCard boxSize="5" />} colorScheme="blue" mt="6">
           {t("content.donateButton")}
         </Button>
