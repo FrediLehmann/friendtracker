@@ -22,6 +22,7 @@ import NextLink from "next/link";
 import { Copyright, MinimalHeader } from "components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import withIsSignedIn from "utils/user/withSignInState";
 
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
@@ -142,4 +143,7 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default withIsSignedIn(Home, {
+  needsSignIn: false,
+  redirectTo: "/friends",
+});

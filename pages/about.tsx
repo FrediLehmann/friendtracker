@@ -22,7 +22,7 @@ const About: NextPage = () => {
       </Head>
       <MinimalHeader />
       <Container as="main" layerStyle="pageContainer" maxW="container.lg">
-        About
+        - mission - funding - founder
       </Container>
     </>
   );
