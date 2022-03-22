@@ -19,17 +19,17 @@ import { ArrowLeft } from "components/Icons";
 import { NextPage } from "next";
 import Head from "next/head";
 import NextLink from "next/link";
-// import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
-// export async function getServerSideProps({ locale }: { locale: string }) {
-//   return {
-//     props: {
-//       ...(await serverSideTranslations(locale, ["friends", "common"])),
-//     },
-//   };
-// }
+export async function getServerSideProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["friends", "common"])),
+    },
+  };
+}
 
 const Friend: NextPage = () => {
   const { t } = useTranslation(["friends", "common"]);
