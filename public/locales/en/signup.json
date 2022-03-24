@@ -12,6 +12,11 @@
       "invalid": "Please enter a valid email address",
       "required": "Email address is required"
     },
+    "password": {
+      "label": "Password",
+      "required": "Password required",
+      "minLength": "Password requires at least 8 characters"
+    },
     "tos": {
       "label": "Terms of service",
       "checkbox": {
@@ -21,6 +26,12 @@
       },
       "needsToBeChecked": "You need to agree to the terms of service to sign up."
     },
-    "submit": "Sign up"
+    "submit": "Sign up",
+    "submitFailed": "Sign up failed",
+    "success": {
+      "title": "Account successfully created",
+      "description": "Your account was successfully created. Verify you email address before you login.",
+      "toLogin": "Go to login"
+    }
   }
 }

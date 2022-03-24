@@ -12,6 +12,11 @@
       "invalid": "Bitte geben Sie eine gültige E-Mail Adresse ein",
       "required": "Email adresse wird benötigt"
     },
+    "password": {
+      "label": "Passwort",
+      "required": "Passwort wird benötigt",
+      "minLength": "Passwort benötigt mindestens 8 Zeichen"
+    },
     "tos": {
       "label": "Nutzungsbedingungen",
       "checkbox": {
@@ -21,6 +26,12 @@
       },
       "needsToBeChecked": "Um sich anzumelden, müssen Sie den Nutzungsbedingungen zustimmen."
     },
-    "submit": "Registrieren Sie sich"
+    "submit": "Registrieren Sie sich",
+    "submitFailed": "Sign up fehlgeschlagen",
+    "success": {
+      "title": "Account erfolgreich erstellt",
+      "description": "Ihr Account wurde erfolgreich erstellt. Bestätigen Sie ihre Email Adresse bevor Sie sich einloggen.",
+      "toLogin": "Zum login"
+    }
   }
 }
