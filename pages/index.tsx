@@ -31,7 +31,7 @@ export const getServerSideProps = withAuthProhibited({
   async getServerSideProps({ locale = "en" }) {
     return {
       props: {
-        ...(await serverSideTranslations(locale, ["friends", "common"])),
+        ...(await serverSideTranslations(locale, ["login", "common"])),
       },
     };
   },
