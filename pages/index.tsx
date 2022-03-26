@@ -25,6 +25,8 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { withAuthProhibited } from "utils/withAuthProhibited";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export const getServerSideProps = withAuthProhibited({
   redirectTo: "/profile",
@@ -41,6 +43,14 @@ const Home: NextPage = () => {
   const { t } = useTranslation(["login", "common"]);
   const toast = useToast();
   const smallScreen = useBreakpointValue({ base: true, sm: false });
+  const router = useRouter();
+
+  useEffect(() => {
+    supabaseClient.auth.onAuthStateChange(() => {
+      router.push("/profile");
+    });
+  }, [router]);
+
   return (
     <>
       <Head>
