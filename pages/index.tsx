@@ -24,14 +24,18 @@ import { Copyright, MinimalHeader } from "components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { withAuthProhibited } from "utils/withAuthProhibited";
 
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["common", "login"])),
-    },
-  };
-}
+export const getServerSideProps = withAuthProhibited({
+  redirectTo: "/profile",
+  async getServerSideProps({ locale = "en" }) {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ["friends", "common"])),
+      },
+    };
+  },
+});
 
 const Home: NextPage = () => {
   const { t } = useTranslation(["login", "common"]);

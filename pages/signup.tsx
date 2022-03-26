@@ -30,14 +30,18 @@ import { useTranslation } from "next-i18next";
 import { MinimalHeader } from "components";
 import { useState } from "react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { withAuthProhibited } from "utils/withAuthProhibited";
 
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["common", "signup"])),
-    },
-  };
-}
+export const getServerSideProps = withAuthProhibited({
+  redirectTo: "/profile",
+  async getServerSideProps({ locale = "en" }) {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ["common", "signup"])),
+      },
+    };
+  },
+});
 
 const Signup: NextPage = () => {
   const { t } = useTranslation(["signup", "common"]);
