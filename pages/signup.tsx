@@ -28,8 +28,8 @@ import NextLink from "next/link";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { MinimalHeader } from "components";
-import { supabase } from "utils/supabaseClient";
 import { useState } from "react";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
@@ -110,7 +110,7 @@ const Signup: NextPage = () => {
               ),
             })}
             onSubmit={async (values, { setSubmitting }) => {
-              const { error } = await supabase.auth.signUp({
+              const { error } = await supabaseClient.auth.signUp({
                 email: values.email,
                 password: values.password,
               });
