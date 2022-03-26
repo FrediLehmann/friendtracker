@@ -6,8 +6,8 @@
   "call": "Call",
   "email": "Email",
   "safetyStatus": {
-    "ok": "Safety status: sicher",
-    "nok": "Safety status: unsicher"
+    "ok": "Safety status: safe",
+    "nok": "Safety status: unsafe"
   },
   "healtStatus": {
     "good": "Health status: good",
