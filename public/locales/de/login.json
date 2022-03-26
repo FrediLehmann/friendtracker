@@ -7,7 +7,11 @@
       "invalid": "Invalide email adresse",
       "required": "Email adresse wird benötigt"
     },
-    "submit": "Mit Email einloggen"
+    "submit": "Mit Email einloggen",
+    "login": {
+      "failed": "Login fehlgeschlagen",
+      "success": "Email mit dem Zugriffslink wurde versendet."
+    }
   },
   "loginWithFacebook": "Mit Facebook einloggen",
   "loginWithTwitter": "Mit Twitter einloggen",

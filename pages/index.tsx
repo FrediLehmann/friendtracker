@@ -12,6 +12,7 @@ import {
   Link,
   Text,
   useBreakpointValue,
+  useToast,
 } from "@chakra-ui/react";
 import { Field, FieldProps, Form, Formik } from "formik";
 import type { NextPage } from "next";
@@ -22,6 +23,7 @@ import NextLink from "next/link";
 import { Copyright, MinimalHeader } from "components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
@@ -33,6 +35,7 @@ export async function getStaticProps({ locale }: { locale: string }) {
 
 const Home: NextPage = () => {
   const { t } = useTranslation(["login", "common"]);
+  const toast = useToast();
   const smallScreen = useBreakpointValue({ base: true, sm: false });
   return (
     <>
@@ -62,10 +65,24 @@ const Home: NextPage = () => {
                       .email(t("loginForm.email.invalid"))
                       .required(t("loginForm.email.required")),
                   })}
-                  onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                      setSubmitting(false);
-                    }, 3000);
+                  onSubmit={async (values, { setSubmitting }) => {
+                    const { error } = await supabaseClient.auth.signIn({
+                      email: values.email,
+                    });
+
+                    if (error) {
+                      toast({
+                        title: t("loginForm.login.failed"),
+                        position: "top",
+                        status: "error",
+                      });
+                    } else {
+                      toast({
+                        title: t("loginForm.login.success"),
+                        position: "top",
+                        status: "success",
+                      });
+                    }
                   }}
                 >
                   {({ isSubmitting }) => (
