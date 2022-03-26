@@ -5,14 +5,17 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { withAuthRequired } from "@supabase/supabase-auth-helpers/nextjs";
 
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["friends", "common"])),
-    },
-  };
-}
+export const getServerSideProps = withAuthRequired({
+  async getServerSideProps({ locale = "en" }) {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ["common", "friends"])),
+      },
+    };
+  },
+});
 
 const Friends: NextPage = () => {
   const { t } = useTranslation(["friends", "common"]);

@@ -22,14 +22,17 @@ import NextLink from "next/link";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { withAuthRequired } from "@supabase/supabase-auth-helpers/nextjs";
 
-export async function getServerSideProps({ locale }: { locale: string }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["friends", "common"])),
-    },
-  };
-}
+export const getServerSideProps = withAuthRequired({
+  async getServerSideProps({ locale = "en" }) {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ["common", "friends"])),
+      },
+    };
+  },
+});
 
 const Friend: NextPage = () => {
   const { t } = useTranslation(["friends", "common"]);

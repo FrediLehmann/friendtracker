@@ -7,7 +7,6 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { withAuthRequired } from "@supabase/supabase-auth-helpers/nextjs";
 
 export const getServerSideProps = withAuthRequired({
-  redirectTo: "/",
   async getServerSideProps({ locale = "en" }) {
     return {
       props: {
