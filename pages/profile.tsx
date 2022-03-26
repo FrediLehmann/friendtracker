@@ -24,14 +24,18 @@ import Head from "next/head";
 import * as Yup from "yup";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { withAuthRequired } from "@supabase/supabase-auth-helpers/nextjs";
 
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["common", "profile"])),
-    },
-  };
-}
+export const getServerSideProps = withAuthRequired({
+  redirectTo: "/",
+  async getServerSideProps({ locale = "en" }) {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ["common", "profile"])),
+      },
+    };
+  },
+});
 
 const Profile: NextPage = () => {
   const { t } = useTranslation(["profile", "common"]);
