@@ -24,9 +24,11 @@ const Index: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    supabaseClient.auth.onAuthStateChange(() => {
+    const { data: authListener } = supabaseClient.auth.onAuthStateChange(() => {
       router.push("/profile");
     });
+
+    return () => authListener?.unsubscribe();
   }, [router]);
 
   return (
