@@ -1,28 +1,30 @@
 import {
   chakra,
+  Checkbox,
   FormControl,
   FormErrorMessage,
   FormHelperText,
   FormLabel,
-  Input,
 } from "@chakra-ui/react";
 import { useField } from "formik";
 
-function FormField({
+function CheckBoxField({
   name,
   label,
   helperText,
   helperPosition,
+  showLabel = false,
   isRequired = false,
-  type,
+  children,
   ...props
 }: {
   name: string;
   label: string;
   helperText?: string;
   helperPosition?: "before" | "after";
-  type?: string;
+  showLabel?: boolean;
   isRequired?: boolean;
+  children: any;
 }) {
   const [field, meta] = useField({ name, ...props });
 
@@ -31,13 +33,17 @@ function FormField({
       isInvalid={!!meta.error && !!meta.touched}
       isRequired={isRequired}
     >
-      <FormLabel htmlFor={name}>{label}</FormLabel>
+      <FormLabel htmlFor={name} hidden={!showLabel}>
+        {label}
+      </FormLabel>
       {helperText && helperPosition === "before" && (
         <FormHelperText fontSize={["sm", "md"]} mb="3">
           {helperText}
         </FormHelperText>
       )}
-      <Input id={name} type={type} {...field} {...props} />
+      <Checkbox {...field} {...props}>
+        {children}
+      </Checkbox>
       {helperText && helperPosition === "after" && (
         <FormHelperText fontSize={["sm", "md"]} mb="3">
           {helperText}
@@ -48,4 +54,4 @@ function FormField({
   );
 }
 
-export default chakra(FormField);
+export default chakra(CheckBoxField);
