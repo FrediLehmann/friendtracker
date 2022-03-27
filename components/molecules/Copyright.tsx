@@ -5,7 +5,7 @@ import { useTranslation } from "next-i18next";
 export default function Copyright() {
   const { t } = useTranslation("common");
   return (
-    <Box textAlign="center" fontSize="xs" color="gray.500" py="4">
+    <Box as="section" textAlign="center" fontSize="xs" color="gray.500" py="4">
       <Text>© Copyright {new Date().getFullYear()} by Frederic Lehmann,</Text>
       <Text mb="1">all rights reserved.</Text>
       <Flex display="inline-flex" gap="2">

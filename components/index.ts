@@ -1,6 +1,11 @@
+export * from './atoms'
+export * from './molecules'
+export * from './organisms'
+export * from './templates'
+export * from './pages'
+
 export { default as AvatarUpload } from './AvatarUpload'
 export { default as ContactElement } from './ContactElement'
-export { default as Copyright } from './Copyright'
 export { default as EmailInfo } from './EmailInfo'
 export { default as FriendList } from './FriendList'
 export { FullHeader, MinimalHeader } from './Header'
