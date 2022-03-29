@@ -1,16 +1,16 @@
 import { Button, Flex, FormControl, FormLabel, Select } from "@chakra-ui/react";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { useTranslation } from "next-i18next";
-import * as Yup from "yup";
+import { object, mixed } from "yup";
 
 export default function SetStatus({ size }: { size: "sm" | "md" }) {
   const { t } = useTranslation("common");
   return (
     <Formik
       initialValues={{ safety: "safe", health: "good" }}
-      validationSchema={Yup.object({
-        safety: Yup.mixed().oneOf(["safe", "unsafe"]).defined(),
-        health: Yup.mixed().oneOf(["good", "ok", "bad"]).defined(),
+      validationSchema={object({
+        safety: mixed().oneOf(["safe", "unsafe"]).defined(),
+        health: mixed().oneOf(["good", "ok", "bad"]).defined(),
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {

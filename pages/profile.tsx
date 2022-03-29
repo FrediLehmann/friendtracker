@@ -21,7 +21,7 @@ import {
 import { Field, FieldProps, Form, Formik } from "formik";
 import { NextPage } from "next";
 import Head from "next/head";
-import * as Yup from "yup";
+import { object, string } from "yup";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { withAuthRequired } from "@supabase/supabase-auth-helpers/nextjs";
@@ -61,11 +61,11 @@ const Profile: NextPage = () => {
               <Box>
                 <Formik
                   initialValues={{ firstname: "", lastname: "" }}
-                  validationSchema={Yup.object({
-                    firstname: Yup.string().required(
+                  validationSchema={object({
+                    firstname: string().required(
                       t("nameSection.firstName.required")
                     ),
-                    lastname: Yup.string().required(
+                    lastname: string().required(
                       t("nameSection.lastName.required")
                     ),
                   })}
@@ -138,8 +138,8 @@ const Profile: NextPage = () => {
             />
             <Formik
               initialValues={{ email: "" }}
-              validationSchema={Yup.object({
-                email: Yup.string()
+              validationSchema={object({
+                email: string()
                   .email(t("emailSection.addEmail.invalid"))
                   .required(t("emailSection.addEmail.required")),
               })}
@@ -187,10 +187,8 @@ const Profile: NextPage = () => {
             <PhoneInfo number="+41 (0) 79 475 78 91" />
             <Formik
               initialValues={{ number: "" }}
-              validationSchema={Yup.object({
-                number: Yup.string().required(
-                  t("phoneSection.addPhone.required")
-                ),
+              validationSchema={object({
+                number: string().required(t("phoneSection.addPhone.required")),
               })}
               onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {

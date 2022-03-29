@@ -3,7 +3,7 @@ import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { FormField } from "components";
 import { Form, Formik } from "formik";
 import { useTranslation } from "next-i18next";
-import * as Yup from "yup";
+import { object, string } from "yup";
 
 function SignInForm() {
   const { t } = useTranslation(["login"]);
@@ -12,8 +12,8 @@ function SignInForm() {
   return (
     <Formik
       initialValues={{ email: "" }}
-      validationSchema={Yup.object({
-        email: Yup.string()
+      validationSchema={object({
+        email: string()
           .email(t("loginForm.email.invalid"))
           .required(t("loginForm.email.required")),
       })}

@@ -16,7 +16,7 @@ import CheckBoxField from "components/molecules/CheckBoxField";
 import { Form, Formik } from "formik";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
-import * as Yup from "yup";
+import { object, string, bool } from "yup";
 import NextLink from "next/link";
 import { Login } from "components/Icons";
 
@@ -52,14 +52,14 @@ export default function SignUpForm() {
   ) : (
     <Formik
       initialValues={{ email: "", password: "", tosAgreement: false }}
-      validationSchema={Yup.object({
-        email: Yup.string()
+      validationSchema={object({
+        email: string()
           .email(t("signupForm.email.invalid"))
           .required(t("signupForm.email.required")),
-        password: Yup.string()
+        password: string()
           .required(t("signupForm.password.required"))
           .min(8, t("signupForm.password.minLength")),
-        tosAgreement: Yup.bool().isTrue(t("signupForm.tos.needsToBeChecked")),
+        tosAgreement: bool().isTrue(t("signupForm.tos.needsToBeChecked")),
       })}
       onSubmit={async (values, { setSubmitting }) => {
         const { error } = await supabaseClient.auth.signUp({
