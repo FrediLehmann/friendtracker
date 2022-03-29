@@ -15,7 +15,7 @@ const LANGUAGES = [
   { locale: "ru", flag: "🇷🇺", text: "Русский" },
 ];
 
-export default function Language() {
+export default function LanguageSelect() {
   const router = useRouter();
   const showText = useBreakpointValue({
     base: false,

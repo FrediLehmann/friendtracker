@@ -8,7 +8,6 @@ import {
   IconButton,
   LinkBox,
   LinkOverlay,
-  Spacer,
   Text,
 } from "@chakra-ui/react";
 import { AlertTriangle, Check, X } from "components/Icons";

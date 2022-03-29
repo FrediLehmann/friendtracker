@@ -7,8 +7,8 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { CreditCard, DollarSign, Github } from "components/Icons";
-import LanguageSelect from "components/LanguageSelect";
+import { LanguageSelect } from "components";
+import { DollarSign, Github } from "components/Icons";
 import { useTranslation } from "next-i18next";
 
 export default function MinimalHeader() {

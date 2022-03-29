@@ -1,7 +1,6 @@
 import { Container, Heading, Link, useBreakpointValue } from "@chakra-ui/react";
-import { MinimalHeader } from "components";
+import { Description, MinimalHeader, SignUpForm } from "components";
 import { ArrowLeft } from "components/Icons";
-import SignUp from "components/templates/SignUp";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
 
@@ -28,7 +27,11 @@ export default function SignUpPage() {
             Friend Tracker
           </Heading>
         )}
-        <SignUp />
+        <Heading as="h1" size="lg" mt={smallScreen ? "1" : ""} mb={["3", "8"]}>
+          {t("signup")}
+        </Heading>
+        <Description mb={["4", "6"]}>{t("signupDescription")}</Description>
+        <SignUpForm />
       </Container>
     </>
   );

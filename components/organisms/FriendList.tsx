@@ -1,7 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import Friend from "./Friend";
-import PendingFriend from "./PendingFriend";
-import UnavailableFriend from "./UnavailableFriend";
+import { Friend, PendingFriend, UnavailableFriend } from "components";
 
 export default function FriendList() {
   return (

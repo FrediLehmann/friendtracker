@@ -5,7 +5,6 @@ import {
   EditablePreview,
   Flex,
   Input,
-  Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";

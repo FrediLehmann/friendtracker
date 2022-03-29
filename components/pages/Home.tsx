@@ -1,10 +1,19 @@
 import {
   Center,
   Container,
+  Flex,
   Heading,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { Copyright, Description, MinimalHeader, SignIn } from "components";
+import {
+  Card,
+  Copyright,
+  Description,
+  ExternalSignIn,
+  MinimalHeader,
+  SignInForm,
+  Unregistered,
+} from "components";
 import { useTranslation } from "next-i18next";
 
 export default function Home() {
@@ -22,7 +31,17 @@ export default function Home() {
             </Heading>
           )}
           <Description mb={["4", "6"]}>{t("loginText")}</Description>
-          <SignIn />
+          <Flex flexDirection="column" gap={["3", "5"]}>
+            <Card bg="gray.50">
+              <SignInForm />
+            </Card>
+            <Card bg="gray.50">
+              <ExternalSignIn />
+            </Card>
+            <Card fontSize="sm">
+              <Unregistered />
+            </Card>
+          </Flex>
           <Copyright />
         </Center>
       </Container>

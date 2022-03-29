@@ -1,6 +1,5 @@
-import { Box, Container, Flex, Spacer } from "@chakra-ui/react";
-import { FullHeader, FriendList, RecommendedList } from "components";
-import AddFriend from "components/AddFriend";
+import { Box, Container, Flex } from "@chakra-ui/react";
+import { FullHeader, FriendList, AddFriend } from "components";
 import { NextPage } from "next";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -31,8 +30,6 @@ const Friends: NextPage = () => {
             <AddFriend />
             <FriendList />
           </Box>
-          {/* <Spacer />
-          <RecommendedList /> */}
         </Flex>
       </Container>
     </>
