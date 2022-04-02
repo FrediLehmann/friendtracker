@@ -34,9 +34,11 @@ import NavItem from "./NavItem";
 import NextLink from "next/link";
 import useLoggedIn from "state/auth/useLoggedIn";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const { t } = useTranslation("common");
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const buttonVariant = useBreakpointValue({
     base: "icon",
@@ -63,12 +65,14 @@ const Header = () => {
         <Flex>
           {!loggedIn && buttonVariant === "full" && (
             <Flex gap="2" mr="2">
-              <Button variant="ghost" gap="2">
-                <Github boxSize="4" />
+              <Button leftIcon={<Github boxSize="4" />} variant="ghost">
                 <Text>{t("header.contribute")}</Text>
               </Button>
-              <Button variant="ghost" gap="2">
-                <DollarSign boxSize="4" />
+              <Button
+                leftIcon={<DollarSign boxSize="4" />}
+                variant="ghost"
+                onClick={() => router.push("/pricing")}
+              >
                 <Text>{t("header.pricing")}</Text>
               </Button>
             </Flex>
@@ -84,6 +88,7 @@ const Header = () => {
                 variant="ghost"
                 icon={<DollarSign boxSize="4" />}
                 aria-label={t("header.pricing")}
+                onClick={() => router.push("/pricing")}
               />
             </Flex>
           )}
