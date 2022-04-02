@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, Heading, Text } from "@chakra-ui/react";
-import { Header, PageFrame } from "components";
+import { PageFrame } from "components";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import Head from "next/head";
@@ -21,7 +21,6 @@ const Pricing: NextPage = () => {
       <Head>
         <title>Friend Tracker | {t("page.title")}</title>
       </Head>
-      <Header />
       <PageFrame>
         <Heading as="h1">{t("content.mainHeading")}</Heading>
         <Heading as="h2" size="lg" maxW={["full", null, "75%"]} mt="6" mb="4">

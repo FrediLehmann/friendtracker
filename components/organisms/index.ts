@@ -1,6 +1,5 @@
 export { default as ExternalSignIn } from './ExternalSignIn'
 export { default as FriendList } from './FriendList'
-export { default as Header } from './Header'
 export { default as SetStatus } from './SetStatus'
 export { default as SignUpForm } from './SignUpForm'
 export { default as SignInForm } from './SignInForm'

@@ -13,7 +13,6 @@ import {
 import {
   AvatarUpload,
   EmailInfo,
-  Header,
   PageFrame,
   PhoneInfo,
   SetStatus,
@@ -43,7 +42,6 @@ const Profile: NextPage = () => {
       <Head>
         <title>Friend Tracker | {t("page.title")}</title>
       </Head>
-      <Header />
       <PageFrame>
         <Flex layerStyle="pageContent" flexDirection="column" gap="3" w="full">
           <Box bg="white" layerStyle="card">

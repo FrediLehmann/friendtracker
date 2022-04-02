@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { Copyright, Header, PageFrame } from "components";
+import { Copyright, PageFrame } from "components";
 import { useTranslation } from "next-i18next";
 import { Center } from "@chakra-ui/react";
 import {
@@ -20,7 +20,6 @@ const Index: NextPage = () => {
         <meta name="description" content={t("description")} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
       <PageFrame size="small">
         <Center flexDirection="column">
           <IntroductionSection />

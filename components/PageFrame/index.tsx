@@ -1,4 +1,5 @@
 import { Container } from "@chakra-ui/react";
+import Header from "./Header";
 
 export default function PageFrame({
   size = "default",
@@ -8,13 +9,16 @@ export default function PageFrame({
   children: React.ReactNode;
 }) {
   return (
-    <Container
-      as="main"
-      mt={["2", "8", "10"]}
-      mb={["6", "8", "12"]}
-      maxW={size === "small" ? "96" : "container.lg"}
-    >
-      {children}
-    </Container>
+    <>
+      <Header />
+      <Container
+        as="main"
+        mt={["2", "8", "10"]}
+        mb={["6", "8", "12"]}
+        maxW={size === "small" ? "96" : "container.lg"}
+      >
+        {children}
+      </Container>
+    </>
   );
 }
