@@ -1,19 +1,13 @@
 import type { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
-import {
-  ChakraProvider,
-  StateProvider,
-  UserProvider,
-} from "components/Providers";
+import { ChakraProvider, UserProvider } from "utils/Providers";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserProvider>
-      <StateProvider>
-        <ChakraProvider>
-          <Component {...pageProps} />
-        </ChakraProvider>
-      </StateProvider>
+      <ChakraProvider>
+        <Component {...pageProps} />
+      </ChakraProvider>
     </UserProvider>
   );
 }

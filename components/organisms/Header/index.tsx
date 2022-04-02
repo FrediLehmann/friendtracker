@@ -32,7 +32,6 @@ import {
 import { useTranslation } from "next-i18next";
 import NavItem from "./NavItem";
 import NextLink from "next/link";
-import useLoggedIn from "state/auth/useLoggedIn";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useRouter } from "next/router";
 
@@ -44,7 +43,7 @@ const Header = () => {
     base: "icon",
     md: "full",
   });
-  const loggedIn = useLoggedIn();
+  const loggedIn = false;
 
   return (
     <Box as="header">
