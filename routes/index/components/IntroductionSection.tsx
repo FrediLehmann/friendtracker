@@ -7,7 +7,7 @@ export default function IntroductionSection() {
   const headingHidden = useBreakpointValue({ base: true, sm: false });
 
   return (
-    <>
+    <section>
       <Heading
         as="h1"
         hidden={headingHidden}
@@ -18,6 +18,6 @@ export default function IntroductionSection() {
         Friend Tracker
       </Heading>
       <Description mb={["4", "6"]}>{t("loginText")}</Description>
-    </>
+    </section>
   );
 }
