@@ -1,16 +1,11 @@
-import {
-  Center,
-  Container,
-  Flex,
-  Heading,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Center, Flex, Heading, useBreakpointValue } from "@chakra-ui/react";
 import {
   Card,
   Copyright,
   Description,
   ExternalSignIn,
   Header,
+  PageFrame,
   SignInForm,
   Unregistered,
 } from "components";
@@ -23,7 +18,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <Container as="main" maxW="96" layerStyle="pageContainer">
+      <PageFrame size="small">
         <Center flexDirection="column">
           {!smallScreen && (
             <Heading as="h1" size="lg" mb={["3", "8"]} alignSelf="start">
@@ -44,7 +39,7 @@ export default function Home() {
           </Flex>
           <Copyright />
         </Center>
-      </Container>
+      </PageFrame>
     </>
   );
 }

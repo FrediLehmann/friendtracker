@@ -3,18 +3,16 @@ import {
   Badge,
   Box,
   Button,
-  Container,
   Divider,
   Flex,
   Heading,
-  HStack,
   Link,
   Stack,
   Text,
   useBreakpointValue,
   VStack,
 } from "@chakra-ui/react";
-import { ContactElement, Header } from "components";
+import { ContactElement, Header, PageFrame } from "components";
 import { ArrowLeft } from "components/Icons";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -47,7 +45,7 @@ const Friend: NextPage = () => {
         <title>Friend Tracker | {t("page.title")}</title>
       </Head>
       <Header />
-      <Container as="main" layerStyle="pageContainer" maxW="container.lg">
+      <PageFrame>
         <Box layerStyle="pageContent">
           <Flex gap="5" alignItems="center">
             <Avatar size={avatarSize} />
@@ -96,7 +94,7 @@ const Friend: NextPage = () => {
             </Button>
           </Flex>
         </Box>
-      </Container>
+      </PageFrame>
     </>
   );
 };

@@ -1,12 +1,6 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { Home } from "components";
-import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import Home from "routes/index";
 import { withAuthProhibited } from "utils/withAuthProhibited";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 
 export const getServerSideProps = withAuthProhibited({
   redirectTo: "/profile",
@@ -19,28 +13,4 @@ export const getServerSideProps = withAuthProhibited({
   },
 });
 
-const Index: NextPage = () => {
-  const { t } = useTranslation(["login"]);
-  const router = useRouter();
-
-  useEffect(() => {
-    const { data: authListener } = supabaseClient.auth.onAuthStateChange(() => {
-      router.push("/profile");
-    });
-
-    return () => authListener?.unsubscribe();
-  }, [router]);
-
-  return (
-    <>
-      <Head>
-        <title>Friend Tracker</title>
-        <meta name="description" content={t("description")} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Home />
-    </>
-  );
-};
-
-export default Index;
+export default Home;

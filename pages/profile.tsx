@@ -1,6 +1,5 @@
 import {
   Box,
-  Container,
   Flex,
   Heading,
   Text,
@@ -15,6 +14,7 @@ import {
   AvatarUpload,
   EmailInfo,
   Header,
+  PageFrame,
   PhoneInfo,
   SetStatus,
 } from "components";
@@ -44,7 +44,7 @@ const Profile: NextPage = () => {
         <title>Friend Tracker | {t("page.title")}</title>
       </Head>
       <Header />
-      <Container as="main" layerStyle="pageContainer" maxW="container.lg">
+      <PageFrame>
         <Flex layerStyle="pageContent" flexDirection="column" gap="3" w="full">
           <Box bg="white" layerStyle="card">
             <Heading as="h2" fontSize={["md", "lg"]} mb="4">
@@ -229,7 +229,7 @@ const Profile: NextPage = () => {
             </Formik>
           </VStack>
         </Flex>
-      </Container>
+      </PageFrame>
     </>
   );
 };
