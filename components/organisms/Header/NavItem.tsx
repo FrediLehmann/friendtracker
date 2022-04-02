@@ -5,12 +5,17 @@ const NavItem = ({
   href,
   icon,
   text,
+  onClick,
 }: {
-  href: string;
+  href?: string;
   icon: JSX.Element;
   text: string;
+  onClick?: () => unknown;
 }) => {
   const router = useRouter();
+
+  const navigate = () => href && router.push(href);
+
   return (
     <Flex
       as="button"
@@ -18,7 +23,7 @@ const NavItem = ({
       py="3"
       color="gray.700"
       alignItems="center"
-      onClick={() => router.push(href)}
+      onClick={onClick || navigate}
       _hover={{ cursor: "pointer", bg: "gray.100" }}
       _focus={{
         outline: "2px solid transparent",

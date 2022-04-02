@@ -1,5 +1,5 @@
 import { Container, Heading, Link, useBreakpointValue } from "@chakra-ui/react";
-import { Description, MinimalHeader, SignUpForm } from "components";
+import { Description, Header, SignUpForm } from "components";
 import { ArrowLeft } from "components/Icons";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
@@ -10,7 +10,7 @@ export default function SignUpPage() {
 
   return (
     <>
-      <MinimalHeader />
+      <Header />
       <Container as="main" maxW="96" layerStyle="pageContainer">
         <NextLink href="/" passHref>
           <Link

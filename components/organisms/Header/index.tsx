@@ -14,6 +14,9 @@ import {
   Spacer,
   LinkBox,
   LinkOverlay,
+  Button,
+  Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { Copyright, LanguageSelect, SetStatus } from "components";
 import {
@@ -23,14 +26,23 @@ import {
   CreditCard,
   Users,
   MessageSquare,
+  DollarSign,
+  Logout,
 } from "components/Icons";
 import { useTranslation } from "next-i18next";
 import NavItem from "./NavItem";
 import NextLink from "next/link";
+import useLoggedIn from "state/auth/useLoggedIn";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 
-const FullHeader = () => {
+const Header = () => {
   const { t } = useTranslation("common");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const buttonVariant = useBreakpointValue({
+    base: "icon",
+    md: "full",
+  });
+  const loggedIn = useLoggedIn();
 
   return (
     <Box as="header">
@@ -49,14 +61,42 @@ const FullHeader = () => {
           </Heading>
         </LinkBox>
         <Flex>
+          {!loggedIn && buttonVariant === "full" && (
+            <Flex gap="2" mr="2">
+              <Button variant="ghost" gap="2">
+                <Github boxSize="4" />
+                <Text>{t("header.contribute")}</Text>
+              </Button>
+              <Button variant="ghost" gap="2">
+                <DollarSign boxSize="4" />
+                <Text>{t("header.pricing")}</Text>
+              </Button>
+            </Flex>
+          )}
+          {!loggedIn && buttonVariant === "icon" && (
+            <Flex gap="1" mr="1">
+              <IconButton
+                variant="ghost"
+                icon={<Github boxSize="4" />}
+                aria-label={t("header.contribute")}
+              />
+              <IconButton
+                variant="ghost"
+                icon={<DollarSign boxSize="4" />}
+                aria-label={t("header.pricing")}
+              />
+            </Flex>
+          )}
           <LanguageSelect />
-          <IconButton
-            ml="4"
-            aria-label={t("menu")}
-            variant="outline"
-            icon={<MenuIcon />}
-            onClick={onOpen}
-          />
+          {loggedIn && (
+            <IconButton
+              ml="4"
+              aria-label={t("menu")}
+              variant="outline"
+              icon={<MenuIcon />}
+              onClick={onOpen}
+            />
+          )}
         </Flex>
         <Drawer onClose={onClose} isOpen={isOpen} size="xs">
           <DrawerOverlay />
@@ -80,6 +120,13 @@ const FullHeader = () => {
                   href="/profile"
                   icon={<Settings boxSize="5" />}
                   text={t("header.navigation.pages.settings")}
+                />
+                <NavItem
+                  onClick={() => {
+                    supabaseClient.auth.signOut();
+                  }}
+                  icon={<Logout boxSize="5" />}
+                  text={t("header.signout")}
                 />
                 <Heading as="p" mt="8" mb="4" pl="6" fontSize="sm">
                   {t("header.navigation.support.title")}
@@ -110,4 +157,4 @@ const FullHeader = () => {
   );
 };
 
-export default FullHeader;
+export default Header;

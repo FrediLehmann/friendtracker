@@ -5,7 +5,7 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
-import { MinimalHeader } from "components";
+import { Header } from "components";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import Head from "next/head";
@@ -27,7 +27,7 @@ const Pricing: NextPage = () => {
       <Head>
         <title>Friend Tracker | {t("page.title")}</title>
       </Head>
-      <MinimalHeader />
+      <Header />
       <Container as="main" layerStyle="pageContainer" maxW="container.sm">
         <Heading as="h1">{t("content.mainHeading")}</Heading>
         <Heading as="h2" size="lg" maxW={["full", null, "75%"]} mt="6" mb="4">

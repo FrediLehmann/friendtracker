@@ -7,11 +7,10 @@
     "aboutLink": "About",
     "tosLink": "Terms of service"
   },
-  "headerMinimal": {
-    "contribute": "Contribute",
-    "pricing": "Pricing"
-  },
   "header": {
+    "signout": "Sign out",
+    "contribute": "Contribute",
+    "pricing": "Pricing",
     "navigation": {
       "pages": {
         "title": "Pages",

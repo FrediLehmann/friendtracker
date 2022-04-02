@@ -14,7 +14,7 @@ import {
   useBreakpointValue,
   VStack,
 } from "@chakra-ui/react";
-import { ContactElement, FullHeader } from "components";
+import { ContactElement, Header } from "components";
 import { ArrowLeft } from "components/Icons";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -46,7 +46,7 @@ const Friend: NextPage = () => {
       <Head>
         <title>Friend Tracker | {t("page.title")}</title>
       </Head>
-      <FullHeader />
+      <Header />
       <Container as="main" layerStyle="pageContainer" maxW="container.lg">
         <Box layerStyle="pageContent">
           <Flex gap="5" alignItems="center">

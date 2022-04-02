@@ -7,11 +7,10 @@
     "aboutLink": "Про",
     "tosLink": "Умови надання послуг"
   },
-  "headerMinimal": {
-    "contribute": "Сприяють",
-    "pricing": "Ціноутворення"
-  },
   "header": {
+    "signout": "Вийти",
+    "contribute": "Сприяють",
+    "pricing": "Ціноутворення",
     "navigation": {
       "pages": {
         "title": "Сторінок",

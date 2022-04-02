@@ -7,11 +7,10 @@
     "aboutLink": "О сайте",
     "tosLink": "Условия предоставления услуг"
   },
-  "headerMinimal": {
-    "contribute": "Вклад",
-    "pricing": "Ценообразование"
-  },
   "header": {
+    "signout": "Выписаться",
+    "contribute": "Вклад",
+    "pricing": "Ценообразование",
     "navigation": {
       "pages": {
         "title": "Страницы",

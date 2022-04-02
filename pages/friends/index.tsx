@@ -1,5 +1,5 @@
 import { Box, Container, Flex } from "@chakra-ui/react";
-import { FullHeader, FriendList, AddFriend } from "components";
+import { Header, FriendList, AddFriend } from "components";
 import { NextPage } from "next";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -23,7 +23,7 @@ const Friends: NextPage = () => {
       <Head>
         <title>Friend Tracker | {t("page.title")}</title>
       </Head>
-      <FullHeader />
+      <Header />
       <Container as="main" layerStyle="pageContainer" maxW="container.lg">
         <Flex layerStyle="pageContent" gap="3">
           <Box w="full">

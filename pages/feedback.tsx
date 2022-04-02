@@ -1,5 +1,5 @@
 import { Container } from "@chakra-ui/react";
-import { FullHeader } from "components";
+import { Header } from "components";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import Head from "next/head";
@@ -23,7 +23,7 @@ const Feedback: NextPage = () => {
       <Head>
         <title>Friend Tracker | {t("page.title")}</title>
       </Head>
-      <FullHeader />
+      <Header />
       <Container as="main" layerStyle="pageContainer" maxW="container.lg">
         Feedback
       </Container>

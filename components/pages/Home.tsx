@@ -10,7 +10,7 @@ import {
   Copyright,
   Description,
   ExternalSignIn,
-  MinimalHeader,
+  Header,
   SignInForm,
   Unregistered,
 } from "components";
@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <>
-      <MinimalHeader />
+      <Header />
       <Container as="main" maxW="96" layerStyle="pageContainer">
         <Center flexDirection="column">
           {!smallScreen && (

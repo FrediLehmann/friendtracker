@@ -7,11 +7,10 @@
     "aboutLink": "Über uns",
     "tosLink": "Nutzungsbedingungen"
   },
-  "headerMinimal": {
-    "contribute": "Mithelfen",
-    "pricing": "Preise"
-  },
   "header": {
+    "signout": "Ausloggen",
+    "contribute": "Mithelfen",
+    "pricing": "Preise",
     "navigation": {
       "pages": {
         "title": "Seiten",

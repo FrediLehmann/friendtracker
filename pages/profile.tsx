@@ -14,7 +14,7 @@ import {
 import {
   AvatarUpload,
   EmailInfo,
-  FullHeader,
+  Header,
   PhoneInfo,
   SetStatus,
 } from "components";
@@ -43,7 +43,7 @@ const Profile: NextPage = () => {
       <Head>
         <title>Friend Tracker | {t("page.title")}</title>
       </Head>
-      <FullHeader />
+      <Header />
       <Container as="main" layerStyle="pageContainer" maxW="container.lg">
         <Flex layerStyle="pageContent" flexDirection="column" gap="3" w="full">
           <Box bg="white" layerStyle="card">
