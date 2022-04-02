@@ -1,6 +1,6 @@
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 
-const theme = extendTheme({
+export const theme = extendTheme({
   layerStyles: {
     card: {
       px: ["3", "5"],
@@ -26,7 +26,3 @@ const theme = extendTheme({
     },
   },
 });
-
-export default function Provider({ children }: { children: JSX.Element }) {
-  return <ChakraProvider theme={theme}>{children}</ChakraProvider>;
-}
