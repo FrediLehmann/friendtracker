@@ -16,7 +16,7 @@ export default function EmailInfo({
   isPrimary = false,
 }: {
   email: string;
-  isPrimary: boolean;
+  isPrimary?: boolean;
 }) {
   const { t } = useTranslation("profile");
   return (

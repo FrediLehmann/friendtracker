@@ -1,5 +1,5 @@
 import { Heading, useBreakpointValue } from "@chakra-ui/react";
-import { Description } from "components";
+import { DescriptionText } from "components";
 import { useTranslation } from "next-i18next";
 
 export default function IntroductionSection() {
@@ -17,7 +17,7 @@ export default function IntroductionSection() {
       >
         Friend Tracker
       </Heading>
-      <Description mb={["4", "6"]}>{t("loginText")}</Description>
+      <DescriptionText mb={["4", "6"]}>{t("loginText")}</DescriptionText>
     </section>
   );
 }

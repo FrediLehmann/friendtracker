@@ -25,7 +25,7 @@
     }
   },
   "emailSection": {
-    "title": "Emails",
+    "title": "Email addresses",
     "primary": "Primary",
     "remove": "Remove",
     "addEmail": {
