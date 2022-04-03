@@ -1,7 +1,9 @@
-import { Box } from "@chakra-ui/react";
-import { Unregistered } from "components";
+import { Box, Link, Text } from "@chakra-ui/react";
+import { useTranslation } from "next-i18next";
+import NextLink from "next/link";
 
 export default function RegisterSection() {
+  const { t } = useTranslation("login");
   return (
     <Box
       as="section"
@@ -14,7 +16,12 @@ export default function RegisterSection() {
       borderColor="gray.200"
       fontSize="sm"
     >
-      <Unregistered />
+      <Text>
+        {t("notRegistered")}{" "}
+        <NextLink href="/signup" passHref>
+          <Link color="blue.500">{t("createAccount")}</Link>
+        </NextLink>
+      </Text>
     </Box>
   );
 }

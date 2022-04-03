@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { ExternalSignIn } from "components";
+import { SignInFacebook, SignInTwitter } from "components";
 
 export default function ExternalSignInSection() {
   return (
@@ -14,7 +14,8 @@ export default function ExternalSignInSection() {
       borderRadius="lg"
       borderColor="gray.200"
     >
-      <ExternalSignIn />
+      <SignInFacebook />
+      <SignInTwitter />
     </Box>
   );
 }

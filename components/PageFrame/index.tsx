@@ -1,5 +1,5 @@
 import { Container } from "@chakra-ui/react";
-import Header from "./Header";
+import { Header } from "./components";
 
 export default function PageFrame({
   size = "default",
