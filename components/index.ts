@@ -1,5 +1,4 @@
 export * from './molecules'
-export * from './organisms'
 
 export { default as Copyright } from './Copyright'
 export { default as DescriptionText } from './DescriptionText'

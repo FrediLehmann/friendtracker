@@ -1,10 +1,6 @@
-import { Box, Flex } from "@chakra-ui/react";
-import { FriendList, AddFriend, PageFrame } from "components";
-import { NextPage } from "next";
-import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
 import { withAuthRequired } from "@supabase/supabase-auth-helpers/nextjs";
+import Friends from "routes/friends";
 
 export const getServerSideProps = withAuthRequired({
   async getServerSideProps({ locale = "en" }) {
@@ -15,24 +11,5 @@ export const getServerSideProps = withAuthRequired({
     };
   },
 });
-
-const Friends: NextPage = () => {
-  const { t } = useTranslation(["friends", "common"]);
-  return (
-    <>
-      <Head>
-        <title>Friend Tracker | {t("page.title")}</title>
-      </Head>
-      <PageFrame>
-        <Flex layerStyle="pageContent" gap="3">
-          <Box w="full">
-            <AddFriend />
-            <FriendList />
-          </Box>
-        </Flex>
-      </PageFrame>
-    </>
-  );
-};
 
 export default Friends;
