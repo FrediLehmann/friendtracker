@@ -1,5 +1,3 @@
-export * from './molecules'
-
 export { default as Copyright } from './Copyright'
 export { default as DescriptionText } from './DescriptionText'
 export { FormField, CheckBoxField } from './Form'
