@@ -3,9 +3,16 @@ import { Info, Language, LogoSection, Menu } from "./components";
 
 const Header = () => {
   return (
-    <Box borderBottom="1px" borderColor="gray.200">
+    <Box
+      as="header"
+      borderBottom="1px"
+      borderColor="gray.200"
+      position="sticky"
+      top="0"
+      background="white"
+      zIndex="1"
+    >
       <Container
-        as="header"
         maxW="container.xl"
         py={["2", "4"]}
         display="flex"
