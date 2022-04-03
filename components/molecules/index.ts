@@ -1,8 +1,5 @@
 export { default as AddFriend } from './AddFriend'
 export { default as ContactElement } from './ContactElement'
-export { default as Copyright } from './Copyright'
 export { default as Friend } from './Friend'
 export { default as PendingFriend } from './PendingFriend'
-export { default as SignInFacebook } from './SignInFacebook'
-export { default as SignInTwitter } from './SignInTwitter'
 export { default as UnavailableFriend } from './UnavailableFriend'

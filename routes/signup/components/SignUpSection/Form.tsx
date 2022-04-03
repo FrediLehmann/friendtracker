@@ -1,55 +1,20 @@
-import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
-  Button,
-  Fade,
-  Flex,
-  Link,
-  Text,
-  useToast,
-} from "@chakra-ui/react";
-import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
-import { FormField } from "components/molecules";
-import CheckBoxField from "components/molecules/CheckBoxField";
 import { Form, Formik } from "formik";
-import { useTranslation } from "next-i18next";
-import { useState } from "react";
 import { object, string, bool } from "yup";
+import { useTranslation } from "next-i18next";
+import { useToast, VStack, Text, Link, Button } from "@chakra-ui/react";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { CheckBoxField, FormField } from "components";
 import NextLink from "next/link";
-import { Login } from "components/Icons";
 
-export default function SignUpForm() {
-  const [registered, setRegistered] = useState(false);
+export default function F({
+  setRegistered,
+}: {
+  setRegistered: (arg0: boolean) => void;
+}) {
   const { t } = useTranslation(["signup"]);
   const toast = useToast();
 
-  return registered ? (
-    <Fade in={registered}>
-      <Alert
-        status="success"
-        variant="subtle"
-        flexDirection="column"
-        alignItems="center"
-        textAlign="center"
-        py="6"
-        borderRadius="sm"
-      >
-        <AlertIcon boxSize="35px" mr="0" />
-        <AlertTitle my="2">{t("signupForm.success.title")}</AlertTitle>
-        <AlertDescription maxW="sm" mb="3">
-          {t("signupForm.success.description")}
-        </AlertDescription>
-        <NextLink href="/" passHref>
-          <Link alignItems="center">
-            <Login boxSize="5" mr="2" />
-            {t("signupForm.success.toLogin")}
-          </Link>
-        </NextLink>
-      </Alert>
-    </Fade>
-  ) : (
+  return (
     <Formik
       initialValues={{ email: "", password: "", tosAgreement: false }}
       validationSchema={object({
@@ -82,7 +47,7 @@ export default function SignUpForm() {
     >
       {({ isSubmitting }) => (
         <Form>
-          <Flex flexDirection="column" gap="5">
+          <VStack spacing="5">
             <FormField
               name="email"
               label={t("signupForm.email.label")}
@@ -118,7 +83,7 @@ export default function SignUpForm() {
             >
               {t("signupForm.submit")}
             </Button>
-          </Flex>
+          </VStack>
         </Form>
       )}
     </Formik>

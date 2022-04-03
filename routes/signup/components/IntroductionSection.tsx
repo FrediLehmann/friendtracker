@@ -1,15 +1,15 @@
 import { Heading, Link, useBreakpointValue } from "@chakra-ui/react";
-import { DescriptionText, PageFrame, SignUpForm } from "components";
+import { DescriptionText } from "components";
 import { ArrowLeft } from "components/Icons";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
 
-export default function SignUpPage() {
+export default function IntroductionSection() {
   const { t } = useTranslation(["signup"]);
   const smallScreen = useBreakpointValue({ base: true, sm: false });
 
   return (
-    <PageFrame size="small">
+    <section>
       <NextLink href="/" passHref>
         <Link
           display="block"
@@ -31,7 +31,6 @@ export default function SignUpPage() {
       <DescriptionText mb={["4", "6"]}>
         {t("signupDescription")}
       </DescriptionText>
-      <SignUpForm />
-    </PageFrame>
+    </section>
   );
 }
