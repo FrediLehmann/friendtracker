@@ -1,4 +1,4 @@
-import { Form, Formik } from "formik";
+import { Form as FormikForm, Formik } from "formik";
 import { object, string, bool } from "yup";
 import { useTranslation } from "next-i18next";
 import { useToast, VStack, Text, Link, Button } from "@chakra-ui/react";
@@ -6,7 +6,7 @@ import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { CheckBoxField, FormField } from "components";
 import NextLink from "next/link";
 
-export default function F({
+export default function Form({
   setRegistered,
 }: {
   setRegistered: (arg0: boolean) => void;
@@ -46,7 +46,7 @@ export default function F({
       }}
     >
       {({ isSubmitting }) => (
-        <Form>
+        <FormikForm>
           <VStack spacing="5">
             <FormField
               name="email"
@@ -84,7 +84,7 @@ export default function F({
               {t("signupForm.submit")}
             </Button>
           </VStack>
-        </Form>
+        </FormikForm>
       )}
     </Formik>
   );
