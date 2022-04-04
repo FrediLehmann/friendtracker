@@ -5,14 +5,16 @@ import { theme } from "utils/chakraTheme";
 import { UserProvider } from "@supabase/supabase-auth-helpers/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { Provider as ReduxProvider } from "react-redux";
-import { store } from "utils/reduxStore";
+import { RootStore, store } from "store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ReduxProvider store={store}>
       <UserProvider supabaseClient={supabaseClient}>
         <ChakraProvider theme={theme}>
-          <Component {...pageProps} />
+          <RootStore>
+            <Component {...pageProps} />
+          </RootStore>
         </ChakraProvider>
       </UserProvider>
     </ReduxProvider>
