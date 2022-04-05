@@ -21,7 +21,7 @@ import {
   MessageSquare,
   Settings,
   Users,
-} from "components/Icons";
+} from "icons";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";

@@ -5,7 +5,7 @@ import {
   Flex,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { Camera } from "components/Icons";
+import { Camera } from "icons";
 import { useTranslation } from "next-i18next";
 
 export default function AvatarUpload() {

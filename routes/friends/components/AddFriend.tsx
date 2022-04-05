@@ -6,7 +6,7 @@ import {
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
-import { UserPlus } from "components/Icons";
+import { UserPlus } from "icons";
 import { useTranslation } from "next-i18next";
 
 export default function AddFriend() {

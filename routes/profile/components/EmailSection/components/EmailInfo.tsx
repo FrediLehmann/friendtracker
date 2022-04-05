@@ -8,7 +8,7 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
-import { Trash2 } from "components/Icons";
+import { Trash2 } from "icons";
 import { useTranslation } from "next-i18next";
 
 export default function EmailInfo({

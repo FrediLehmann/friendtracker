@@ -10,7 +10,7 @@ import {
   LinkOverlay,
   Text,
 } from "@chakra-ui/react";
-import { X } from "components/Icons";
+import { X } from "icons";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
 

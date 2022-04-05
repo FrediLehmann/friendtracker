@@ -3,7 +3,7 @@ import { PageFrame } from "components";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import Head from "next/head";
-import { CreditCard } from "components/Icons";
+import { CreditCard } from "icons";
 
 const Pricing: NextPage = () => {
   const { t } = useTranslation(["pricing", "common"]);

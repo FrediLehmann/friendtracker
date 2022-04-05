@@ -1,6 +1,6 @@
 import { Heading, Link, useBreakpointValue } from "@chakra-ui/react";
 import { DescriptionText } from "components";
-import { ArrowLeft } from "components/Icons";
+import { ArrowLeft } from "icons";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
 

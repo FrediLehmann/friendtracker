@@ -5,7 +5,7 @@ import {
   useBreakpointValue,
   useClipboard,
 } from "@chakra-ui/react";
-import { Mail, Phone } from "components/Icons";
+import { Mail, Phone } from "icons";
 import { useTranslation } from "next-i18next";
 
 export default function ContactElement({

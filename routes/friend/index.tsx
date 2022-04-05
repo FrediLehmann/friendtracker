@@ -13,7 +13,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { PageFrame } from "components";
-import { ArrowLeft } from "components/Icons";
+import { ArrowLeft } from "icons";
 import { NextPage } from "next";
 import Head from "next/head";
 import NextLink from "next/link";

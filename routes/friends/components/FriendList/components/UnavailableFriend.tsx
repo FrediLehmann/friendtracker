@@ -11,7 +11,7 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { Send, X } from "components/Icons";
+import { Send, X } from "icons";
 import { useTranslation } from "next-i18next";
 
 export default function UnavailableFriend({
