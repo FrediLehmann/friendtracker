@@ -6,9 +6,10 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { DollarSign, Github } from "components/Icons";
-import { useIsLoggedIn } from "hooks";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { getUserLoggedIn } from "store/user";
 
 export default function Info() {
   const { t } = useTranslation("common");
@@ -17,7 +18,7 @@ export default function Info() {
     base: "icon",
     md: "full",
   });
-  const loggedIn = useIsLoggedIn();
+  const loggedIn = useSelector(getUserLoggedIn);
 
   if (loggedIn) return <></>;
   if (buttonVariant === "full")

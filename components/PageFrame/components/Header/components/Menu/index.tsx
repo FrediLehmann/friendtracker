@@ -22,14 +22,17 @@ import {
   Settings,
   Users,
 } from "components/Icons";
-import { useIsLoggedIn } from "hooks";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { getUserLoggedIn } from "store/user";
 import NavItem from "./NavItem";
 
 export default function Menu() {
   const { t } = useTranslation("common");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const loggedIn = useIsLoggedIn();
+  const loggedIn = useSelector(getUserLoggedIn);
+  const router = useRouter();
 
   return (
     <>
@@ -65,6 +68,7 @@ export default function Menu() {
               <NavItem
                 onClick={() => {
                   supabaseClient.auth.signOut();
+                  router.push("/");
                 }}
                 icon={<Logout boxSize="5" />}
                 text={t("header.signout")}
