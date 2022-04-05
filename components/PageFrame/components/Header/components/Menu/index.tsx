@@ -29,7 +29,7 @@ import NavItem from "./NavItem";
 export default function Menu() {
   const { t } = useTranslation("common");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const loggedIn = useIsLoggedIn(false);
+  const loggedIn = useIsLoggedIn();
 
   return (
     <>
