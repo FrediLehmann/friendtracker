@@ -9,9 +9,19 @@ import {
   RegisterSection,
   SignInSection,
 } from "./components";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { getUserLoggedIn } from "store/user";
+import { useEffect } from "react";
 
 const Index: NextPage = () => {
   const { t } = useTranslation(["login"]);
+  const router = useRouter();
+  const isLoggedIn = useSelector(getUserLoggedIn);
+
+  useEffect(() => {
+    isLoggedIn && router.push("/profile");
+  }, [router, isLoggedIn]);
 
   return (
     <>
