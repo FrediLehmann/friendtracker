@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "analyze": "source-map-explorer .next/static/**/*.js"
+    "analyze": "source-map-explorer .next/static/**/*.js",
+    "types": "npx openapi-typescript https://pvedftpxedwetnxlopty.supabase.co/rest/v1/?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2ZWRmdHB4ZWR3ZXRueGxvcHR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDU1NTc1ODIsImV4cCI6MTk2MTEzMzU4Mn0.jv5n2bXr_jRvOjJTo60baD7jKkmMt178YmCPw3cHxwE --output types/supabase.ts"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.8.5",
