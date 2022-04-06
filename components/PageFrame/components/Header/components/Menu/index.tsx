@@ -48,10 +48,9 @@ export default function Menu() {
       <Drawer onClose={onClose} isOpen={isOpen} size="xs">
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerBody p="0" display="flex" flexDirection="column">
+          <DrawerBody px="0" display="flex" flexDirection="column">
             <DrawerCloseButton mt="3" />
-            <Flex direction="column" mt="4.5rem" w="full">
-              <Divider />
+            <Flex direction="column" w="full">
               <Heading as="p" mt="8" mb="4" pl="6" fontSize="sm">
                 {t("header.navigation.pages.title")}
               </Heading>
