@@ -14,7 +14,7 @@
   },
   "nameSection": {
     "title": "Name",
-    "description": "Ihr Konto kann anhand der Informationen, die Sie hier eingeben, gefunden werden.",
+    "edit": "Ändern Sie Ihren Namen",
     "firstName": {
       "label": "Name",
       "required": "Name ist zwingend notwendig"

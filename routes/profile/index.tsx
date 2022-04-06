@@ -6,15 +6,17 @@ import { EmailSection, GeneralSection, PhoneSection } from "./components";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile, getUserProfile } from "store/user";
 import { useEffect } from "react";
+import { useUser } from "@supabase/supabase-auth-helpers/react";
 
 const Profile: NextPage = () => {
   const { t } = useTranslation(["profile", "common"]);
   const dispatch = useDispatch();
   const profile = useSelector(getUserProfile);
+  const { user } = useUser();
 
   useEffect(() => {
-    if (profile.state === "init") dispatch(fetchUserProfile());
-  }, [profile, dispatch]);
+    if (profile.state === "init" && user) dispatch(fetchUserProfile());
+  }, [profile, user, dispatch]);
 
   return (
     <>

@@ -14,7 +14,7 @@
   },
   "nameSection": {
     "title": "Name",
-    "description": "Your account can be found using the information you pass in here.",
+    "edit": "Set your name",
     "firstName": {
       "label": "First name",
       "required": "First name is required"

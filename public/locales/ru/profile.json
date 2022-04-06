@@ -14,7 +14,7 @@
   },
   "nameSection": {
     "title": "Имя",
-    "description": "Ваш счет можно найти по информации, которую вы вводите здесь.",
+    "edit": "Set your name",
     "firstName": {
       "label": "Имя",
       "required": "Имя и фамилия обязательны"
