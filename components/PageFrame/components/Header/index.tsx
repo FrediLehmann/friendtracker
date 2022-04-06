@@ -10,7 +10,7 @@ const Header = () => {
       position="sticky"
       top="0"
       background="white"
-      zIndex="1"
+      zIndex="sticky"
     >
       <Container
         maxW="container.xl"

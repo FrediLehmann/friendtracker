@@ -15,7 +15,7 @@ export default function SignInTwitter() {
   return (
     <Button
       mt="3"
-      size="sm"
+      size="md"
       w="100%"
       colorScheme="twitter"
       leftIcon={<Twitter boxSize="4" fill="white" />}

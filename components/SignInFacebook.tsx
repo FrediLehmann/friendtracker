@@ -15,7 +15,7 @@ export default function SignInFacebook() {
   return (
     <Button
       w="100%"
-      size="sm"
+      size="md"
       colorScheme="facebook"
       leftIcon={<Facebook boxSize="4" fill="white" />}
       onClick={signIn}

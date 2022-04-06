@@ -60,7 +60,7 @@ export default function SignInSection() {
             <Button
               mt="5"
               w="100%"
-              size="sm"
+              size="md"
               type="submit"
               colorScheme="blue"
               isLoading={isSubmitting}
