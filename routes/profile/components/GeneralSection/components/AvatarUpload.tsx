@@ -5,7 +5,6 @@ import {
   Tooltip,
   VisuallyHiddenInput,
   useToast,
-  Spinner,
 } from "@chakra-ui/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";

@@ -58,6 +58,23 @@ export const uploadAvatarImage = createAsyncThunk<
   }
 );
 
+export const changeUserName = createAsyncThunk<
+  string | undefined,
+  string,
+  { state: RootState }
+>("user/profile/user_name", async (newName, { getState }) => {
+  const { owner, user_name } = getUserProfile(getState());
+
+  let { error } = await supabaseClient
+    .from("profiles")
+    .update({ user_name: newName })
+    .eq("owner", owner);
+
+  if (error) return user_name;
+
+  return newName;
+});
+
 //#endregion
 
 //#region state
@@ -114,6 +131,13 @@ const userSlice = createSlice({
     builder.addCase(uploadAvatarImage.fulfilled, (state, { payload }) => {
       state.profile.uploadingAvatarImage = false;
       state.profile.avatar_url = payload;
+    });
+
+    builder.addCase(changeUserName.rejected, (state, { payload }) => {
+      state.profile.user_name = payload as string;
+    });
+    builder.addCase(changeUserName.fulfilled, (state, { payload }) => {
+      state.profile.user_name = payload;
     });
   },
 });

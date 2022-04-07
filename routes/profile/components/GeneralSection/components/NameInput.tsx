@@ -4,16 +4,16 @@ import {
   EditablePreview,
   useBoolean,
 } from "@chakra-ui/react";
-import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { Edit } from "icons";
 import { useTranslation } from "next-i18next";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { getUserProfile } from "store/user";
+import { useDispatch, useSelector } from "react-redux";
+import { changeUserName, getUserProfile } from "store/user";
 
 export default function NameInput() {
   const { t } = useTranslation("profile");
-  const { owner = "", user_name = "" } = useSelector(getUserProfile);
+  const dispatch = useDispatch();
+  const { user_name = "" } = useSelector(getUserProfile);
   const [edit, setEdit] = useBoolean();
   const [userName, setUserName] = useState(user_name);
 
@@ -24,14 +24,8 @@ export default function NameInput() {
   async function submit(value: string) {
     setEdit.off();
     if (user_name === value) return;
-    if (!owner) throw new Error("No profile or owner");
 
-    let { error } = await supabaseClient
-      .from("profiles")
-      .update({ user_name: value })
-      .eq("owner", owner);
-
-    if (error) throw new Error("Could not save user name");
+    dispatch(changeUserName(value));
   }
 
   return (
