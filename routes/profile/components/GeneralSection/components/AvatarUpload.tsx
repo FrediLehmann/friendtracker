@@ -60,7 +60,7 @@ export default function AvatarUpload() {
 
     const file = event.target.files[0];
     const fileExt = file.name.split(".").pop();
-    const filePath = `${owner}/${user_name.replace(" ", "")}.${fileExt}`;
+    const filePath = `${owner}/avatar.${fileExt}`;
 
     dispatch(uploadAvatarImage({ filePath, file }));
   }
