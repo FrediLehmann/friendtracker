@@ -77,6 +77,7 @@ export default function Form({
             </CheckBoxField>
             <Button
               colorScheme="blue"
+              w="full"
               mt="4"
               type="submit"
               isLoading={isSubmitting}
