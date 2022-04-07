@@ -9,8 +9,9 @@
   },
   "avatarSection": {
     "title": "Профіль",
-    "imgUpload": "Завантажити зображення",
-    "imgAriaLabel": "Завантажити зображення"
+    "imgAriaLabel": "Завантажити зображення",
+    "selectFile": "Select an image",
+    "selectFileDescription": "Please select an image to upload."
   },
   "nameSection": {
     "title": "Ім'я",

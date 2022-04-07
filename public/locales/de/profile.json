@@ -9,8 +9,9 @@
   },
   "avatarSection": {
     "title": "Profilbild",
-    "imgUpload": "Bild hochladen",
-    "imgAriaLabel": "Bild hochladen"
+    "imgAriaLabel": "Bild hochladen",
+    "selectFile": "Wählen Sie ein Bild",
+    "selectFileDescription": "Bitte wählen Sie ein Bild zum hochladen aus."
   },
   "nameSection": {
     "title": "Name",

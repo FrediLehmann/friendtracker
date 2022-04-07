@@ -51,8 +51,8 @@ export default function AvatarUpload() {
   function uploadAvatar(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.files || event.target.files.length === 0) {
       toast({
-        title: "Select a file",
-        description: "Please select a file to upload",
+        title: t("avatarSection.selectFile"),
+        description: t("avatarSection.selectFileDescription"),
         status: "error",
       });
       return;
