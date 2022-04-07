@@ -3,6 +3,17 @@
   "copied": "Kopiert",
   "contact": "Kontaktieren",
   "menu": "Menu",
+  "handle": {
+    "modalTitle": "Wählen Sie eine Identifikation",
+    "label": "Ihre Identifikation",
+    "description": "Sobald Sie eine Identifikation gewählt haben kann diese nicht mehr verändert werden.",
+    "helper": "Die Identifikation wird dazu verwendet um Sie auf unserer Platform zu finden und identifizieren.",
+    "required": "Diese Information is zwingend notwendig",
+    "submit": "Wählen",
+    "onlyAlphabeteAndNumber": "Nur Buchstaben und Nummern sind erlaubt.",
+    "minLength": "Identifikation muss mindestens 5 Zeichen enthalten.",
+    "alreadyTaken": "Dies Identifikation wird bereits verwendet."
+  },
   "copyright": {
     "aboutLink": "Über uns",
     "tosLink": "Nutzungsbedingungen"

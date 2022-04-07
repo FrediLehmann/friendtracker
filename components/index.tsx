@@ -4,3 +4,4 @@ export { FormField, CheckBoxField } from "./Form";
 export { default as PageFrame } from "./PageFrame";
 export { default as SignInFacebook } from "./SignInFacebook";
 export { default as SignInTwitter } from "./SignInTwitter";
+export { default as User } from "./User";

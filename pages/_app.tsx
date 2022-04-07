@@ -6,6 +6,7 @@ import { UserProvider } from "@supabase/supabase-auth-helpers/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { Provider as ReduxProvider } from "react-redux";
 import { RootStore, store } from "store";
+import { User } from "components";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -13,7 +14,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <UserProvider supabaseClient={supabaseClient}>
         <ChakraProvider theme={theme}>
           <RootStore>
-            <Component {...pageProps} />
+            <User>
+              <Component {...pageProps} />
+            </User>
           </RootStore>
         </ChakraProvider>
       </UserProvider>

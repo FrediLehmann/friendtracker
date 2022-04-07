@@ -109,6 +109,9 @@ const userSlice = createSlice({
     setMainEmail: (state, { payload }: PayloadAction<string>) => {
       state.email = payload;
     },
+    setUserHandle: (state, { payload }: PayloadAction<string>) => {
+      state.profile.user_handle = payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserProfile.pending, (state) => {
@@ -142,8 +145,12 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUserLoggedIn, setLoginStatusLoading, setMainEmail } =
-  userSlice.actions;
+export const {
+  setUserLoggedIn,
+  setLoginStatusLoading,
+  setMainEmail,
+  setUserHandle,
+} = userSlice.actions;
 
 export default userSlice.reducer;
 
