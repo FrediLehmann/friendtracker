@@ -11,12 +11,7 @@ export default function IntroductionSection() {
   return (
     <section>
       <NextLink href="/" passHref>
-        <Link
-          display="block"
-          mr="auto"
-          color="blue.500"
-          fontSize={["sm", "md"]}
-        >
+        <Link mr="auto" color="blue.500" fontSize={["sm", "md"]} p="1">
           <ArrowLeft boxSize={["3", "4"]} mb={["0.5", "1"]} /> {t("return")}
         </Link>
       </NextLink>
