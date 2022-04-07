@@ -6,7 +6,7 @@ import { definitions } from "types/supabase";
 //#region actions
 
 export const fetchUserProfile = createAsyncThunk<
-  Promise<definitions["profiles"]>,
+  definitions["profiles"],
   undefined
 >("user/profile", async () => {
   let { data, error } = await supabaseClient
@@ -20,6 +20,44 @@ export const fetchUserProfile = createAsyncThunk<
   return data;
 });
 
+export const uploadAvatarImage = createAsyncThunk<
+  string | undefined,
+  { filePath: string; file: any },
+  { state: RootState }
+>(
+  "user/profile/avatar_url",
+  async ({ filePath, file }, { getState, rejectWithValue }) => {
+    const { owner, avatar_url } = getUserProfile(getState());
+
+    // If the user has an existing avatar image => remove it
+    if (avatar_url) {
+      let { error } = await supabaseClient.storage
+        .from("avatars")
+        .remove([avatar_url]);
+
+      if (error) rejectWithValue(avatar_url);
+    }
+
+    // Upload image
+    let { data, error: uploadError } = await supabaseClient.storage
+      .from("avatars")
+      .upload(filePath, file);
+
+    if (uploadError) rejectWithValue("");
+    if (!data) rejectWithValue("");
+
+    const url = data?.Key.replace("avatars/", "");
+
+    // Update profile
+    await supabaseClient
+      .from("profiles")
+      .update({ avatar_url: url })
+      .eq("owner", owner);
+
+    return url;
+  }
+);
+
 //#endregion
 
 //#region state
@@ -30,6 +68,7 @@ type UserState = {
   email: string;
   profile: {
     state: "init" | "loading" | "loaded" | "error";
+    uploadingAvatarImage: boolean;
   } & definitions["profiles"];
 };
 
@@ -37,7 +76,7 @@ const initialState: UserState = {
   loggedIn: false,
   loadingLoginStatus: true,
   email: "",
-  profile: { state: "init", owner: "" },
+  profile: { state: "init", uploadingAvatarImage: false, owner: "" },
 };
 
 const userSlice = createSlice({
@@ -58,13 +97,23 @@ const userSlice = createSlice({
     builder.addCase(fetchUserProfile.pending, (state) => {
       state.profile.state = "loading";
     });
-
     builder.addCase(fetchUserProfile.rejected, (state) => {
       state.profile.state = "error";
     });
-
     builder.addCase(fetchUserProfile.fulfilled, (state, { payload }) => {
       state.profile = { ...state.profile, state: "loaded", ...payload };
+    });
+
+    builder.addCase(uploadAvatarImage.pending, (state) => {
+      state.profile.uploadingAvatarImage = true;
+    });
+    builder.addCase(uploadAvatarImage.rejected, (state, { payload }) => {
+      state.profile.uploadingAvatarImage = false;
+      state.profile.avatar_url = payload as string;
+    });
+    builder.addCase(uploadAvatarImage.fulfilled, (state, { payload }) => {
+      state.profile.uploadingAvatarImage = false;
+      state.profile.avatar_url = payload;
     });
   },
 });
@@ -86,5 +135,8 @@ export const getUserLoginLoadingState = (state: RootState) =>
 export const getUserEmail = (state: RootState) => state.user.email;
 
 export const getUserProfile = (state: RootState) => state.user.profile;
+
+export const getUserAvatarUrl = (state: RootState) =>
+  state.user.profile.avatar_url;
 
 //#endregion

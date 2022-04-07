@@ -20,6 +20,8 @@ export interface paths {
           owner?: parameters["rowFilter.profiles.owner"];
           /** User name */
           user_name?: parameters["rowFilter.profiles.user_name"];
+          /** Avatar image url */
+          avatar_url?: parameters["rowFilter.profiles.avatar_url"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -74,6 +76,8 @@ export interface paths {
           owner?: parameters["rowFilter.profiles.owner"];
           /** User name */
           user_name?: parameters["rowFilter.profiles.user_name"];
+          /** Avatar image url */
+          avatar_url?: parameters["rowFilter.profiles.avatar_url"];
         };
         header: {
           /** Preference */
@@ -92,6 +96,8 @@ export interface paths {
           owner?: parameters["rowFilter.profiles.owner"];
           /** User name */
           user_name?: parameters["rowFilter.profiles.user_name"];
+          /** Avatar image url */
+          avatar_url?: parameters["rowFilter.profiles.avatar_url"];
         };
         body: {
           /** profiles */
@@ -129,6 +135,11 @@ export interface definitions {
      * @description User name
      */
     user_name?: string;
+    /**
+     * Format: text
+     * @description Avatar image url
+     */
+    avatar_url?: string;
   };
 }
 
@@ -176,6 +187,11 @@ export interface parameters {
    * @description User name
    */
   "rowFilter.profiles.user_name": string;
+  /**
+   * Format: text
+   * @description Avatar image url
+   */
+  "rowFilter.profiles.avatar_url": string;
 }
 
 export interface operations {}
