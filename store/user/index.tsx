@@ -75,6 +75,68 @@ export const changeUserName = createAsyncThunk<
   return newName;
 });
 
+export const fetchAdditionalEmailAddresses = createAsyncThunk<
+  string[],
+  undefined,
+  { state: RootState }
+>("user/email_addresses", async (_, { getState, rejectWithValue }) => {
+  const { owner } = getUserProfile(getState());
+
+  let { data, error } = await supabaseClient
+    .from<definitions["emails"]>("emails")
+    .select("email")
+    .eq("owner", owner);
+
+  if (error) return rejectWithValue([]);
+
+  const result: string[] = [];
+  data?.forEach((d) => result.push(d.email));
+  return result;
+});
+
+export const addEmailAddress = createAsyncThunk<
+  string | undefined,
+  string,
+  { state: RootState }
+>("user/email_addresses/add", async (additionalAddress, { getState }) => {
+  const state = getState();
+  const { owner } = getUserProfile(state);
+  const email = getUserEmail(state);
+  const emails = getAdditionalUserEmails(state);
+
+  if (email === additionalAddress) return;
+  if (emails.includes(additionalAddress)) return;
+
+  let { error } = await supabaseClient
+    .from("emails")
+    .insert([{ owner, email: additionalAddress }]);
+
+  if (error) return;
+
+  return additionalAddress;
+});
+
+export const removeEmailAddress = createAsyncThunk<
+  string | undefined,
+  string,
+  { state: RootState }
+>("user/email_addresses/remove", async (removeAddress, { getState }) => {
+  const state = getState();
+  const { owner } = getUserProfile(state);
+  const emails = getAdditionalUserEmails(state);
+
+  if (!emails.includes(removeAddress)) return;
+
+  let { error } = await supabaseClient
+    .from("emails")
+    .delete()
+    .match({ owner, email: removeAddress });
+
+  if (error) return;
+
+  return removeAddress;
+});
+
 //#endregion
 
 //#region state
@@ -83,6 +145,8 @@ type UserState = {
   loggedIn: boolean;
   loadingLoginStatus: boolean;
   email: string;
+  emails: string[];
+  emailsLoaded: boolean;
   profile: {
     state: "init" | "loading" | "loaded" | "error";
     uploadingAvatarImage: boolean;
@@ -93,6 +157,8 @@ const initialState: UserState = {
   loggedIn: false,
   loadingLoginStatus: true,
   email: "",
+  emails: [],
+  emailsLoaded: false,
   profile: { state: "init", uploadingAvatarImage: false, owner: "" },
 };
 
@@ -142,6 +208,31 @@ const userSlice = createSlice({
     builder.addCase(changeUserName.fulfilled, (state, { payload }) => {
       state.profile.user_name = payload;
     });
+
+    builder.addCase(
+      fetchAdditionalEmailAddresses.rejected,
+      (state, { payload }) => {
+        state.emails = payload as string[];
+        state.emailsLoaded = true;
+      }
+    );
+    builder.addCase(
+      fetchAdditionalEmailAddresses.fulfilled,
+      (state, { payload }) => {
+        state.emails = payload;
+        state.emailsLoaded = true;
+      }
+    );
+
+    builder.addCase(addEmailAddress.fulfilled, (state, { payload }) => {
+      if (!payload) return;
+      state.emails = [...state.emails, payload];
+    });
+
+    builder.addCase(removeEmailAddress.fulfilled, (state, { payload }) => {
+      if (!payload) return;
+      state.emails = state.emails.filter((e) => e !== payload);
+    });
   },
 });
 
@@ -164,6 +255,11 @@ export const getUserLoginLoadingState = (state: RootState) =>
   state.user.loadingLoginStatus;
 
 export const getUserEmail = (state: RootState) => state.user.email;
+
+export const getAdditionalUserEmails = (state: RootState) => state.user.emails;
+
+export const getAdditionalUserEmailsLoaded = (state: RootState) =>
+  state.user.emailsLoaded;
 
 export const getUserProfile = (state: RootState) => state.user.profile;
 

@@ -30,9 +30,10 @@
     "primary": "Hauptadresse",
     "remove": "Entfernen",
     "addEmail": {
-      "required": "Email adresse wird benötigt",
-      "invalid": "Invalide email adresse",
-      "label": "Email adresse hinzufügen",
+      "required": "Email Adresse wird benötigt",
+      "invalid": "Invalide email Adresse",
+      "label": "Email Adresse",
+      "title": "Email Adresse hinzufügen",
       "add": "Hinzufügen"
     },
     "info": {

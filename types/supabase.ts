@@ -12,6 +12,102 @@ export interface paths {
       };
     };
   };
+  "/emails": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.emails.id"];
+          created_at?: parameters["rowFilter.emails.created_at"];
+          owner?: parameters["rowFilter.emails.owner"];
+          email?: parameters["rowFilter.emails.email"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["emails"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** emails */
+          emails?: definitions["emails"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.emails.id"];
+          created_at?: parameters["rowFilter.emails.created_at"];
+          owner?: parameters["rowFilter.emails.owner"];
+          email?: parameters["rowFilter.emails.email"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.emails.id"];
+          created_at?: parameters["rowFilter.emails.created_at"];
+          owner?: parameters["rowFilter.emails.owner"];
+          email?: parameters["rowFilter.emails.email"];
+        };
+        body: {
+          /** emails */
+          emails?: definitions["emails"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/profiles": {
     get: {
       parameters: {
@@ -123,6 +219,24 @@ export interface paths {
 }
 
 export interface definitions {
+  /** @description Users email addresses, used to identify or find friends */
+  emails: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /** Format: uuid */
+    owner: string;
+    /** Format: text */
+    email: string;
+  };
   /** @description User profile */
   profiles: {
     /**
@@ -187,6 +301,16 @@ export interface parameters {
   offset: string;
   /** @description Limiting and Pagination */
   limit: string;
+  /** @description emails */
+  "body.emails": definitions["emails"];
+  /** Format: bigint */
+  "rowFilter.emails.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.emails.created_at": string;
+  /** Format: uuid */
+  "rowFilter.emails.owner": string;
+  /** Format: text */
+  "rowFilter.emails.email": string;
   /** @description profiles */
   "body.profiles": definitions["profiles"];
   /** Format: timestamp with time zone */

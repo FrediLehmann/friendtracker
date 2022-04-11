@@ -32,7 +32,8 @@
     "addEmail": {
       "required": "Email address is required",
       "invalid": "Invalid email address",
-      "label": "Add email address",
+      "label": "Email address",
+      "title": "Add email address",
       "add": "Add"
     },
     "info": {
