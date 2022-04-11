@@ -12,10 +12,18 @@
       "invalid": "Пожалуйста, введите действительный адрес электронной почты",
       "required": "Адрес электронной почты обязателен"
     },
+    "emailVerify": {
+      "label": "Verify email address",
+      "match": ""
+    },
     "password": {
       "label": "Пасворт",
       "required": "Требуется пароль",
       "minLength": "Пароль должен содержать не менее 8 символов"
+    },
+    "passwordVerify": {
+      "label": "Verify password",
+      "match": "Passwords do not match"
     },
     "tos": {
       "label": "Условия предоставления услуг",

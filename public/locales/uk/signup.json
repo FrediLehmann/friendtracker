@@ -12,10 +12,18 @@
       "invalid": "Введіть припустиму адресу електронної пошти",
       "required": "Адреса електронної пошти обов'язкова"
     },
+    "emailVerify": {
+      "label": "Verify email address",
+      "match": ""
+    },
     "password": {
       "label": "Пароль",
       "required": "Пароль обов'язковий",
       "minLength": "Пароль вимагає не менше 8 символів"
+    },
+    "passwordVerify": {
+      "label": "Verify password",
+      "match": "Passwords do not match"
     },
     "tos": {
       "label": "Умови надання послуг",

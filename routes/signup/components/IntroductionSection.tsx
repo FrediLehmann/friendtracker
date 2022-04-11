@@ -23,9 +23,6 @@ export default function IntroductionSection() {
       <Heading as="h1" size="lg" mt={smallScreen ? "1" : ""} mb={["3", "8"]}>
         {t("signup")}
       </Heading>
-      <DescriptionText mb={["4", "6"]}>
-        {t("signupDescription")}
-      </DescriptionText>
     </section>
   );
 }

@@ -1,10 +1,9 @@
 import { Form as FormikForm, Formik } from "formik";
-import { object, string, bool } from "yup";
+import * as yup from "yup";
 import { useTranslation } from "next-i18next";
-import { useToast, VStack, Text, Link, Button } from "@chakra-ui/react";
+import { useToast, VStack, Button } from "@chakra-ui/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
-import { CheckBoxField, FormField } from "components";
-import NextLink from "next/link";
+import { EmailSection, PasswordSection, ToSSection } from "./components";
 
 export default function Form({
   setRegistered,
@@ -16,15 +15,35 @@ export default function Form({
 
   return (
     <Formik
-      initialValues={{ email: "", password: "", tosAgreement: false }}
-      validationSchema={object({
-        email: string()
+      initialValues={{
+        email: "",
+        confirmEmail: "",
+        password: "",
+        confirmPassword: "",
+        tosAgreement: false,
+      }}
+      validationSchema={yup.object({
+        email: yup
+          .string()
           .email(t("signupForm.email.invalid"))
           .required(t("signupForm.email.required")),
-        password: string()
+        confirmEmail: yup
+          .string()
+          .email(t("signupForm.email.invalid"))
+          .required(t("signupForm.email.required"))
+          .oneOf([yup.ref("email"), null], t("signupForm.emailVerify.match")),
+        password: yup
+          .string()
           .required(t("signupForm.password.required"))
           .min(8, t("signupForm.password.minLength")),
-        tosAgreement: bool().isTrue(t("signupForm.tos.needsToBeChecked")),
+        confirmPassword: yup
+          .string()
+          .required()
+          .oneOf(
+            [yup.ref("password"), null],
+            t("signupForm.passwordVerify.match")
+          ),
+        tosAgreement: yup.bool().isTrue(t("signupForm.tos.needsToBeChecked")),
       })}
       onSubmit={async (values, { setSubmitting }) => {
         const { error } = await supabaseClient.auth.signUp({
@@ -48,33 +67,9 @@ export default function Form({
       {({ isSubmitting }) => (
         <FormikForm>
           <VStack spacing="5">
-            <FormField
-              name="email"
-              label={t("signupForm.email.label")}
-              isRequired
-              helperText={t("signupForm.email.helper")}
-              helperPosition="before"
-            />
-            <FormField
-              name="password"
-              type="password"
-              label={t("signupForm.password.label")}
-              isRequired
-            />
-            <CheckBoxField
-              name="tosAgreement"
-              label={t("signupForm.tos.label")}
-            >
-              <Text fontSize={["sm", "md"]}>
-                {t("signupForm.tos.checkbox.agree")}{" "}
-                <NextLink href="/tos" passHref>
-                  <Link color="blue.500">
-                    {t("signupForm.tos.checkbox.link")}
-                  </Link>
-                </NextLink>{" "}
-                {t("signupForm.tos.checkbox.signup")}
-              </Text>
-            </CheckBoxField>
+            <EmailSection />
+            <PasswordSection />
+            <ToSSection />
             <Button
               colorScheme="blue"
               w="full"

@@ -12,10 +12,18 @@
       "invalid": "Please enter a valid email address",
       "required": "Email address is required"
     },
+    "emailVerify": {
+      "label": "Verify email address",
+      "match": "Email addresses do not match"
+    },
     "password": {
       "label": "Password",
       "required": "Password required",
       "minLength": "Password requires at least 8 characters"
+    },
+    "passwordVerify": {
+      "label": "Verify password",
+      "match": "Passwords do not match"
     },
     "tos": {
       "label": "Terms of service",
