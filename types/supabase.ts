@@ -108,6 +108,102 @@ export interface paths {
       };
     };
   };
+  "/phones": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.phones.id"];
+          created_at?: parameters["rowFilter.phones.created_at"];
+          phone?: parameters["rowFilter.phones.phone"];
+          owner?: parameters["rowFilter.phones.owner"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["phones"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** phones */
+          phones?: definitions["phones"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.phones.id"];
+          created_at?: parameters["rowFilter.phones.created_at"];
+          phone?: parameters["rowFilter.phones.phone"];
+          owner?: parameters["rowFilter.phones.owner"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.phones.id"];
+          created_at?: parameters["rowFilter.phones.created_at"];
+          phone?: parameters["rowFilter.phones.phone"];
+          owner?: parameters["rowFilter.phones.owner"];
+        };
+        body: {
+          /** phones */
+          phones?: definitions["phones"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/profiles": {
     get: {
       parameters: {
@@ -237,6 +333,24 @@ export interface definitions {
     /** Format: text */
     email: string;
   };
+  /** @description Users phone numbers */
+  phones: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /** Format: text */
+    phone?: string;
+    /** Format: uuid */
+    owner?: string;
+  };
   /** @description User profile */
   profiles: {
     /**
@@ -311,6 +425,16 @@ export interface parameters {
   "rowFilter.emails.owner": string;
   /** Format: text */
   "rowFilter.emails.email": string;
+  /** @description phones */
+  "body.phones": definitions["phones"];
+  /** Format: bigint */
+  "rowFilter.phones.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.phones.created_at": string;
+  /** Format: text */
+  "rowFilter.phones.phone": string;
+  /** Format: uuid */
+  "rowFilter.phones.owner": string;
   /** @description profiles */
   "body.profiles": definitions["profiles"];
   /** Format: timestamp with time zone */

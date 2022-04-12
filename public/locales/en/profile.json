@@ -51,6 +51,10 @@
       "required": "Phone number is required",
       "add": "Add"
     },
-    "remove": "Remove"
+    "remove": "Remove",
+    "info": {
+      "findable": "Can be used to find you",
+      "contact": "Can be used by your friends to contact you"
+    }
   }
 }

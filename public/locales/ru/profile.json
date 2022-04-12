@@ -51,6 +51,10 @@
       "required": "Номер телефона обязателен",
       "add": "Добавить"
     },
-    "remove": "Удалить"
+    "remove": "Удалить",
+    "info": {
+      "findable": "Can be used to find you",
+      "contact": "Can be used by your friends to contact you"
+    }
   }
 }

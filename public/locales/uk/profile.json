@@ -51,6 +51,10 @@
       "required": "Номер телефону обов'язковий",
       "add": "Додати"
     },
-    "remove": "Видалити"
+    "remove": "Видалити",
+    "info": {
+      "findable": "Can be used to find you",
+      "contact": "Can be used by your friends to contact you"
+    }
   }
 }

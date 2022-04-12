@@ -51,6 +51,10 @@
       "required": "Telefonnummer wird benötigt",
       "add": "Hinzufügen"
     },
-    "remove": "Entfernen"
+    "remove": "Entfernen",
+    "info": {
+      "findable": "Kann verwendet werden um Sie auf unserer Platform zu finden",
+      "contact": "Kann von ihren Freunden verwendet werden um Sie zu kontaktieren"
+    }
   }
 }

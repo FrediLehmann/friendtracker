@@ -1,37 +1,45 @@
 import {
+  Box,
   Button,
-  Editable,
-  EditableInput,
-  EditablePreview,
   Flex,
-  Input,
-  useBreakpointValue,
+  ListItem,
+  Spacer,
+  Text,
+  UnorderedList,
 } from "@chakra-ui/react";
+import { Trash2 } from "icons";
 import { useTranslation } from "next-i18next";
+import { useDispatch } from "react-redux";
+import { removePhoneNumber } from "store/user";
 
 export default function PhoneInfo({ number }: { number: string }) {
   const { t } = useTranslation("profile");
-  const smallSize = useBreakpointValue({ base: true, sm: false });
+  const dispatch = useDispatch();
+
   return (
-    <Flex
-      borderWidth="1px"
-      borderRadius="lg"
-      borderColor="gray.200"
-      alignItems="center"
-      w="full"
-    >
-      <Button size={smallSize ? "sm" : "md"} borderInlineEndRadius="0">
-        {t("phoneSection.remove")}
-      </Button>
-      <Editable w="full" borderLeft="none" defaultValue={number} isTruncated>
-        <EditablePreview px="4" />
-        <Input
-          as={EditableInput}
-          py={["1", "2"]}
-          fontSize={["sm", "md"]}
-          borderInlineStartRadius="0"
-        />
-      </Editable>
-    </Flex>
+    <Box layerStyle="card">
+      <Flex flexDirection={["column", null, "row"]}>
+        <Flex flexDirection={["column", null, "row"]}>
+          <Text as="b" fontSize="md" isTruncated>
+            {number}
+          </Text>
+        </Flex>
+        <Spacer />
+        <Button
+          variant="outline"
+          size="sm"
+          mt={["2", null, "0"]}
+          w="min-content"
+          leftIcon={<Trash2 boxSize="4" />}
+          onClick={() => dispatch(removePhoneNumber(number))}
+        >
+          {t("phoneSection.remove")}
+        </Button>
+      </Flex>
+      <UnorderedList fontSize="sm" color="gray.600" mt="3" px="4">
+        <ListItem>{t("emailSection.info.findable")}</ListItem>
+        <ListItem>{t("emailSection.info.contact")}</ListItem>
+      </UnorderedList>
+    </Box>
   );
 }

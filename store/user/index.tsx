@@ -137,6 +137,62 @@ export const removeEmailAddress = createAsyncThunk<
   return removeAddress;
 });
 
+export const fetchPhoneNumbers = createAsyncThunk<
+  string[],
+  undefined,
+  { state: RootState }
+>("user/phone", async (_, { getState, rejectWithValue }) => {
+  const { owner } = getUserProfile(getState());
+
+  let { data, error } = await supabaseClient
+    .from<definitions["phones"]>("phones")
+    .select("phone")
+    .eq("owner", owner);
+
+  if (error) return rejectWithValue([]);
+
+  const result: string[] = [];
+  data?.forEach((d) => d.phone && result.push(d.phone));
+  return result;
+});
+
+export const addPhoneNumber = createAsyncThunk<
+  string | undefined,
+  string,
+  { state: RootState }
+>("user/phone/add", async (phone, { getState }) => {
+  const { owner } = getUserProfile(getState());
+
+  let { error } = await supabaseClient
+    .from("phones")
+    .insert([{ owner, phone }]);
+
+  if (error) return;
+
+  return phone;
+});
+
+export const removePhoneNumber = createAsyncThunk<
+  string | undefined,
+  string,
+  { state: RootState }
+>("user/phone/remove", async (removePhone, { getState }) => {
+  const state = getState();
+  const { owner } = getUserProfile(state);
+  const phones = getUserPhones(state);
+
+  if (!phones.includes(removePhone)) return;
+
+  let { error } = await supabaseClient
+    .from("phones")
+    .delete()
+    .match({ owner, phone: removePhone });
+
+  if (error) return;
+
+  return removePhone;
+});
+
 //#endregion
 
 //#region state
@@ -147,6 +203,8 @@ type UserState = {
   email: string;
   emails: string[];
   emailsLoaded: boolean;
+  phones: string[];
+  phonesLoaded: boolean;
   profile: {
     state: "init" | "loading" | "loaded" | "error";
     uploadingAvatarImage: boolean;
@@ -159,6 +217,8 @@ const initialState: UserState = {
   email: "",
   emails: [],
   emailsLoaded: false,
+  phones: [],
+  phonesLoaded: false,
   profile: { state: "init", uploadingAvatarImage: false, owner: "" },
 };
 
@@ -233,6 +293,25 @@ const userSlice = createSlice({
       if (!payload) return;
       state.emails = state.emails.filter((e) => e !== payload);
     });
+
+    builder.addCase(fetchPhoneNumbers.rejected, (state, { payload }) => {
+      state.phones = payload as string[];
+      state.phonesLoaded = true;
+    });
+    builder.addCase(fetchPhoneNumbers.fulfilled, (state, { payload }) => {
+      state.phones = payload;
+      state.phonesLoaded = true;
+    });
+
+    builder.addCase(addPhoneNumber.fulfilled, (state, { payload }) => {
+      if (!payload) return;
+      state.phones = [...state.phones, payload];
+    });
+
+    builder.addCase(removePhoneNumber.fulfilled, (state, { payload }) => {
+      if (!payload) return;
+      state.phones = state.phones.filter((p) => p !== payload);
+    });
   },
 });
 
@@ -260,6 +339,11 @@ export const getAdditionalUserEmails = (state: RootState) => state.user.emails;
 
 export const getAdditionalUserEmailsLoaded = (state: RootState) =>
   state.user.emailsLoaded;
+
+export const getUserPhones = (state: RootState) => state.user.phones;
+
+export const getUserPhonesLoaded = (state: RootState) =>
+  state.user.phonesLoaded;
 
 export const getUserProfile = (state: RootState) => state.user.profile;
 
