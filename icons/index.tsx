@@ -2,6 +2,7 @@ export { default as AlertTriangle } from "./AlertTriangle";
 export { default as ArrowLeft } from "./ArrowLeft";
 export { default as Camera } from "./Camera";
 export { default as Check } from "./Check";
+export { default as ChevronDown } from "./ChevronDown";
 export { default as CreditCard } from "./CreditCard";
 export { default as DollarSign } from "./DollarSign";
 export { default as Edit } from "./Edit";
