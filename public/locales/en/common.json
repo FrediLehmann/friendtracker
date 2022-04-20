@@ -25,6 +25,7 @@
     "navigation": {
       "pages": {
         "title": "Pages",
+        "newsfeed": "Newsfeed",
         "friends": "Friends",
         "settings": "Settings"
       },

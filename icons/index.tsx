@@ -1,3 +1,4 @@
+export { default as Activity } from "./Activity";
 export { default as AlertTriangle } from "./AlertTriangle";
 export { default as ArrowLeft } from "./ArrowLeft";
 export { default as Camera } from "./Camera";

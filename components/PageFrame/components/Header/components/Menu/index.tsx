@@ -1,5 +1,4 @@
 import {
-  Divider,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -14,6 +13,7 @@ import {
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { Copyright } from "components";
 import {
+  Activity,
   CreditCard,
   Github,
   Logout,
@@ -54,6 +54,11 @@ export default function Menu() {
               <Heading as="p" mt="8" mb="4" pl="6" fontSize="sm">
                 {t("header.navigation.pages.title")}
               </Heading>
+              <NavItem
+                href="/newsfeed"
+                icon={<Activity boxSize="5" />}
+                text={t("header.navigation.pages.newsfeed")}
+              />
               <NavItem
                 href="/friends"
                 icon={<Users boxSize="5" />}

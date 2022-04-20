@@ -25,6 +25,7 @@
     "navigation": {
       "pages": {
         "title": "Сторінок",
+        "newsfeed": "Newsfeed",
         "friends": "Друзів",
         "settings": "Параметри"
       },
