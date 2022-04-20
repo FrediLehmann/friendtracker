@@ -16,7 +16,7 @@
   },
   "addFriend": {
     "title": "Add a friend:",
-    "inputPlaceholder": "Use a email address, phone number or just the name",
+    "inputPlaceholder": "Use a email address, phone number or a name",
     "addButton": "Add friend"
   },
   "friendList": {

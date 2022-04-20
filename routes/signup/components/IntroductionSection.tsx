@@ -20,7 +20,7 @@ export default function IntroductionSection() {
           Friend Tracker
         </Heading>
       )}
-      <Heading as="h1" size="lg" mt={smallScreen ? "1" : ""} mb={["3", "8"]}>
+      <Heading as="h1" size="lg" mt={smallScreen ? "1" : ""} mb={["6", "8"]}>
         {t("signup")}
       </Heading>
     </section>
