@@ -16,6 +16,7 @@ export { default as Login } from "./Login";
 export { default as Logout } from "./Logout";
 export { default as Phone } from "./Phone";
 export { default as Plus } from "./Plus";
+export { default as Search } from "./Search";
 export { default as Send } from "./Send";
 export { default as Settings } from "./Settings";
 export { default as Smartphone } from "./Smartphone";
