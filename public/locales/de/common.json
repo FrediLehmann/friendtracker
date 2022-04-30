@@ -20,7 +20,6 @@
   },
   "header": {
     "signout": "Ausloggen",
-    "contribute": "Mithelfen",
     "pricing": "Preise",
     "navigation": {
       "pages": {
@@ -32,7 +31,6 @@
       "support": {
         "title": "Hilfe",
         "feedback": "Feedback",
-        "contribute": "Mithelfen",
         "donate": "Unterstützen"
       }
     }

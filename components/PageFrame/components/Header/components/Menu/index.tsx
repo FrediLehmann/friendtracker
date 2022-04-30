@@ -87,11 +87,6 @@ export default function Menu() {
               />
               <NavItem
                 href="/profile"
-                icon={<Github boxSize="5" />}
-                text={t("header.navigation.support.contribute")}
-              />
-              <NavItem
-                href="/profile"
                 icon={<CreditCard boxSize="5" />}
                 text={t("header.navigation.support.donate")}
               />

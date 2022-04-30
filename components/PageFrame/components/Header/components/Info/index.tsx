@@ -24,9 +24,6 @@ export default function Info() {
   if (buttonVariant === "full")
     return (
       <Flex gap="2" mr="2">
-        <Button leftIcon={<Github boxSize="4" />} variant="ghost">
-          <Text>{t("header.contribute")}</Text>
-        </Button>
         <Button
           leftIcon={<DollarSign boxSize="4" />}
           variant="ghost"
@@ -39,11 +36,6 @@ export default function Info() {
 
   return (
     <Flex gap="1" mr="1">
-      <IconButton
-        variant="ghost"
-        icon={<Github boxSize="4" />}
-        aria-label={t("header.contribute")}
-      />
       <IconButton
         variant="ghost"
         icon={<DollarSign boxSize="4" />}
