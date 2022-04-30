@@ -11,8 +11,6 @@ import { useRouter } from "next/router";
 const LANGUAGES = [
   { locale: "en", flag: "🇬🇧", text: "English" },
   { locale: "de", flag: "🇩🇪", text: "Deutsch" },
-  { locale: "uk", flag: "🇺🇦", text: "Українська" },
-  { locale: "ru", flag: "🇷🇺", text: "Русский" },
 ];
 
 export default function LanguageSelect() {
