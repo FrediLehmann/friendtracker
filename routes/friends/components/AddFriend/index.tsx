@@ -130,7 +130,6 @@ export default function AddFriend() {
               state.matches.map((match) => (
                 <SearchResult
                   key={match.owner}
-                  handle={match.user_handle}
                   name={match.user_name}
                   avatarUrl={match.avatar_url}
                 />

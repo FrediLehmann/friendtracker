@@ -236,8 +236,8 @@ const userSlice = createSlice({
     setMainEmail: (state, { payload }: PayloadAction<string>) => {
       state.email = payload;
     },
-    setUserHandle: (state, { payload }: PayloadAction<string>) => {
-      state.profile.user_handle = payload;
+    setUserName: (state, { payload }: PayloadAction<string>) => {
+      state.profile.user_name = payload;
     },
   },
   extraReducers: (builder) => {
@@ -320,7 +320,7 @@ export const {
   setUserLoggedIn,
   setLoginStatusLoading,
   setMainEmail,
-  setUserHandle,
+  setUserName,
 } = userSlice.actions;
 
 export default userSlice.reducer;

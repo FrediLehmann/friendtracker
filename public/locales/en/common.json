@@ -3,16 +3,12 @@
   "copied": "Copied",
   "contact": "Contact",
   "menu": "Menu",
-  "handle": {
-    "modalTitle": "Choose an identifier",
-    "label": "Your identifier",
-    "description": "Once the identifier is selected it can't be changed anymore.",
-    "helper": "This will be your identifier. It'll help identify you and other users of the platform can use it to find you.",
+  "userName": {
+    "modalTitle": "Choose your username",
+    "label": "Username",
+    "description": "Your username enables your friends to find you on our platform. You can later change it again if you want to.",
     "required": "This information is required",
-    "submit": "Choose",
-    "onlyAlphabeteAndNumber": "Only letters and numbers are allowed.",
-    "minLength": "Identifier needs to have 5 at least 5 characters.",
-    "alreadyTaken": "This identifier is already taken."
+    "submit": "Save"
   },
   "copyright": {
     "aboutLink": "About",

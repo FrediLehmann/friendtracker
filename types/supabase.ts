@@ -316,8 +316,6 @@ export interface paths {
           user_name?: parameters["rowFilter.profiles.user_name"];
           /** Avatar image url */
           avatar_url?: parameters["rowFilter.profiles.avatar_url"];
-          /** Users handle */
-          user_handle?: parameters["rowFilter.profiles.user_handle"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -374,8 +372,6 @@ export interface paths {
           user_name?: parameters["rowFilter.profiles.user_name"];
           /** Avatar image url */
           avatar_url?: parameters["rowFilter.profiles.avatar_url"];
-          /** Users handle */
-          user_handle?: parameters["rowFilter.profiles.user_handle"];
         };
         header: {
           /** Preference */
@@ -396,8 +392,6 @@ export interface paths {
           user_name?: parameters["rowFilter.profiles.user_name"];
           /** Avatar image url */
           avatar_url?: parameters["rowFilter.profiles.avatar_url"];
-          /** Users handle */
-          user_handle?: parameters["rowFilter.profiles.user_handle"];
         };
         body: {
           /** profiles */
@@ -499,11 +493,6 @@ export interface definitions {
      * @description Avatar image url
      */
     avatar_url?: string;
-    /**
-     * Format: text
-     * @description Users handle
-     */
-    user_handle?: string;
   };
 }
 
@@ -591,11 +580,6 @@ export interface parameters {
    * @description Avatar image url
    */
   "rowFilter.profiles.avatar_url": string;
-  /**
-   * Format: text
-   * @description Users handle
-   */
-  "rowFilter.profiles.user_handle": string;
 }
 
 export interface operations {}

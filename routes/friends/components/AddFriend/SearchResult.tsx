@@ -4,7 +4,6 @@ import {
   Flex,
   Text,
   useBreakpointValue,
-  VStack,
 } from "@chakra-ui/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { Plus } from "icons";
@@ -13,11 +12,9 @@ import { useSelector } from "react-redux";
 import { getUserLoginLoadingState } from "store/user";
 
 export default function SearchResult({
-  handle,
   name,
   avatarUrl,
 }: {
-  handle?: string;
   name?: string;
   avatarUrl?: string;
 }) {
@@ -51,14 +48,9 @@ export default function SearchResult({
     >
       <Flex gap="2" align="center" mr="5">
         <Avatar src={publicUrl} name={name} size={buttonSize} />
-        <VStack align="start" spacing="1">
-          <Text fontSize={["sm", "md"]} mr="5" fontWeight="bold" isTruncated>
-            {name} aklsdfj alskdflkas dfasdfmiso sdf
-          </Text>
-          <Text fontSize={["xs", "sm"]} isTruncated>
-            @{handle}
-          </Text>
-        </VStack>
+        <Text fontSize={["sm", "md"]} mr="5" fontWeight="bold" isTruncated>
+          {name} aklsdfj alskdflkas dfasdfmiso sdf
+        </Text>
       </Flex>
       <Button leftIcon={<Plus boxSize="5" />} size={buttonSize} mr="8">
         Add

@@ -1,7 +1,4 @@
 import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
   Button,
   Modal,
   ModalBody,
@@ -14,90 +11,73 @@ import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
 import { Form, Formik } from "formik";
 import { useTranslation } from "next-i18next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserProfile, getUserProfile, setUserHandle } from "store/user";
+import { fetchUserProfile, getUserProfile, setUserName } from "store/user";
 import DescriptionText from "./DescriptionText";
 import { FormField } from "./Form";
+import { object, string } from "yup";
 
 export default function User({ children }: { children: React.ReactNode }) {
   const { t } = useTranslation("common");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [handleTaken, setHandleTaken] = useState(false);
 
   const { user } = useUser();
 
   const dispatch = useDispatch();
-  const { state, owner, user_handle } = useSelector(getUserProfile);
+  const { state, owner, user_name } = useSelector(getUserProfile);
 
   useEffect(() => {
     if (user && state === "init") dispatch(fetchUserProfile(user.id));
   }, [dispatch, user, state]);
 
   useEffect(() => {
-    if (user && state === "loaded" && !user_handle) {
+    if (user && state === "loaded" && !user_name) {
       onOpen();
     }
-  }, [user, state, onOpen, user_handle]);
+  }, [user, state, onOpen, user_name]);
 
   return (
     <>
       {children}
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        closeOnEsc={false}
+        closeOnOverlayClick={false}
+      >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{t("handle.modalTitle")}</ModalHeader>
+          <ModalHeader>{t("userName.modalTitle")}</ModalHeader>
           <ModalBody>
             <DescriptionText fontWeight="bold" mb="4">
-              {t("handle.description")}
+              {t("userName.description")}
             </DescriptionText>
             <Formik
-              initialValues={{ handle: "" }}
-              validate={async (values) => {
-                let errors;
-                if (!values.handle) {
-                  errors = { handle: t("handle.required") };
-                } else if (values.handle.length < 5) {
-                  errors = { handle: t("handle.minLength") };
-                } else if (/[^A-Za-z0-9]+/.test(values.handle)) {
-                  errors = { handle: t("handle.onlyAlphabeteAndNumber") };
-                }
-                return errors;
-              }}
+              initialValues={{ name: "" }}
+              validationSchema={object({
+                name: string().required(t("userName.required")),
+              })}
               onSubmit={async (values, { setSubmitting }) => {
-                setHandleTaken(false);
                 const { error } = await supabaseClient
                   .from("profiles")
-                  .update({ user_handle: values.handle })
+                  .update({ user_name: values.name })
                   .eq("owner", owner);
 
                 if (!error) {
-                  dispatch(setUserHandle(values.handle));
+                  dispatch(setUserName(values.name));
                   setSubmitting(false);
                   onClose();
-                  return;
-                } else {
-                  setHandleTaken(true);
                 }
               }}
             >
               {({ isSubmitting }) => (
                 <Form>
                   <FormField
-                    name="handle"
+                    name="name"
                     isRequired
-                    label={t("handle.label")}
-                    helperText={t("handle.helper")}
-                    helperPosition="before"
+                    label={t("userName.label")}
                   />
-                  {handleTaken && (
-                    <Alert status="error" mt="4">
-                      <AlertIcon />
-                      <AlertDescription>
-                        {t("handle.alreadyTaken")}
-                      </AlertDescription>
-                    </Alert>
-                  )}
                   <Button
                     colorScheme="blue"
                     type="submit"
@@ -105,7 +85,7 @@ export default function User({ children }: { children: React.ReactNode }) {
                     w="full"
                     isLoading={isSubmitting}
                   >
-                    {t("handle.submit")}
+                    {t("userName.submit")}
                   </Button>
                 </Form>
               )}

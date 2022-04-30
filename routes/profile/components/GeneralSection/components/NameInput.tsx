@@ -15,7 +15,7 @@ import { changeUserName, getUserProfile } from "store/user";
 export default function NameInput() {
   const { t } = useTranslation("profile");
   const dispatch = useDispatch();
-  const { user_name = "", user_handle } = useSelector(getUserProfile);
+  const { user_name = "" } = useSelector(getUserProfile);
   const [edit, setEdit] = useBoolean();
   const [userName, setUserName] = useState(user_name);
 
@@ -53,7 +53,6 @@ export default function NameInput() {
           />
         )}
       </Editable>
-      <DescriptionText>@{user_handle}</DescriptionText>
     </Box>
   );
 }
