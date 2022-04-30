@@ -34,13 +34,13 @@ export default function AvatarUpload() {
 
   useEffect(() => {
     const fetchSignedAvatarUrl = async () => {
-      let { signedURL, error } = await supabaseClient.storage
+      let { publicURL, error } = await supabaseClient.storage
         .from("avatars")
-        .createSignedUrl(avatar_url, 60);
+        .getPublicUrl(avatar_url);
 
       if (error) throw error;
 
-      setAvatarUrl(signedURL || "");
+      setAvatarUrl(publicURL || "");
     };
 
     if (uploadingAvatarImage && avatarUrl) setAvatarUrl(undefined);

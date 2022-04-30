@@ -17,7 +17,7 @@
   "addFriend": {
     "title": "Добавить друга:",
     "inputPlaceholder": "Используйте адрес электронной почты, номер телефона или просто имя",
-    "addButton": "Добавить"
+    "search": "Search"
   },
   "friendList": {
     "lastOnline": "Последняя регистрация:",

@@ -17,7 +17,7 @@
   "addFriend": {
     "title": "Add a friend:",
     "inputPlaceholder": "Use a email address, phone number or a name",
-    "addButton": "Add friend"
+    "search": "Search"
   },
   "friendList": {
     "lastOnline": "Last sign in:",

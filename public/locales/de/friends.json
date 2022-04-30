@@ -17,7 +17,7 @@
   "addFriend": {
     "title": "Freund hinzufügen:",
     "inputPlaceholder": "Verwende eine Email Adresse, Telefonnummer oder einfach einen Namen",
-    "addButton": "Hinzufügen"
+    "search": "Suchen"
   },
   "friendList": {
     "lastOnline": "Letzter login:",
