@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
-import { Friend, PendingFriend, UnavailableFriend } from "./components";
+import { Friend } from "./components";
 
 export default function FriendList() {
   const { t } = useTranslation("friends");
@@ -14,22 +14,14 @@ export default function FriendList() {
           name="Hannes Kaufmann"
           url="hanneskaufmann"
           lastSignIn="24.03.2022"
-          status="ok"
         />
-        <Friend
-          name="Wendy Nguyen"
-          url="wendynguyen"
-          lastSignIn="12.02.2022"
-          status="ok"
-        />
-        <PendingFriend name="Markus Trachsel" url="markustrachsel" />
+        <Friend name="Wendy Nguyen" url="wendynguyen" lastSignIn="12.02.2022" />
+        <Friend name="Markus Trachsel" url="markustrachsel" isPending />
         <Friend
           name="Frederic Lehmann"
           url="fredericlehmann"
           lastSignIn="03.03.2022"
-          status="nok"
         />
-        <UnavailableFriend identifier="steffan.landgraf@smg.ch" />
       </Flex>
     </>
   );

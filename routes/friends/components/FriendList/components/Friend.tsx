@@ -1,7 +1,7 @@
 import {
   Avatar,
+  AvatarBadge,
   Box,
-  Circle,
   Divider,
   Flex,
   Heading,
@@ -10,45 +10,20 @@ import {
   LinkOverlay,
   Text,
 } from "@chakra-ui/react";
-import { AlertTriangle, Check, X } from "icons";
+import { X } from "icons";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
-
-type Status = "ok" | "nok";
-
-const StatusComponent = ({ status }: { status: Status }) => {
-  switch (status) {
-    case "ok":
-      return (
-        <Circle size="20px" bg="green.400" color="white">
-          <Check boxSize="3" />
-        </Circle>
-      );
-    case "nok":
-      return (
-        <Circle size="20px" bg="red.400" color="white">
-          <AlertTriangle boxSize="3" />
-        </Circle>
-      );
-    default:
-      return (
-        <Circle size="20px" bg="green.400" color="white">
-          <Check boxSize="3" />
-        </Circle>
-      );
-  }
-};
 
 export default function Friend({
   name,
   url,
   lastSignIn,
-  status,
+  isPending = false,
 }: {
   name: string;
   url: string;
-  lastSignIn: string;
-  status: Status;
+  lastSignIn?: string;
+  isPending?: boolean;
 }) {
   const { t } = useTranslation("friends");
   return (
@@ -68,18 +43,25 @@ export default function Friend({
         alignItems="center"
         w="full"
       >
-        <Avatar />
+        <Avatar>
+          {isPending && (
+            <AvatarBadge
+              borderColor="orange.100"
+              bg="orange.400"
+              boxSize="1.25em"
+            />
+          )}
+        </Avatar>
         <Box overflow="hidden">
-          <Flex gap="3" alignItems="center">
-            <Heading size="sm" isTruncated>
-              <NextLink href={`/friends/${url}`} passHref>
-                <LinkOverlay>{name}</LinkOverlay>
-              </NextLink>
-            </Heading>
-            <StatusComponent status={status} />
-          </Flex>
+          <Heading size="sm" isTruncated>
+            <NextLink href={`/friends/${url}`} passHref>
+              <LinkOverlay>{name}</LinkOverlay>
+            </NextLink>
+          </Heading>
           <Text color="gray.600" fontSize="xs">
-            {t("friendList.lastOnline")} {lastSignIn}
+            {isPending
+              ? t("friendList.pendingRequest")
+              : t("friendList.lastOnline", { lastLogin: lastSignIn })}
           </Text>
         </Box>
       </LinkBox>

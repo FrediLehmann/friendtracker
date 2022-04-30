@@ -22,7 +22,7 @@
   },
   "friendList": {
     "count": "{{count}} Freunde in der Liste",
-    "lastOnline": "Letzter login:",
+    "lastOnline": "Letzter login: {{lastLogin}}",
     "removeFriend": "Freund entfernen",
     "pendingRequest": "Ausstehende Freundschaftsanfrage",
     "sendInvite": "Einladung schicken",

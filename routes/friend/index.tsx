@@ -56,7 +56,7 @@ const Friend: NextPage = () => {
                 </Badge>
               </Stack>
               <Text fontSize={["xs", null, "md"]}>
-                {t("friendList.lastOnline")} 24.03.2022
+                {t("friendList.lastOnline", { lastLogin: "24.03.2022" })}
               </Text>
             </VStack>
           </Flex>
