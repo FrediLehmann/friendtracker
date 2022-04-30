@@ -20,6 +20,7 @@
     "search": "Search"
   },
   "friendList": {
+    "count": "{{count}} friends in list",
     "lastOnline": "Last sign in:",
     "removeFriend": "Remove friend",
     "pendingRequest": "Pending friend request",

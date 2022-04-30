@@ -20,6 +20,7 @@
     "search": "Suchen"
   },
   "friendList": {
+    "count": "{{count}} Freunde in der Liste",
     "lastOnline": "Letzter login:",
     "removeFriend": "Freund entfernen",
     "pendingRequest": "Ausstehende Freundschaftsanfrage",
