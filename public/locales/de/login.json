@@ -8,6 +8,7 @@
       "required": "Email adresse wird benötigt"
     },
     "submit": "Mit Email einloggen",
+    "create": "Registrieren",
     "login": {
       "failed": "Login fehlgeschlagen",
       "success": "Email mit dem Zugriffslink wurde versendet."

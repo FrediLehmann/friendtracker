@@ -67,6 +67,17 @@ export default function SignInSection() {
             >
               {t("loginForm.submit")}
             </Button>
+            <Button
+              mt="2"
+              w="100%"
+              size="md"
+              type="submit"
+              colorScheme="blue"
+              variant="outline"
+              isLoading={isSubmitting}
+            >
+              {t("loginForm.create")}
+            </Button>
           </Form>
         )}
       </Formik>

@@ -6,7 +6,6 @@ import { Center } from "@chakra-ui/react";
 import {
   ExternalSignInSection,
   IntroductionSection,
-  RegisterSection,
   SignInSection,
 } from "./components";
 import { useRouter } from "next/router";
@@ -35,7 +34,6 @@ const Index: NextPage = () => {
           <IntroductionSection />
           <SignInSection />
           <ExternalSignInSection />
-          <RegisterSection />
           <Copyright />
         </Center>
       </PageFrame>

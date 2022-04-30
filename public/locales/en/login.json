@@ -8,6 +8,7 @@
       "required": "Email address is required"
     },
     "submit": "Login with email",
+    "create": "Register",
     "login": {
       "failed": "Login failed",
       "success": "Email with your access link was sent."
