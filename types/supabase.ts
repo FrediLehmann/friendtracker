@@ -108,6 +108,108 @@ export interface paths {
       };
     };
   };
+  "/friends": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.friends.id"];
+          created_at?: parameters["rowFilter.friends.created_at"];
+          owner?: parameters["rowFilter.friends.owner"];
+          friend?: parameters["rowFilter.friends.friend"];
+          /** Friend request status */
+          status?: parameters["rowFilter.friends.status"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["friends"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** friends */
+          friends?: definitions["friends"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.friends.id"];
+          created_at?: parameters["rowFilter.friends.created_at"];
+          owner?: parameters["rowFilter.friends.owner"];
+          friend?: parameters["rowFilter.friends.friend"];
+          /** Friend request status */
+          status?: parameters["rowFilter.friends.status"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.friends.id"];
+          created_at?: parameters["rowFilter.friends.created_at"];
+          owner?: parameters["rowFilter.friends.owner"];
+          friend?: parameters["rowFilter.friends.friend"];
+          /** Friend request status */
+          status?: parameters["rowFilter.friends.status"];
+        };
+        body: {
+          /** friends */
+          friends?: definitions["friends"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/phones": {
     get: {
       parameters: {
@@ -333,6 +435,29 @@ export interface definitions {
     /** Format: text */
     email: string;
   };
+  friends: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /** Format: uuid */
+    owner?: string;
+    /** Format: character varying */
+    friend?: string;
+    /**
+     * Format: public.friend_request_status
+     * @description Friend request status
+     * @enum {string}
+     */
+    status: "pending" | "accepted" | "denied";
+  };
   /** @description Users phone numbers */
   phones: {
     /**
@@ -425,6 +550,21 @@ export interface parameters {
   "rowFilter.emails.owner": string;
   /** Format: text */
   "rowFilter.emails.email": string;
+  /** @description friends */
+  "body.friends": definitions["friends"];
+  /** Format: bigint */
+  "rowFilter.friends.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.friends.created_at": string;
+  /** Format: uuid */
+  "rowFilter.friends.owner": string;
+  /** Format: character varying */
+  "rowFilter.friends.friend": string;
+  /**
+   * Format: public.friend_request_status
+   * @description Friend request status
+   */
+  "rowFilter.friends.status": string;
   /** @description phones */
   "body.phones": definitions["phones"];
   /** Format: bigint */

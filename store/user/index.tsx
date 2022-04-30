@@ -7,11 +7,12 @@ import { definitions } from "types/supabase";
 
 export const fetchUserProfile = createAsyncThunk<
   definitions["profiles"],
-  undefined
->("user/profile", async () => {
+  string
+>("user/profile", async (owner) => {
   let { data, error } = await supabaseClient
     .from<definitions["profiles"]>("profiles")
     .select("*")
+    .eq("owner", owner)
     .single();
 
   if (error) throw error;

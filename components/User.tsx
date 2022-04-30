@@ -31,7 +31,7 @@ export default function User({ children }: { children: React.ReactNode }) {
   const { state, owner, user_handle } = useSelector(getUserProfile);
 
   useEffect(() => {
-    if (user && state === "init") dispatch(fetchUserProfile());
+    if (user && state === "init") dispatch(fetchUserProfile(user.id));
   }, [dispatch, user, state]);
 
   useEffect(() => {
