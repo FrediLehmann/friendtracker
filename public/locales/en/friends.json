@@ -17,7 +17,8 @@
   "addFriend": {
     "title": "Add a friend:",
     "inputPlaceholder": "Use a email address, phone number or a name",
-    "search": "Search"
+    "search": "Search",
+    "add": "Add"
   },
   "friendList": {
     "count": "{{count}} friends in list",
