@@ -316,6 +316,7 @@ export interface paths {
           user_name?: parameters["rowFilter.profiles.user_name"];
           /** Avatar image url */
           avatar_url?: parameters["rowFilter.profiles.avatar_url"];
+          profile_hash?: parameters["rowFilter.profiles.profile_hash"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -372,6 +373,7 @@ export interface paths {
           user_name?: parameters["rowFilter.profiles.user_name"];
           /** Avatar image url */
           avatar_url?: parameters["rowFilter.profiles.avatar_url"];
+          profile_hash?: parameters["rowFilter.profiles.profile_hash"];
         };
         header: {
           /** Preference */
@@ -392,6 +394,7 @@ export interface paths {
           user_name?: parameters["rowFilter.profiles.user_name"];
           /** Avatar image url */
           avatar_url?: parameters["rowFilter.profiles.avatar_url"];
+          profile_hash?: parameters["rowFilter.profiles.profile_hash"];
         };
         body: {
           /** profiles */
@@ -405,6 +408,26 @@ export interface paths {
       responses: {
         /** No Content */
         204: never;
+      };
+    };
+  };
+  "/rpc/get_users": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: text */
+            query: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
       };
     };
   };
@@ -443,11 +466,16 @@ export interface definitions {
     created_at?: string;
     /** Format: uuid */
     owner?: string;
-    /** Format: character varying */
+    /**
+     * Format: text
+     * @description Note:
+     * This is a Foreign Key to `profiles.profile_hash`.<fk table='profiles' column='profile_hash'/>
+     */
     friend?: string;
     /**
      * Format: public.friend_request_status
      * @description Friend request status
+     * @default pending
      * @enum {string}
      */
     status: "pending" | "accepted" | "denied";
@@ -493,6 +521,8 @@ export interface definitions {
      * @description Avatar image url
      */
     avatar_url?: string;
+    /** Format: text */
+    profile_hash: string;
   };
 }
 
@@ -547,7 +577,7 @@ export interface parameters {
   "rowFilter.friends.created_at": string;
   /** Format: uuid */
   "rowFilter.friends.owner": string;
-  /** Format: character varying */
+  /** Format: text */
   "rowFilter.friends.friend": string;
   /**
    * Format: public.friend_request_status
@@ -580,6 +610,8 @@ export interface parameters {
    * @description Avatar image url
    */
   "rowFilter.profiles.avatar_url": string;
+  /** Format: text */
+  "rowFilter.profiles.profile_hash": string;
 }
 
 export interface operations {}
