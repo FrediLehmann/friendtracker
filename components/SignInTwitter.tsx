@@ -20,6 +20,7 @@ export default function SignInTwitter() {
       colorScheme="twitter"
       leftIcon={<Twitter boxSize="4" fill="white" />}
       onClick={signIn}
+      disabled
     >
       {t("loginWithTwitter")}
     </Button>

@@ -19,6 +19,7 @@ export default function SignInFacebook() {
       colorScheme="facebook"
       leftIcon={<Facebook boxSize="4" fill="white" />}
       onClick={signIn}
+      disabled
     >
       {t("loginWithFacebook")}
     </Button>
