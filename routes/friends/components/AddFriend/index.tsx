@@ -71,7 +71,7 @@ export default function AddFriend() {
         .not("owner", "eq", owner)
         .textSearch("user_name", state.query);
 
-      if (error) throw error;
+      if (error || !data) throw error;
 
       state.searchError && dispatch({ type: "toggleError" });
       dispatch({ type: "updateMatches", value: data });
