@@ -20,13 +20,53 @@ import NextLink from "next/link";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { ContactElement } from "./components";
+import { useEffect, useState } from "react";
+import { useUser } from "@supabase/supabase-auth-helpers/react";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { definitions } from "types/supabase";
 
 const Friend: NextPage = () => {
   const { t } = useTranslation(["friends", "common"]);
-  const avatarSize = useBreakpointValue({ base: "lg", md: "xl" });
+  const avatarSize = useBreakpointValue({ base: "md", md: "lg" });
+
+  const { user } = useUser();
 
   const router = useRouter();
   const { identifier } = router.query;
+
+  const [friend, setFriend] = useState<definitions["profiles"]>();
+  useEffect(() => {
+    const fetchFriend = async () => {
+      const { data, error } = await supabaseClient
+        .from("profiles")
+        .select("*")
+        .eq("profile_hash", identifier)
+        .single();
+
+      if (error) throw error;
+
+      setFriend(data);
+    };
+
+    user && fetchFriend();
+  }, [user, identifier]);
+
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>();
+  useEffect(() => {
+    const fetchSignedAvatarUrl = async () => {
+      if (!friend?.avatar_url) return;
+
+      let { publicURL, error } = await supabaseClient.storage
+        .from("avatars")
+        .getPublicUrl(friend.avatar_url);
+
+      if (error) throw error;
+
+      setAvatarUrl(publicURL || "");
+    };
+
+    if (user && friend) fetchSignedAvatarUrl();
+  }, [friend, user]);
 
   return (
     <>
@@ -36,47 +76,26 @@ const Friend: NextPage = () => {
       <PageFrame>
         <Box layerStyle="pageContent">
           <Flex gap="5" alignItems="center">
-            <Avatar size={avatarSize} />
+            <Avatar src={avatarUrl} size={avatarSize} />
             <VStack spacing="2" align="start">
               <Heading as="h1" size="lg">
-                {identifier}
+                {friend?.user_name || ""}
               </Heading>
-              <Stack direction={["column", "row"]} spacing="2">
-                <Badge
-                  colorScheme="green"
-                  fontSize={["0.6rem", null, "0.75rem"]}
-                >
-                  {t("safetyStatus.ok")}
-                </Badge>
-                <Badge
-                  colorScheme="green"
-                  fontSize={["0.6rem", null, "0.75rem"]}
-                >
-                  {t("healtStatus.good")}
-                </Badge>
-              </Stack>
-              <Text fontSize={["xs", null, "md"]}>
-                {t("friendList.lastOnline", { lastLogin: "24.03.2022" })}
-              </Text>
             </VStack>
           </Flex>
           <Divider my="4" />
-          <NextLink href="/friends" passHref>
-            <Link display="block" mb="5" color="blue.500">
-              <ArrowLeft boxSize="4" mb="1" /> {t("backToFriends")}
-            </Link>
-          </NextLink>
-          <Flex layerStyle="card" gap="4" bg="white" flexDirection="column">
-            <Heading as="h2" size="sm" color="gray.700">
-              {t("contactDetails")}
-            </Heading>
-            <Text fontSize="sm" color="gray.500">
-              {t("contactText", { name: "Hannes" })}
-            </Text>
-            <ContactElement type="phone" text="+41 79 475 78 91" />
-            <ContactElement type="email" text="frederic.lehmann@bluewin.ch" />
-          </Flex>
-          <Flex layerStyle="card" mt="4" bg="white">
+          <Flex
+            layerStyle="card"
+            mt="4"
+            bg="white"
+            align="center"
+            justify="space-between"
+          >
+            <NextLink href="/friends" passHref>
+              <Link display="block" color="blue.500">
+                <ArrowLeft boxSize="4" mb="1" /> {t("backToFriends")}
+              </Link>
+            </NextLink>
             <Button variant="outline" colorScheme="red" size="sm">
               {t("friendList.removeFriend")}
             </Button>

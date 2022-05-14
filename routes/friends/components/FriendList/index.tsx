@@ -64,6 +64,7 @@ export default function FriendList() {
             key={friend.profile_hash}
             name={friend.user_name || ""}
             url={friend.profile_hash}
+            avatar_url={friend.avatar_url || ""}
             isPending={friend.friends[0]?.request_status === "pending"}
           />
         ))}

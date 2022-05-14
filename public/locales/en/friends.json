@@ -1,19 +1,8 @@
 {
   "page": { "title": "Friends" },
   "backToFriends": "Back to friend list",
-  "contactDetails": "Contact details",
-  "contactText": "Take some time to get in touch with {{name}}.",
   "call": "Call",
   "email": "Email",
-  "safetyStatus": {
-    "ok": "Safety status: safe",
-    "nok": "Safety status: unsafe"
-  },
-  "healtStatus": {
-    "good": "Health status: good",
-    "okay": "Health status: okay",
-    "bad": "Health status: bad"
-  },
   "addFriend": {
     "title": "Add a friend:",
     "inputPlaceholder": "Use a email address, phone number or a name",

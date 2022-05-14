@@ -1,19 +1,8 @@
 {
   "page": { "title": "Freunde" },
   "backToFriends": "Zurück zu allen Freunden",
-  "contactDetails": "Kontakt details",
-  "contactText": "Nimm dir einen Moment Zeit {{name}} zu kontaktieren.",
   "call": "Anrufen",
   "email": "Email",
-  "safetyStatus": {
-    "ok": "Sicherheitsstatus: safe",
-    "nok": "Sicherheitsstatus: unsafe"
-  },
-  "healtStatus": {
-    "good": "Gesundheitsstatus: good",
-    "okay": "Gesundheitsstatus: okay",
-    "bad": "Gesundheitsstatus: bad"
-  },
   "addFriend": {
     "title": "Freund hinzufügen:",
     "inputPlaceholder": "Verwende eine Email Adresse, Telefonnummer oder einfach einen Namen",

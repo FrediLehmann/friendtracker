@@ -26,7 +26,6 @@ export default function Requests() {
   const { profile_hash } = useSelector(getUserProfile);
 
   const [friendRequests, setFriendRequests] = useState<FriendList[]>();
-
   useEffect(() => {
     const getRequests = async () => {
       const { data, error } = await supabaseClient

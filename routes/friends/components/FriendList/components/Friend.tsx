@@ -10,20 +10,47 @@ import {
   LinkOverlay,
   Text,
 } from "@chakra-ui/react";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { useUser } from "@supabase/supabase-auth-helpers/react";
 import { X } from "icons";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Friend({
   name,
   url,
+  avatar_url,
   isPending = false,
 }: {
   name: string;
   url: string;
+  avatar_url: string;
   isPending?: boolean;
 }) {
   const { t } = useTranslation("friends");
+
+  const { user } = useUser();
+
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>();
+  useEffect(() => {
+    const fetchSignedAvatarUrl = async () => {
+      if (!avatar_url) return;
+
+      let { publicURL, error } = await supabaseClient.storage
+        .from("avatars")
+        .getPublicUrl(avatar_url);
+
+      if (error) throw error;
+
+      console.log(publicURL);
+
+      setAvatarUrl(publicURL || "");
+    };
+
+    if (user) fetchSignedAvatarUrl();
+  }, [avatar_url, user]);
+
   return (
     <Flex
       alignItems="center"
@@ -41,7 +68,7 @@ export default function Friend({
         alignItems="center"
         w="full"
       >
-        <Avatar>
+        <Avatar src={avatarUrl}>
           {isPending && (
             <AvatarBadge
               borderColor="orange.100"
