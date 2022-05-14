@@ -20,7 +20,11 @@
     "search": "Suchen",
     "add": "Hinzufügen"
   },
+  "friendRequests": {
+    "title": "Freundschaftsanfragen"
+  },
   "friendList": {
+    "noFriends": "Suche nach Freunden und sende Ihnen eine Anfrage",
     "count": "{{count}} Freunde in der Liste",
     "lastOnline": "Letzter login: {{lastLogin}}",
     "removeFriend": "Freund entfernen",

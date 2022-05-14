@@ -2,7 +2,7 @@ import { PageFrame } from "components";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useTranslation } from "next-i18next";
-import { AddFriend, FriendList } from "./components";
+import { AddFriend, FriendList, Requests } from "./components";
 
 const Friends: NextPage = () => {
   const { t } = useTranslation(["friends"]);
@@ -13,6 +13,7 @@ const Friends: NextPage = () => {
       </Head>
       <PageFrame>
         <AddFriend />
+        <Requests />
         <FriendList />
       </PageFrame>
     </>

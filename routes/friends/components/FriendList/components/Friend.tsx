@@ -17,12 +17,10 @@ import NextLink from "next/link";
 export default function Friend({
   name,
   url,
-  lastSignIn,
   isPending = false,
 }: {
   name: string;
   url: string;
-  lastSignIn?: string;
   isPending?: boolean;
 }) {
   const { t } = useTranslation("friends");
@@ -59,9 +57,7 @@ export default function Friend({
             </NextLink>
           </Heading>
           <Text color="gray.600" fontSize="xs">
-            {isPending
-              ? t("friendList.pendingRequest")
-              : t("friendList.lastOnline", { lastLogin: lastSignIn })}
+            {isPending && t("friendList.pendingRequest")}
           </Text>
         </Box>
       </LinkBox>

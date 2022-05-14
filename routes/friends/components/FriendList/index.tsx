@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Center, Flex, Text } from "@chakra-ui/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
 import { useTranslation } from "next-i18next";
@@ -32,9 +32,9 @@ export default function FriendList() {
       const { data, error } = await supabaseClient
         .from("profiles")
         .select(
-          "owner, user_name, avatar_url, profile_hash, friends!friends_friend_fkey!inner(request_status, initiator)"
+          "owner, user_name, avatar_url, profile_hash, friends!friends_friend_fkey!inner(request_status, friend)"
         )
-        .eq("friends.initiator", profile_hash);
+        .neq("friends.friend", profile_hash);
 
       if (error) throw error;
 
@@ -44,24 +44,25 @@ export default function FriendList() {
     user && profile_hash && getFriends();
   }, [user, profile_hash]);
 
-  return (
+  return friends && friends.length > 0 ? (
     <>
       <Text textAlign="end" color="gray.500" fontSize="sm" mb="2">
         {t("friendList.count", { count: friends?.length || 0 })}
       </Text>
       <Flex direction="column" gap="3">
-        {friends &&
-          friends.length > 0 &&
-          friends.map((friend) => (
-            <Friend
-              key={friend.profile_hash}
-              name={friend.user_name || ""}
-              url={friend.profile_hash}
-              isPending={friend.friends[0]?.request_status === "pending"}
-              lastSignIn="24.03.2022"
-            />
-          ))}
+        {friends.map((friend) => (
+          <Friend
+            key={friend.profile_hash}
+            name={friend.user_name || ""}
+            url={friend.profile_hash}
+            isPending={friend.friends[0]?.request_status === "pending"}
+          />
+        ))}
       </Flex>
     </>
+  ) : (
+    <Center mt={["8", "14"]}>
+      <Text color="gray.500">{t("friendList.noFriends")}</Text>
+    </Center>
   );
 }
