@@ -12,6 +12,7 @@ interface FriendList {
   avatar_url?: string;
   profile_hash: string;
   friends: {
+    id: number;
     request_status: string;
     initiator: string;
   }[];
@@ -31,8 +32,9 @@ export default function Requests() {
       const { data, error } = await supabaseClient
         .from("profiles")
         .select(
-          "owner, user_name, avatar_url, profile_hash, friends!friends_initiator_fkey!inner(request_status, initiator)"
+          "owner, user_name, avatar_url, profile_hash, friends!friends_initiator_fkey!inner(id, request_status, initiator)"
         )
+        .eq("friends.request_status", "pending")
         .neq("friends.initiator", profile_hash);
 
       if (error) throw error;
@@ -42,6 +44,22 @@ export default function Requests() {
 
     user && profile_hash && getRequests();
   }, [user, profile_hash]);
+
+  const acceptRequest = async (id: number) => {
+    const { error } = await supabaseClient.rpc("approve_friend_request", {
+      request_id: id,
+    });
+
+    if (error) throw error;
+  };
+
+  const denyRequest = async (id: number) => {
+    const { error } = await supabaseClient.rpc("deny_friend_request", {
+      request_id: id,
+    });
+
+    if (error) throw error;
+  };
 
   return friendRequests && friendRequests?.length > 0 ? (
     <Box>
@@ -58,8 +76,15 @@ export default function Requests() {
             <Text>{request.user_name}</Text>
           </Flex>
           <ButtonGroup size="sm" spacing="4" variant="link">
-            <Button colorScheme="blue">Accept</Button>
-            <Button>Reject</Button>
+            <Button
+              colorScheme="blue"
+              onClick={() => acceptRequest(request.friends[0].id)}
+            >
+              Accept
+            </Button>
+            <Button onClick={() => denyRequest(request.friends[0].id)}>
+              Reject
+            </Button>
           </ButtonGroup>
         </Flex>
       ))}

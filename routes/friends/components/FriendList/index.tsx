@@ -29,16 +29,25 @@ export default function FriendList() {
 
   useEffect(() => {
     const getFriends = async () => {
-      const { data, error } = await supabaseClient
+      const { data: data_f1, error: error_f1 } = await supabaseClient
+        .from("profiles")
+        .select(
+          "owner, user_name, avatar_url, profile_hash, friends!friends_initiator_fkey!inner(request_status, friend)"
+        )
+        .neq("friends.initiator", profile_hash);
+
+      if (error_f1) throw error_f1;
+
+      const { data: data_f2, error: error_f2 } = await supabaseClient
         .from("profiles")
         .select(
           "owner, user_name, avatar_url, profile_hash, friends!friends_friend_fkey!inner(request_status, friend)"
         )
         .neq("friends.friend", profile_hash);
 
-      if (error) throw error;
+      if (error_f2) throw error_f2;
 
-      setFriends(data);
+      setFriends([...data_f1, ...data_f2]);
     };
 
     user && profile_hash && getFriends();
