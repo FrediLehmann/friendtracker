@@ -1,8 +1,8 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { withAuthRequired } from "@supabase/supabase-auth-helpers/nextjs";
+import { withPageAuth } from "@supabase/supabase-auth-helpers/nextjs";
 import Friends from "routes/friends";
 
-export const getServerSideProps = withAuthRequired({
+export const getServerSideProps = withPageAuth({
   async getServerSideProps({ locale = "en" }) {
     return {
       props: {
