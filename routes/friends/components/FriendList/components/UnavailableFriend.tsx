@@ -1,5 +1,4 @@
 import {
-  Avatar,
   AvatarBadge,
   Box,
   Button,
@@ -11,6 +10,7 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { Avatar } from "components";
 import { Send, X } from "icons";
 import { useTranslation } from "next-i18next";
 

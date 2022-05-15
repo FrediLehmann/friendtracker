@@ -1,25 +1,20 @@
 import {
-  Avatar,
-  Badge,
   Box,
   Button,
   Divider,
   Flex,
   Heading,
   Link,
-  Stack,
-  Text,
   useBreakpointValue,
   VStack,
 } from "@chakra-ui/react";
-import { PageFrame } from "components";
+import { Avatar, PageFrame } from "components";
 import { ArrowLeft } from "icons";
 import { NextPage } from "next";
 import Head from "next/head";
 import NextLink from "next/link";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { ContactElement } from "./components";
 import { useEffect, useState } from "react";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
@@ -51,23 +46,6 @@ const Friend: NextPage = () => {
     user && fetchFriend();
   }, [user, identifier]);
 
-  const [avatarUrl, setAvatarUrl] = useState<string | undefined>();
-  useEffect(() => {
-    const fetchSignedAvatarUrl = async () => {
-      if (!friend?.avatar_url) return;
-
-      let { publicURL, error } = await supabaseClient.storage
-        .from("avatars")
-        .getPublicUrl(friend.avatar_url);
-
-      if (error) throw error;
-
-      setAvatarUrl(publicURL || "");
-    };
-
-    if (user && friend) fetchSignedAvatarUrl();
-  }, [friend, user]);
-
   return (
     <>
       <Head>
@@ -76,7 +54,7 @@ const Friend: NextPage = () => {
       <PageFrame>
         <Box layerStyle="pageContent">
           <Flex gap="5" alignItems="center">
-            <Avatar src={avatarUrl} size={avatarSize} />
+            <Avatar url={friend?.avatar_url} size={avatarSize} />
             <VStack spacing="2" align="start">
               <Heading as="h1" size="lg">
                 {friend?.user_name || ""}

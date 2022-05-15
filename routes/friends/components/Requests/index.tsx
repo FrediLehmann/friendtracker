@@ -1,6 +1,7 @@
-import { Avatar, Box, Button, ButtonGroup, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, Text } from "@chakra-ui/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
+import { Avatar } from "components";
 import { useTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -71,7 +72,7 @@ export default function Requests() {
           justify="space-between"
         >
           <Flex align="center">
-            <Avatar mr="2" size="sm" />
+            <Avatar url={request.avatar_url} mr="2" size="sm" />
             <Text>{request.user_name}</Text>
           </Flex>
           <ButtonGroup size="sm" spacing="4" variant="link">
