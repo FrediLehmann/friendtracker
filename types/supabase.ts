@@ -317,7 +317,6 @@ export interface paths {
           /** Avatar image url */
           avatar_url?: parameters["rowFilter.profiles.avatar_url"];
           profile_hash?: parameters["rowFilter.profiles.profile_hash"];
-          last_online?: parameters["rowFilter.profiles.last_online"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -375,7 +374,6 @@ export interface paths {
           /** Avatar image url */
           avatar_url?: parameters["rowFilter.profiles.avatar_url"];
           profile_hash?: parameters["rowFilter.profiles.profile_hash"];
-          last_online?: parameters["rowFilter.profiles.last_online"];
         };
         header: {
           /** Preference */
@@ -397,7 +395,6 @@ export interface paths {
           /** Avatar image url */
           avatar_url?: parameters["rowFilter.profiles.avatar_url"];
           profile_hash?: parameters["rowFilter.profiles.profile_hash"];
-          last_online?: parameters["rowFilter.profiles.last_online"];
         };
         body: {
           /** profiles */
@@ -635,8 +632,6 @@ export interface definitions {
     avatar_url?: string;
     /** Format: text */
     profile_hash: string;
-    /** Format: timestamp with time zone */
-    last_online?: string;
   };
 }
 
@@ -725,8 +720,6 @@ export interface parameters {
   "rowFilter.profiles.avatar_url": string;
   /** Format: text */
   "rowFilter.profiles.profile_hash": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.profiles.last_online": string;
 }
 
 export interface operations {}
