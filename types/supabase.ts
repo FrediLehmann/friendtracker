@@ -114,10 +114,10 @@ export interface paths {
         query: {
           id?: parameters["rowFilter.friends.id"];
           created_at?: parameters["rowFilter.friends.created_at"];
-          owner?: parameters["rowFilter.friends.owner"];
+          updated_at?: parameters["rowFilter.friends.updated_at"];
+          initiator?: parameters["rowFilter.friends.initiator"];
           friend?: parameters["rowFilter.friends.friend"];
-          /** Friend request status */
-          status?: parameters["rowFilter.friends.status"];
+          request_status?: parameters["rowFilter.friends.request_status"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -170,10 +170,10 @@ export interface paths {
         query: {
           id?: parameters["rowFilter.friends.id"];
           created_at?: parameters["rowFilter.friends.created_at"];
-          owner?: parameters["rowFilter.friends.owner"];
+          updated_at?: parameters["rowFilter.friends.updated_at"];
+          initiator?: parameters["rowFilter.friends.initiator"];
           friend?: parameters["rowFilter.friends.friend"];
-          /** Friend request status */
-          status?: parameters["rowFilter.friends.status"];
+          request_status?: parameters["rowFilter.friends.request_status"];
         };
         header: {
           /** Preference */
@@ -190,10 +190,10 @@ export interface paths {
         query: {
           id?: parameters["rowFilter.friends.id"];
           created_at?: parameters["rowFilter.friends.created_at"];
-          owner?: parameters["rowFilter.friends.owner"];
+          updated_at?: parameters["rowFilter.friends.updated_at"];
+          initiator?: parameters["rowFilter.friends.initiator"];
           friend?: parameters["rowFilter.friends.friend"];
-          /** Friend request status */
-          status?: parameters["rowFilter.friends.status"];
+          request_status?: parameters["rowFilter.friends.request_status"];
         };
         body: {
           /** friends */
@@ -317,6 +317,7 @@ export interface paths {
           /** Avatar image url */
           avatar_url?: parameters["rowFilter.profiles.avatar_url"];
           profile_hash?: parameters["rowFilter.profiles.profile_hash"];
+          last_online?: parameters["rowFilter.profiles.last_online"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -374,6 +375,7 @@ export interface paths {
           /** Avatar image url */
           avatar_url?: parameters["rowFilter.profiles.avatar_url"];
           profile_hash?: parameters["rowFilter.profiles.profile_hash"];
+          last_online?: parameters["rowFilter.profiles.last_online"];
         };
         header: {
           /** Preference */
@@ -395,6 +397,7 @@ export interface paths {
           /** Avatar image url */
           avatar_url?: parameters["rowFilter.profiles.avatar_url"];
           profile_hash?: parameters["rowFilter.profiles.profile_hash"];
+          last_online?: parameters["rowFilter.profiles.last_online"];
         };
         body: {
           /** profiles */
@@ -411,6 +414,68 @@ export interface paths {
       };
     };
   };
+  "/rpc/deny_friend_request": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: integer */
+            request_id: number;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/are_pending_friends": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: text */
+            target: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/send_friend_request": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: text */
+            receiver: string;
+            /** Format: text */
+            sender: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
   "/rpc/get_users": {
     post: {
       parameters: {
@@ -418,6 +483,46 @@ export interface paths {
           args: {
             /** Format: text */
             query: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/are_friends": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: text */
+            target: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/approve_friend_request": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: integer */
+            request_id: number;
           };
         };
         header: {
@@ -464,8 +569,17 @@ export interface definitions {
      * @default now()
      */
     created_at?: string;
-    /** Format: uuid */
-    owner?: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    updated_at?: string;
+    /**
+     * Format: text
+     * @description Note:
+     * This is a Foreign Key to `profiles.profile_hash`.<fk table='profiles' column='profile_hash'/>
+     */
+    initiator?: string;
     /**
      * Format: text
      * @description Note:
@@ -474,11 +588,9 @@ export interface definitions {
     friend?: string;
     /**
      * Format: public.friend_request_status
-     * @description Friend request status
-     * @default pending
      * @enum {string}
      */
-    status: "pending" | "accepted" | "denied";
+    request_status?: "pending" | "accepted" | "denied" | "revoked";
   };
   /** @description Users phone numbers */
   phones: {
@@ -523,6 +635,8 @@ export interface definitions {
     avatar_url?: string;
     /** Format: text */
     profile_hash: string;
+    /** Format: timestamp with time zone */
+    last_online?: string;
   };
 }
 
@@ -575,15 +689,14 @@ export interface parameters {
   "rowFilter.friends.id": string;
   /** Format: timestamp with time zone */
   "rowFilter.friends.created_at": string;
-  /** Format: uuid */
-  "rowFilter.friends.owner": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.friends.updated_at": string;
+  /** Format: text */
+  "rowFilter.friends.initiator": string;
   /** Format: text */
   "rowFilter.friends.friend": string;
-  /**
-   * Format: public.friend_request_status
-   * @description Friend request status
-   */
-  "rowFilter.friends.status": string;
+  /** Format: public.friend_request_status */
+  "rowFilter.friends.request_status": string;
   /** @description phones */
   "body.phones": definitions["phones"];
   /** Format: bigint */
@@ -612,6 +725,8 @@ export interface parameters {
   "rowFilter.profiles.avatar_url": string;
   /** Format: text */
   "rowFilter.profiles.profile_hash": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.profiles.last_online": string;
 }
 
 export interface operations {}
