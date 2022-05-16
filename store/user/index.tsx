@@ -220,7 +220,12 @@ const initialState: UserState = {
   emailsLoaded: false,
   phones: [],
   phonesLoaded: false,
-  profile: { state: "init", uploadingAvatarImage: false, owner: "" },
+  profile: {
+    state: "init",
+    uploadingAvatarImage: false,
+    owner: "",
+    profile_hash: "",
+  },
 };
 
 const userSlice = createSlice({
