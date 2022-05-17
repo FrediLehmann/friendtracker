@@ -5,7 +5,7 @@ export default function LogoSection() {
   return (
     <LinkBox as="section">
       <Heading as="h1" fontSize={["sm", "md", "lg"]}>
-        <NextLink href="/friends" passHref>
+        <NextLink href="/" passHref>
           <LinkOverlay>Friend Tracker</LinkOverlay>
         </NextLink>
       </Heading>

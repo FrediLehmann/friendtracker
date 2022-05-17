@@ -3,7 +3,7 @@ import Home from "routes/index";
 import { withAuthProhibited } from "utils/withAuthProhibited";
 
 export const getServerSideProps = withAuthProhibited({
-  redirectTo: "/profile",
+  redirectTo: "/newsfeed",
   async getServerSideProps({ locale = "en" }) {
     return {
       props: {
