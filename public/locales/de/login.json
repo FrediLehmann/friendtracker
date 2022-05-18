@@ -1,6 +1,5 @@
 {
-  "description": "Verfolgen Sie das Wohlbefinden Ihrer Freunde und Familie.",
-  "loginText": "Melden Sie sich an und halten Sie sich über den Sicherheits- und Gesundheitsstatus Ihrer Freunde auf dem Laufenden. Verbinden Sie sich mit Menschen, die Sie auf der ganzen Welt kennen, und informieren Sie sie über Ihre aktuelle Situation. Sehen Sie innerhalb von Sekunden, wie es Ihrer Familie und Ihren Freunden geht.",
+  "loginText": "Melden Sie sich an und bleiben Sie informiert darüber was Ihre Freunde und Familie tun. Verbinden Sie sich mit Menschen, die Sie auf der ganzen Welt kennen, und informieren Sie sie über Ihre aktuelle Unterfangen. Sehen Sie innerhalb von Sekunden, wie es Ihrer Familie und Ihren Freunden geht.",
   "loginForm": {
     "email": {
       "label": "Email adresse",

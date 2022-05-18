@@ -1,6 +1,5 @@
 {
-  "description": "Track the well being of your friends and family.",
-  "loginText": "Sign in and be up to date with your friends security and health status. Connect with people you know from all around the world and let them know about your current situation. See within seconds how your family and friends are doing.",
+  "loginText": "Sign up and be up to date with your friends and family. Connect with people you know from all around the world and let them know about your current adventures. See within seconds how your family and friends are doing.",
   "loginForm": {
     "email": {
       "label": "Email address",
