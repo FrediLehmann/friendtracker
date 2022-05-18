@@ -21,7 +21,7 @@ export const theme = extendTheme({
   },
   textStyles: {
     descriptiveText: {
-      color: "gray.500",
+      color: "gray.600",
       fontSize: ["sm", null, "md"],
     },
   },

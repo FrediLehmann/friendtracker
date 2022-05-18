@@ -29,7 +29,7 @@ export default function PhoneSection() {
         <SectionHeading>{t("phoneSection.title")}</SectionHeading>
         <AddPhone />
       </Flex>
-      <Text color="gray.500" fontSize={["sm", null, "md"]}>
+      <Text color="gray.600" fontSize={["sm", null, "md"]}>
         {t("phoneSection.description")}
       </Text>
       {phones.map((phone, index) => (

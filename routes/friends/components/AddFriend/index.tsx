@@ -151,7 +151,7 @@ export default function AddFriend() {
       )}
       {state.hasSearched && state.matches && state.matches.length < 1 && (
         <Center mt="5">
-          <Text color="gray.500">No results found</Text>
+          <Text color="gray.600">No results found</Text>
         </Center>
       )}
     </Box>

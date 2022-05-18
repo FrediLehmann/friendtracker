@@ -55,7 +55,7 @@ export default function FriendList() {
 
   return friends && friends.length > 0 ? (
     <>
-      <Text textAlign="end" color="gray.500" fontSize="sm" mb="2">
+      <Text textAlign="end" color="gray.600" fontSize="sm" mb="2">
         {t("friendList.count", { count: friends?.length || 0 })}
       </Text>
       <Flex direction="column" gap="3">
@@ -72,7 +72,7 @@ export default function FriendList() {
     </>
   ) : (
     <Center mt={["8", "14"]}>
-      <Text color="gray.500">{t("friendList.noFriends")}</Text>
+      <Text color="gray.600">{t("friendList.noFriends")}</Text>
     </Center>
   );
 }

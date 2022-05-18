@@ -18,7 +18,7 @@ export default function PostCreator({
             {poster}
           </Link>
         </NextLink>
-        <Text fontSize="xs" color="gray.500">
+        <Text fontSize="xs" color="gray.600">
           {posted}
         </Text>
       </Box>

@@ -10,7 +10,7 @@ export default function PostImages({ images }: { images: string[] }) {
         position="absolute"
         left="2"
         top="2"
-        bg="blackAlpha.600"
+        bg="blackAlpha.700"
         py="1"
         px="2"
         color="whiteAlpha.900"
@@ -36,7 +36,7 @@ export default function PostImages({ images }: { images: string[] }) {
             objectFit="cover"
             fallback={
               <Center h="full" bg="gray.100">
-                <Camera boxSize="8" color="gray.500" />
+                <Camera boxSize="8" color="gray.600" />
               </Center>
             }
           />
@@ -48,7 +48,7 @@ export default function PostImages({ images }: { images: string[] }) {
             objectFit="cover"
             fallback={
               <Center h="full" bg="gray.100">
-                <Camera boxSize="8" color="gray.500" />
+                <Camera boxSize="8" color="gray.600" />
               </Center>
             }
           />
