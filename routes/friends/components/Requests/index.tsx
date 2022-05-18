@@ -39,7 +39,7 @@ export default function Requests() {
 
       if (error) throw error;
 
-      setFriendRequests(data);
+      setFriendRequests(data || []);
     };
 
     user && profile_hash && getRequests();

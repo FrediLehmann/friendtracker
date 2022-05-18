@@ -47,7 +47,7 @@ export default function FriendList() {
 
       if (error_f2) throw error_f2;
 
-      setFriends([...data_f1, ...data_f2]);
+      setFriends([...(data_f1 || []), ...(data_f2 || [])]);
     };
 
     user && profile_hash && getFriends();
