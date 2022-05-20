@@ -30,7 +30,7 @@ export default function Requests() {
   useEffect(() => {
     const getRequests = async () => {
       const { data, error } = await supabaseClient
-        .from("profiles")
+        .from("user_profiles")
         .select(
           "owner, user_name, avatar_url, profile_hash, friends!friends_initiator_fkey!inner(id, request_status, initiator)"
         )

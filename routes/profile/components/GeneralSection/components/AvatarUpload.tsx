@@ -20,7 +20,7 @@ export default function AvatarUpload() {
   const dispatch = useDispatch();
 
   const {
-    owner = "",
+    user_id = "",
     user_name = "",
     avatar_url = "",
     uploadingAvatarImage,
@@ -38,7 +38,7 @@ export default function AvatarUpload() {
 
     const file = event.target.files[0];
     const fileExt = file.name.split(".").pop();
-    const filePath = `${owner}/avatar.${fileExt}`;
+    const filePath = `${user_id}/avatar.${fileExt}`;
 
     dispatch(uploadAvatarImage({ filePath, file }));
   }

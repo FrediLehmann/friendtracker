@@ -12,14 +12,14 @@ export interface paths {
       };
     };
   };
-  "/emails": {
+  "/email_addresses": {
     get: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.emails.id"];
-          created_at?: parameters["rowFilter.emails.created_at"];
-          owner?: parameters["rowFilter.emails.owner"];
-          email?: parameters["rowFilter.emails.email"];
+          id?: parameters["rowFilter.email_addresses.id"];
+          created_at?: parameters["rowFilter.email_addresses.created_at"];
+          user_id?: parameters["rowFilter.email_addresses.user_id"];
+          email_address?: parameters["rowFilter.email_addresses.email_address"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -41,7 +41,7 @@ export interface paths {
       responses: {
         /** OK */
         200: {
-          schema: definitions["emails"][];
+          schema: definitions["email_addresses"][];
         };
         /** Partial Content */
         206: unknown;
@@ -50,8 +50,8 @@ export interface paths {
     post: {
       parameters: {
         body: {
-          /** emails */
-          emails?: definitions["emails"];
+          /** email_addresses */
+          email_addresses?: definitions["email_addresses"];
         };
         query: {
           /** Filtering Columns */
@@ -70,10 +70,10 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.emails.id"];
-          created_at?: parameters["rowFilter.emails.created_at"];
-          owner?: parameters["rowFilter.emails.owner"];
-          email?: parameters["rowFilter.emails.email"];
+          id?: parameters["rowFilter.email_addresses.id"];
+          created_at?: parameters["rowFilter.email_addresses.created_at"];
+          user_id?: parameters["rowFilter.email_addresses.user_id"];
+          email_address?: parameters["rowFilter.email_addresses.email_address"];
         };
         header: {
           /** Preference */
@@ -88,14 +88,14 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.emails.id"];
-          created_at?: parameters["rowFilter.emails.created_at"];
-          owner?: parameters["rowFilter.emails.owner"];
-          email?: parameters["rowFilter.emails.email"];
+          id?: parameters["rowFilter.email_addresses.id"];
+          created_at?: parameters["rowFilter.email_addresses.created_at"];
+          user_id?: parameters["rowFilter.email_addresses.user_id"];
+          email_address?: parameters["rowFilter.email_addresses.email_address"];
         };
         body: {
-          /** emails */
-          emails?: definitions["emails"];
+          /** email_addresses */
+          email_addresses?: definitions["email_addresses"];
         };
         header: {
           /** Preference */
@@ -108,16 +108,14 @@ export interface paths {
       };
     };
   };
-  "/friends": {
+  "/phone_numbers": {
     get: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.friends.id"];
-          created_at?: parameters["rowFilter.friends.created_at"];
-          updated_at?: parameters["rowFilter.friends.updated_at"];
-          initiator?: parameters["rowFilter.friends.initiator"];
-          friend?: parameters["rowFilter.friends.friend"];
-          request_status?: parameters["rowFilter.friends.request_status"];
+          id?: parameters["rowFilter.phone_numbers.id"];
+          created_at?: parameters["rowFilter.phone_numbers.created_at"];
+          user_id?: parameters["rowFilter.phone_numbers.user_id"];
+          phone_number?: parameters["rowFilter.phone_numbers.phone_number"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -139,7 +137,7 @@ export interface paths {
       responses: {
         /** OK */
         200: {
-          schema: definitions["friends"][];
+          schema: definitions["phone_numbers"][];
         };
         /** Partial Content */
         206: unknown;
@@ -148,8 +146,8 @@ export interface paths {
     post: {
       parameters: {
         body: {
-          /** friends */
-          friends?: definitions["friends"];
+          /** phone_numbers */
+          phone_numbers?: definitions["phone_numbers"];
         };
         query: {
           /** Filtering Columns */
@@ -168,12 +166,10 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.friends.id"];
-          created_at?: parameters["rowFilter.friends.created_at"];
-          updated_at?: parameters["rowFilter.friends.updated_at"];
-          initiator?: parameters["rowFilter.friends.initiator"];
-          friend?: parameters["rowFilter.friends.friend"];
-          request_status?: parameters["rowFilter.friends.request_status"];
+          id?: parameters["rowFilter.phone_numbers.id"];
+          created_at?: parameters["rowFilter.phone_numbers.created_at"];
+          user_id?: parameters["rowFilter.phone_numbers.user_id"];
+          phone_number?: parameters["rowFilter.phone_numbers.phone_number"];
         };
         header: {
           /** Preference */
@@ -188,16 +184,14 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.friends.id"];
-          created_at?: parameters["rowFilter.friends.created_at"];
-          updated_at?: parameters["rowFilter.friends.updated_at"];
-          initiator?: parameters["rowFilter.friends.initiator"];
-          friend?: parameters["rowFilter.friends.friend"];
-          request_status?: parameters["rowFilter.friends.request_status"];
+          id?: parameters["rowFilter.phone_numbers.id"];
+          created_at?: parameters["rowFilter.phone_numbers.created_at"];
+          user_id?: parameters["rowFilter.phone_numbers.user_id"];
+          phone_number?: parameters["rowFilter.phone_numbers.phone_number"];
         };
         body: {
-          /** friends */
-          friends?: definitions["friends"];
+          /** phone_numbers */
+          phone_numbers?: definitions["phone_numbers"];
         };
         header: {
           /** Preference */
@@ -210,14 +204,16 @@ export interface paths {
       };
     };
   };
-  "/phones": {
+  "/user_profiles": {
     get: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.phones.id"];
-          created_at?: parameters["rowFilter.phones.created_at"];
-          phone?: parameters["rowFilter.phones.phone"];
-          owner?: parameters["rowFilter.phones.owner"];
+          id?: parameters["rowFilter.user_profiles.id"];
+          created_at?: parameters["rowFilter.user_profiles.created_at"];
+          user_id?: parameters["rowFilter.user_profiles.user_id"];
+          user_name?: parameters["rowFilter.user_profiles.user_name"];
+          avatar_url?: parameters["rowFilter.user_profiles.avatar_url"];
+          profile_hash?: parameters["rowFilter.user_profiles.profile_hash"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -239,7 +235,7 @@ export interface paths {
       responses: {
         /** OK */
         200: {
-          schema: definitions["phones"][];
+          schema: definitions["user_profiles"][];
         };
         /** Partial Content */
         206: unknown;
@@ -248,8 +244,8 @@ export interface paths {
     post: {
       parameters: {
         body: {
-          /** phones */
-          phones?: definitions["phones"];
+          /** user_profiles */
+          user_profiles?: definitions["user_profiles"];
         };
         query: {
           /** Filtering Columns */
@@ -268,10 +264,12 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.phones.id"];
-          created_at?: parameters["rowFilter.phones.created_at"];
-          phone?: parameters["rowFilter.phones.phone"];
-          owner?: parameters["rowFilter.phones.owner"];
+          id?: parameters["rowFilter.user_profiles.id"];
+          created_at?: parameters["rowFilter.user_profiles.created_at"];
+          user_id?: parameters["rowFilter.user_profiles.user_id"];
+          user_name?: parameters["rowFilter.user_profiles.user_name"];
+          avatar_url?: parameters["rowFilter.user_profiles.avatar_url"];
+          profile_hash?: parameters["rowFilter.user_profiles.profile_hash"];
         };
         header: {
           /** Preference */
@@ -286,14 +284,16 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.phones.id"];
-          created_at?: parameters["rowFilter.phones.created_at"];
-          phone?: parameters["rowFilter.phones.phone"];
-          owner?: parameters["rowFilter.phones.owner"];
+          id?: parameters["rowFilter.user_profiles.id"];
+          created_at?: parameters["rowFilter.user_profiles.created_at"];
+          user_id?: parameters["rowFilter.user_profiles.user_id"];
+          user_name?: parameters["rowFilter.user_profiles.user_name"];
+          avatar_url?: parameters["rowFilter.user_profiles.avatar_url"];
+          profile_hash?: parameters["rowFilter.user_profiles.profile_hash"];
         };
         body: {
-          /** phones */
-          phones?: definitions["phones"];
+          /** user_profiles */
+          user_profiles?: definitions["user_profiles"];
         };
         header: {
           /** Preference */
@@ -303,173 +303,6 @@ export interface paths {
       responses: {
         /** No Content */
         204: never;
-      };
-    };
-  };
-  "/profiles": {
-    get: {
-      parameters: {
-        query: {
-          created_at?: parameters["rowFilter.profiles.created_at"];
-          owner?: parameters["rowFilter.profiles.owner"];
-          /** User name */
-          user_name?: parameters["rowFilter.profiles.user_name"];
-          /** Avatar image url */
-          avatar_url?: parameters["rowFilter.profiles.avatar_url"];
-          profile_hash?: parameters["rowFilter.profiles.profile_hash"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["profiles"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** profiles */
-          profiles?: definitions["profiles"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          created_at?: parameters["rowFilter.profiles.created_at"];
-          owner?: parameters["rowFilter.profiles.owner"];
-          /** User name */
-          user_name?: parameters["rowFilter.profiles.user_name"];
-          /** Avatar image url */
-          avatar_url?: parameters["rowFilter.profiles.avatar_url"];
-          profile_hash?: parameters["rowFilter.profiles.profile_hash"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          created_at?: parameters["rowFilter.profiles.created_at"];
-          owner?: parameters["rowFilter.profiles.owner"];
-          /** User name */
-          user_name?: parameters["rowFilter.profiles.user_name"];
-          /** Avatar image url */
-          avatar_url?: parameters["rowFilter.profiles.avatar_url"];
-          profile_hash?: parameters["rowFilter.profiles.profile_hash"];
-        };
-        body: {
-          /** profiles */
-          profiles?: definitions["profiles"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
-  "/rpc/deny_friend_request": {
-    post: {
-      parameters: {
-        body: {
-          args: {
-            /** Format: integer */
-            request_id: number;
-          };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
-  "/rpc/are_pending_friends": {
-    post: {
-      parameters: {
-        body: {
-          args: {
-            /** Format: text */
-            target: string;
-          };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
-  "/rpc/send_friend_request": {
-    post: {
-      parameters: {
-        body: {
-          args: {
-            /** Format: text */
-            receiver: string;
-            /** Format: text */
-            sender: string;
-          };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
       };
     };
   };
@@ -493,51 +326,11 @@ export interface paths {
       };
     };
   };
-  "/rpc/are_friends": {
-    post: {
-      parameters: {
-        body: {
-          args: {
-            /** Format: text */
-            target: string;
-          };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
-  "/rpc/approve_friend_request": {
-    post: {
-      parameters: {
-        body: {
-          args: {
-            /** Format: integer */
-            request_id: number;
-          };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
 }
 
 export interface definitions {
-  /** @description Users email addresses, used to identify or find friends */
-  emails: {
+  /** @description Users email addresses */
+  email_addresses: {
     /**
      * Format: bigint
      * @description Note:
@@ -550,47 +343,12 @@ export interface definitions {
      */
     created_at?: string;
     /** Format: uuid */
-    owner: string;
+    user_id: string;
     /** Format: text */
-    email: string;
-  };
-  friends: {
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    created_at?: string;
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    updated_at?: string;
-    /**
-     * Format: text
-     * @description Note:
-     * This is a Foreign Key to `profiles.profile_hash`.<fk table='profiles' column='profile_hash'/>
-     */
-    initiator?: string;
-    /**
-     * Format: text
-     * @description Note:
-     * This is a Foreign Key to `profiles.profile_hash`.<fk table='profiles' column='profile_hash'/>
-     */
-    friend?: string;
-    /**
-     * Format: public.friend_request_status
-     * @enum {string}
-     */
-    request_status?: "pending" | "accepted" | "denied" | "revoked";
+    email_address: string;
   };
   /** @description Users phone numbers */
-  phones: {
+  phone_numbers: {
     /**
      * Format: bigint
      * @description Note:
@@ -602,33 +360,29 @@ export interface definitions {
      * @default now()
      */
     created_at?: string;
-    /** Format: text */
-    phone?: string;
     /** Format: uuid */
-    owner?: string;
+    user_id: string;
+    /** Format: text */
+    phone_number: string;
   };
-  /** @description User profile */
-  profiles: {
+  /** @description User Profiles */
+  user_profiles: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
     /**
      * Format: timestamp with time zone
      * @default now()
      */
     created_at?: string;
-    /**
-     * Format: uuid
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    owner: string;
-    /**
-     * Format: text
-     * @description User name
-     */
+    /** Format: uuid */
+    user_id: string;
+    /** Format: text */
     user_name?: string;
-    /**
-     * Format: text
-     * @description Avatar image url
-     */
+    /** Format: text */
     avatar_url?: string;
     /** Format: text */
     profile_hash: string;
@@ -668,58 +422,40 @@ export interface parameters {
   offset: string;
   /** @description Limiting and Pagination */
   limit: string;
-  /** @description emails */
-  "body.emails": definitions["emails"];
+  /** @description email_addresses */
+  "body.email_addresses": definitions["email_addresses"];
   /** Format: bigint */
-  "rowFilter.emails.id": string;
+  "rowFilter.email_addresses.id": string;
   /** Format: timestamp with time zone */
-  "rowFilter.emails.created_at": string;
+  "rowFilter.email_addresses.created_at": string;
   /** Format: uuid */
-  "rowFilter.emails.owner": string;
+  "rowFilter.email_addresses.user_id": string;
   /** Format: text */
-  "rowFilter.emails.email": string;
-  /** @description friends */
-  "body.friends": definitions["friends"];
+  "rowFilter.email_addresses.email_address": string;
+  /** @description phone_numbers */
+  "body.phone_numbers": definitions["phone_numbers"];
   /** Format: bigint */
-  "rowFilter.friends.id": string;
+  "rowFilter.phone_numbers.id": string;
   /** Format: timestamp with time zone */
-  "rowFilter.friends.created_at": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.friends.updated_at": string;
+  "rowFilter.phone_numbers.created_at": string;
+  /** Format: uuid */
+  "rowFilter.phone_numbers.user_id": string;
   /** Format: text */
-  "rowFilter.friends.initiator": string;
-  /** Format: text */
-  "rowFilter.friends.friend": string;
-  /** Format: public.friend_request_status */
-  "rowFilter.friends.request_status": string;
-  /** @description phones */
-  "body.phones": definitions["phones"];
+  "rowFilter.phone_numbers.phone_number": string;
+  /** @description user_profiles */
+  "body.user_profiles": definitions["user_profiles"];
   /** Format: bigint */
-  "rowFilter.phones.id": string;
+  "rowFilter.user_profiles.id": string;
   /** Format: timestamp with time zone */
-  "rowFilter.phones.created_at": string;
-  /** Format: text */
-  "rowFilter.phones.phone": string;
+  "rowFilter.user_profiles.created_at": string;
   /** Format: uuid */
-  "rowFilter.phones.owner": string;
-  /** @description profiles */
-  "body.profiles": definitions["profiles"];
-  /** Format: timestamp with time zone */
-  "rowFilter.profiles.created_at": string;
-  /** Format: uuid */
-  "rowFilter.profiles.owner": string;
-  /**
-   * Format: text
-   * @description User name
-   */
-  "rowFilter.profiles.user_name": string;
-  /**
-   * Format: text
-   * @description Avatar image url
-   */
-  "rowFilter.profiles.avatar_url": string;
+  "rowFilter.user_profiles.user_id": string;
   /** Format: text */
-  "rowFilter.profiles.profile_hash": string;
+  "rowFilter.user_profiles.user_name": string;
+  /** Format: text */
+  "rowFilter.user_profiles.avatar_url": string;
+  /** Format: text */
+  "rowFilter.user_profiles.profile_hash": string;
 }
 
 export interface operations {}

@@ -6,13 +6,13 @@ import { definitions } from "types/supabase";
 //#region actions
 
 export const fetchUserProfile = createAsyncThunk<
-  definitions["profiles"],
+  definitions["user_profiles"],
   string
->("user/profile", async (owner) => {
+>("user/profile", async (user_id) => {
   let { data, error } = await supabaseClient
-    .from<definitions["profiles"]>("profiles")
+    .from<definitions["user_profiles"]>("user_profiles")
     .select("*")
-    .eq("owner", owner)
+    .eq("user_id", user_id)
     .single();
 
   if (error) throw error;
@@ -28,7 +28,7 @@ export const uploadAvatarImage = createAsyncThunk<
 >(
   "user/profile/avatar_url",
   async ({ filePath, file }, { getState, rejectWithValue }) => {
-    const { owner, avatar_url } = getUserProfile(getState());
+    const { user_id, avatar_url } = getUserProfile(getState());
 
     // If the user has an existing avatar image => remove it
     if (avatar_url) {
@@ -51,9 +51,9 @@ export const uploadAvatarImage = createAsyncThunk<
 
     // Update profile
     await supabaseClient
-      .from("profiles")
+      .from("user_profiles")
       .update({ avatar_url: url })
-      .eq("owner", owner);
+      .eq("user_id", user_id);
 
     return url;
   }
@@ -64,12 +64,12 @@ export const changeUserName = createAsyncThunk<
   string,
   { state: RootState }
 >("user/profile/user_name", async (newName, { getState }) => {
-  const { owner, user_name } = getUserProfile(getState());
+  const { user_id, user_name } = getUserProfile(getState());
 
   let { error } = await supabaseClient
-    .from("profiles")
+    .from("user_profiles")
     .update({ user_name: newName })
-    .eq("owner", owner);
+    .eq("user_id", user_id);
 
   if (error) return user_name;
 
@@ -81,17 +81,17 @@ export const fetchAdditionalEmailAddresses = createAsyncThunk<
   undefined,
   { state: RootState }
 >("user/email_addresses", async (_, { getState, rejectWithValue }) => {
-  const { owner } = getUserProfile(getState());
+  const { user_id } = getUserProfile(getState());
 
   let { data, error } = await supabaseClient
-    .from<definitions["emails"]>("emails")
-    .select("email")
-    .eq("owner", owner);
+    .from<definitions["email_addresses"]>("email_addresses")
+    .select("email_address")
+    .eq("user_id", user_id);
 
   if (error) return rejectWithValue([]);
 
   const result: string[] = [];
-  data?.forEach((d) => result.push(d.email));
+  data?.forEach((d) => result.push(d.email_address));
   return result;
 });
 
@@ -101,7 +101,7 @@ export const addEmailAddress = createAsyncThunk<
   { state: RootState }
 >("user/email_addresses/add", async (additionalAddress, { getState }) => {
   const state = getState();
-  const { owner } = getUserProfile(state);
+  const { user_id } = getUserProfile(state);
   const email = getUserEmail(state);
   const emails = getAdditionalUserEmails(state);
 
@@ -109,8 +109,8 @@ export const addEmailAddress = createAsyncThunk<
   if (emails.includes(additionalAddress)) return;
 
   let { error } = await supabaseClient
-    .from("emails")
-    .insert([{ owner, email: additionalAddress }]);
+    .from("email_addresses")
+    .insert([{ user_id, email: additionalAddress }]);
 
   if (error) return;
 
@@ -123,15 +123,15 @@ export const removeEmailAddress = createAsyncThunk<
   { state: RootState }
 >("user/email_addresses/remove", async (removeAddress, { getState }) => {
   const state = getState();
-  const { owner } = getUserProfile(state);
+  const { user_id } = getUserProfile(state);
   const emails = getAdditionalUserEmails(state);
 
   if (!emails.includes(removeAddress)) return;
 
   let { error } = await supabaseClient
-    .from("emails")
+    .from("email_addresses")
     .delete()
-    .match({ owner, email: removeAddress });
+    .match({ user_id, email: removeAddress });
 
   if (error) return;
 
@@ -143,17 +143,17 @@ export const fetchPhoneNumbers = createAsyncThunk<
   undefined,
   { state: RootState }
 >("user/phone", async (_, { getState, rejectWithValue }) => {
-  const { owner } = getUserProfile(getState());
+  const { user_id } = getUserProfile(getState());
 
   let { data, error } = await supabaseClient
-    .from<definitions["phones"]>("phones")
-    .select("phone")
-    .eq("owner", owner);
+    .from<definitions["phone_numbers"]>("phone_numbers")
+    .select("phone_number")
+    .eq("user_id", user_id);
 
   if (error) return rejectWithValue([]);
 
   const result: string[] = [];
-  data?.forEach((d) => d.phone && result.push(d.phone));
+  data?.forEach((d) => d.phone_number && result.push(d.phone_number));
   return result;
 });
 
@@ -162,11 +162,11 @@ export const addPhoneNumber = createAsyncThunk<
   string,
   { state: RootState }
 >("user/phone/add", async (phone, { getState }) => {
-  const { owner } = getUserProfile(getState());
+  const { user_id } = getUserProfile(getState());
 
   let { error } = await supabaseClient
-    .from("phones")
-    .insert([{ owner, phone }]);
+    .from("phone_numbers")
+    .insert([{ user_id, phone }]);
 
   if (error) return;
 
@@ -179,15 +179,15 @@ export const removePhoneNumber = createAsyncThunk<
   { state: RootState }
 >("user/phone/remove", async (removePhone, { getState }) => {
   const state = getState();
-  const { owner } = getUserProfile(state);
+  const { user_id } = getUserProfile(state);
   const phones = getUserPhones(state);
 
   if (!phones.includes(removePhone)) return;
 
   let { error } = await supabaseClient
-    .from("phones")
+    .from("phone_numbers")
     .delete()
-    .match({ owner, phone: removePhone });
+    .match({ user_id, phone: removePhone });
 
   if (error) return;
 
@@ -209,7 +209,7 @@ type UserState = {
   profile: {
     state: "init" | "loading" | "loaded" | "error";
     uploadingAvatarImage: boolean;
-  } & definitions["profiles"];
+  } & definitions["user_profiles"];
 };
 
 const initialState: UserState = {
@@ -221,9 +221,10 @@ const initialState: UserState = {
   phones: [],
   phonesLoaded: false,
   profile: {
+    id: 1,
     state: "init",
     uploadingAvatarImage: false,
-    owner: "",
+    user_id: "",
     profile_hash: "",
   },
 };

@@ -30,7 +30,7 @@ export default function FriendList() {
   useEffect(() => {
     const getFriends = async () => {
       const { data: data_f1, error: error_f1 } = await supabaseClient
-        .from("profiles")
+        .from("user_profiles")
         .select(
           "owner, user_name, avatar_url, profile_hash, friends!friends_initiator_fkey!inner(request_status, friend)"
         )
@@ -39,7 +39,7 @@ export default function FriendList() {
       if (error_f1) throw error_f1;
 
       const { data: data_f2, error: error_f2 } = await supabaseClient
-        .from("profiles")
+        .from("user_profiles")
         .select(
           "owner, user_name, avatar_url, profile_hash, friends!friends_friend_fkey!inner(request_status, friend)"
         )

@@ -29,11 +29,11 @@ const Friend: NextPage = () => {
   const router = useRouter();
   const { identifier } = router.query;
 
-  const [friend, setFriend] = useState<definitions["profiles"]>();
+  const [friend, setFriend] = useState<definitions["user_profiles"]>();
   useEffect(() => {
     const fetchFriend = async () => {
       const { data, error } = await supabaseClient
-        .from("profiles")
+        .from("user_profiles")
         .select("*")
         .eq("profile_hash", identifier)
         .single();

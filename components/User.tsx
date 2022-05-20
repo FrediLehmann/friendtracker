@@ -25,7 +25,7 @@ export default function User({ children }: { children: React.ReactNode }) {
   const { user } = useUser();
 
   const dispatch = useDispatch();
-  const { state, owner, user_name } = useSelector(getUserProfile);
+  const { state, user_id, user_name } = useSelector(getUserProfile);
 
   useEffect(() => {
     if (user && state === "init") dispatch(fetchUserProfile(user.id));
@@ -60,9 +60,9 @@ export default function User({ children }: { children: React.ReactNode }) {
               })}
               onSubmit={async (values, { setSubmitting }) => {
                 const { error } = await supabaseClient
-                  .from("profiles")
+                  .from("user_profiles")
                   .update({ user_name: values.name })
-                  .eq("owner", owner);
+                  .eq("user_id", user_id);
 
                 if (!error) {
                   dispatch(setUserName(values.name));
