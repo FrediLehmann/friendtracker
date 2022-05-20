@@ -99,43 +99,43 @@ export const addEmailAddress = createAsyncThunk<
   string | undefined,
   string,
   { state: RootState }
->("user/email_addresses/add", async (additionalAddress, { getState }) => {
+>("user/email_addresses/add", async (email_address, { getState }) => {
   const state = getState();
   const { user_id } = getUserProfile(state);
   const email = getUserEmail(state);
   const emails = getAdditionalUserEmails(state);
 
-  if (email === additionalAddress) return;
-  if (emails.includes(additionalAddress)) return;
+  if (email === email_address) return;
+  if (emails.includes(email_address)) return;
 
   let { error } = await supabaseClient
     .from("email_addresses")
-    .insert([{ user_id, email: additionalAddress }]);
+    .insert([{ user_id, email_address }]);
 
   if (error) return;
 
-  return additionalAddress;
+  return email_address;
 });
 
 export const removeEmailAddress = createAsyncThunk<
   string | undefined,
   string,
   { state: RootState }
->("user/email_addresses/remove", async (removeAddress, { getState }) => {
+>("user/email_addresses/remove", async (email_address, { getState }) => {
   const state = getState();
   const { user_id } = getUserProfile(state);
   const emails = getAdditionalUserEmails(state);
 
-  if (!emails.includes(removeAddress)) return;
+  if (!emails.includes(email_address)) return;
 
   let { error } = await supabaseClient
     .from("email_addresses")
     .delete()
-    .match({ user_id, email: removeAddress });
+    .match({ user_id, email_address });
 
   if (error) return;
 
-  return removeAddress;
+  return email_address;
 });
 
 export const fetchPhoneNumbers = createAsyncThunk<
@@ -161,37 +161,37 @@ export const addPhoneNumber = createAsyncThunk<
   string | undefined,
   string,
   { state: RootState }
->("user/phone/add", async (phone, { getState }) => {
+>("user/phone/add", async (phone_number, { getState }) => {
   const { user_id } = getUserProfile(getState());
 
   let { error } = await supabaseClient
     .from("phone_numbers")
-    .insert([{ user_id, phone }]);
+    .insert([{ user_id, phone_number }]);
 
   if (error) return;
 
-  return phone;
+  return phone_number;
 });
 
 export const removePhoneNumber = createAsyncThunk<
   string | undefined,
   string,
   { state: RootState }
->("user/phone/remove", async (removePhone, { getState }) => {
+>("user/phone/remove", async (phone_number, { getState }) => {
   const state = getState();
   const { user_id } = getUserProfile(state);
   const phones = getUserPhones(state);
 
-  if (!phones.includes(removePhone)) return;
+  if (!phones.includes(phone_number)) return;
 
   let { error } = await supabaseClient
     .from("phone_numbers")
     .delete()
-    .match({ user_id, phone: removePhone });
+    .match({ user_id, phone_number });
 
   if (error) return;
 
-  return removePhone;
+  return phone_number;
 });
 
 //#endregion
