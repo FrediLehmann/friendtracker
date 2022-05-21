@@ -1,35 +1,48 @@
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text, useToast } from "@chakra-ui/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { Avatar } from "components";
 import { useTranslation } from "next-i18next";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addPendingRequest } from "store/friends";
 import { getUserProfile } from "store/user";
 
 export default function SearchResult({
   name,
   avatarUrl,
-  userHash,
+  matchId,
   resetSearch,
 }: {
   name?: string;
   avatarUrl?: string;
-  userHash: string;
+  matchId: number;
   resetSearch: () => void;
 }) {
+  const toast = useToast();
   const { t } = useTranslation("friends");
-  const { profile_hash } = useSelector(getUserProfile);
+
+  const dispatch = useDispatch();
+  const { id } = useSelector(getUserProfile);
 
   async function requestFriend(
     e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLDivElement>
   ) {
     e.preventDefault();
-    const { error } = await supabaseClient.rpc("send_friend_request", {
-      sender: profile_hash,
-      receiver: userHash,
-    });
+    const { data, error } = await supabaseClient
+      .from("friend_requests")
+      .insert({ requestor: id, receiver: matchId });
 
-    if (!error) resetSearch();
+    if (error) {
+      toast({
+        title: "Account created.",
+        description: "We've created your account for you.",
+        status: "error",
+        isClosable: true,
+      });
+    }
+
+    resetSearch();
+    data && dispatch(addPendingRequest(data[0]));
   }
 
   return (

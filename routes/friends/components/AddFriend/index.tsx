@@ -18,6 +18,7 @@ import SearchResult from "./SearchResult";
 
 interface UserSearchResult {
   name: string;
+  id: number;
   avatar: string;
   hash: string;
 }
@@ -143,7 +144,7 @@ export default function AddFriend() {
               key={index}
               name={match.name}
               avatarUrl={match.avatar}
-              userHash={match.hash}
+              matchId={match.id}
               resetSearch={resetSearch}
             />
           ))}
