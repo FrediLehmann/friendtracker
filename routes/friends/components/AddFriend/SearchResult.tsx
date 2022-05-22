@@ -39,6 +39,8 @@ export default function SearchResult({
         status: "error",
         isClosable: true,
       });
+
+      return;
     }
 
     resetSearch();

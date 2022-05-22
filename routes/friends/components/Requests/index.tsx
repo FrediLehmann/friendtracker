@@ -24,26 +24,33 @@ export default function Requests() {
 
   const { user } = useUser();
 
-  const { profile_hash } = useSelector(getUserProfile);
+  const { id } = useSelector(getUserProfile);
 
   const [friendRequests, setFriendRequests] = useState<FriendList[]>();
   useEffect(() => {
     const getRequests = async () => {
+      const { data: requests, error: requestsError } = await supabaseClient
+        .from("friend_requests")
+        .select("requestor")
+        .eq("receiver", id);
+
+      if (requestsError || !requests || requests.length < 1) return;
+
       const { data, error } = await supabaseClient
         .from("user_profiles")
-        .select(
-          "owner, user_name, avatar_url, profile_hash, friends!friends_initiator_fkey!inner(id, request_status, initiator)"
-        )
-        .eq("friends.request_status", "pending")
-        .neq("friends.initiator", profile_hash);
+        .select("id, user_id, user_name, avatar_url, profile_hash")
+        .in(
+          "id",
+          requests.map((req) => req.requestor)
+        );
 
       if (error) throw error;
 
       setFriendRequests(data || []);
     };
 
-    user && profile_hash && getRequests();
-  }, [user, profile_hash]);
+    user && id && getRequests();
+  }, [user, id]);
 
   const acceptRequest = async (id: number) => {
     const { error } = await supabaseClient.rpc("approve_friend_request", {
