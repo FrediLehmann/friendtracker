@@ -29,25 +29,19 @@ export default function FriendList() {
 
   useEffect(() => {
     const getFriends = async () => {
-      const { data: data_f1, error: error_f1 } = await supabaseClient
+      const { data: friendList, error: friendListError } =
+        await supabaseClient.rpc("get_friend_list");
+
+      if (friendListError || !friendList) return;
+
+      const { data: friends, error: friendsError } = await supabaseClient
         .from("user_profiles")
-        .select(
-          "owner, user_name, avatar_url, profile_hash, friends!friends_initiator_fkey!inner(request_status, friend)"
-        )
-        .neq("friends.initiator", profile_hash);
+        .select("*")
+        .in("id", friendList);
 
-      if (error_f1) throw error_f1;
+      if (friendsError || !friends) return;
 
-      const { data: data_f2, error: error_f2 } = await supabaseClient
-        .from("user_profiles")
-        .select(
-          "owner, user_name, avatar_url, profile_hash, friends!friends_friend_fkey!inner(request_status, friend)"
-        )
-        .neq("friends.friend", profile_hash);
-
-      if (error_f2) throw error_f2;
-
-      setFriends([...(data_f1 || []), ...(data_f2 || [])]);
+      setFriends(friends);
     };
 
     user && profile_hash && getFriends();
@@ -65,7 +59,6 @@ export default function FriendList() {
             name={friend.user_name || ""}
             url={friend.profile_hash}
             avatar_url={friend.avatar_url || ""}
-            isPending={friend.friends[0]?.request_status === "pending"}
           />
         ))}
       </Flex>

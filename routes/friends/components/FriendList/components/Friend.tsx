@@ -44,7 +44,7 @@ export default function Friend({
         alignItems="center"
         w="full"
       >
-        <Avatar url={avatar_url}>
+        <Avatar url={avatar_url} name={name}>
           {isPending && (
             <AvatarBadge
               borderColor="orange.100"
