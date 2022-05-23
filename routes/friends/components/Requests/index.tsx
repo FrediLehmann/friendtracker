@@ -8,15 +8,11 @@ import { useSelector } from "react-redux";
 import { getUserProfile } from "store/user";
 
 interface FriendList {
-  owner: string;
+  id: number;
+  user_id: string;
   user_name?: string;
   avatar_url?: string;
   profile_hash: string;
-  friends: {
-    id: number;
-    request_status: string;
-    initiator: string;
-  }[];
 }
 
 export default function Requests() {
@@ -54,7 +50,7 @@ export default function Requests() {
 
   const acceptRequest = async (id: number) => {
     const { error } = await supabaseClient.rpc("approve_friend_request", {
-      request_id: id,
+      request_sender: id,
     });
 
     if (error) throw error;
@@ -62,7 +58,7 @@ export default function Requests() {
 
   const denyRequest = async (id: number) => {
     const { error } = await supabaseClient.rpc("deny_friend_request", {
-      request_id: id,
+      request_sender: id,
     });
 
     if (error) throw error;
@@ -85,13 +81,11 @@ export default function Requests() {
           <ButtonGroup size="sm" spacing="4" variant="link">
             <Button
               colorScheme="blue"
-              onClick={() => acceptRequest(request.friends[0].id)}
+              onClick={() => acceptRequest(request.id)}
             >
               Accept
             </Button>
-            <Button onClick={() => denyRequest(request.friends[0].id)}>
-              Reject
-            </Button>
+            <Button onClick={() => denyRequest(request.id)}>Reject</Button>
           </ButtonGroup>
         </Flex>
       ))}

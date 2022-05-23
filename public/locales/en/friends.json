@@ -10,7 +10,9 @@
     "add": "Add"
   },
   "friendRequests": {
-    "title": "Friend requests"
+    "title": "Friend requests",
+    "createRequestErrorToastTitle": "Friend request error",
+    "createRequestErrorToastDescription": "We could not send your friend request. Please retry another time."
   },
   "friendList": {
     "noFriends": "Search for friends and send them friend requests",

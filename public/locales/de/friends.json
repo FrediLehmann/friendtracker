@@ -10,7 +10,9 @@
     "add": "Hinzufügen"
   },
   "friendRequests": {
-    "title": "Freundschaftsanfragen"
+    "title": "Freundschaftsanfragen",
+    "createRequestErrorToastTitle": "Fehler beim senden",
+    "createRequestErrorToastDescription": "Wir konnten die Freundschaftsanfrage nicht versenden. Versuchen Sie es später erneut."
   },
   "friendList": {
     "noFriends": "Suche nach Freunden und sende Ihnen eine Anfrage",

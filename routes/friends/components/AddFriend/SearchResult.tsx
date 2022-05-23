@@ -34,8 +34,8 @@ export default function SearchResult({
 
     if (error) {
       toast({
-        title: "Account created.",
-        description: "We've created your account for you.",
+        title: t("friendRequests.createRequestErrorToastTitle"),
+        description: t("friendRequests.createRequestErrorToastDescription"),
         status: "error",
         isClosable: true,
       });
