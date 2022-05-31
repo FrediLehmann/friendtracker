@@ -28,7 +28,11 @@ export default function Requests() {
 
   useEffect(() => {
     if (!user) return;
-    if (incomingRequestsState === LoadingStates.loaded) return;
+    if (
+      incomingRequestsState === LoadingStates.loaded ||
+      incomingRequestsState === LoadingStates.error
+    )
+      return;
     if (profileLoadingState !== LoadingStates.loaded) return;
 
     dispatch(loadIncomingFriendRequests());

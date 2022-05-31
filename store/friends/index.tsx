@@ -35,34 +35,35 @@ export const loadIncomingFriendRequests = createAsyncThunk<
   return profiles;
 });
 
-export const loadPendingFriendRequests = createAsyncThunk<any, any>(
-  "friends/pendingFriendRequests",
-  async ({ getState }) => {
-    const state = getState();
-    const { id } = getUserProfile(state);
+export const loadPendingFriendRequests = createAsyncThunk<
+  definitions["user_profiles"][],
+  undefined,
+  { state: RootState }
+>("friends/pendingFriendRequests", async (_, { getState }) => {
+  const state = getState();
+  const { id } = getUserProfile(state);
 
-    const { data: requests, error: requestsError } = await supabaseClient
-      .from("friend_requests")
-      .select("receiver")
-      .eq("requestor", id);
+  const { data: requests, error: requestsError } = await supabaseClient
+    .from("friend_requests")
+    .select("receiver")
+    .eq("requestor", id);
 
-    if (requestsError) throw requestsError.message;
-    if (!requests || requests.length < 1) return [];
+  if (requestsError) throw requestsError.message;
+  if (!requests || requests.length < 1) return [];
 
-    const { data: profiles, error: profilesError } = await supabaseClient
-      .from("user_profiles")
-      .select("id, user_id, user_name, avatar_url, profile_hash")
-      .in(
-        "id",
-        requests.map((req) => req.requestor)
-      );
+  const { data: profiles, error: profilesError } = await supabaseClient
+    .from("user_profiles")
+    .select("id, user_id, user_name, avatar_url, profile_hash")
+    .in(
+      "id",
+      requests.map((req) => req.receiver)
+    );
 
-    if (profilesError) throw profilesError.message;
-    if (!profiles || profiles.length < 1) return [];
+  if (profilesError) throw profilesError.message;
+  if (!profiles || profiles.length < 1) return [];
 
-    return profiles;
-  }
-);
+  return profiles;
+});
 
 type FriendsState = {
   friends: {
