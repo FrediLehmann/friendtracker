@@ -4,7 +4,6 @@ import { Avatar } from "components";
 import { useTranslation } from "next-i18next";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPendingRequest } from "store/friends";
 import { getUserProfile } from "store/user";
 
 export default function SearchResult({
@@ -44,7 +43,6 @@ export default function SearchResult({
     }
 
     resetSearch();
-    data && dispatch(addPendingRequest(data[0]));
   }
 
   return (

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { RootState } from "store";
+import { LoadingStates } from "types/DataStates.enum";
 import { definitions } from "types/supabase";
 
 //#region actions
@@ -207,7 +208,7 @@ type UserState = {
   phones: string[];
   phonesLoaded: boolean;
   profile: {
-    state: "init" | "loading" | "loaded" | "error";
+    state: LoadingStates;
     uploadingAvatarImage: boolean;
   } & definitions["user_profiles"];
 };
@@ -222,7 +223,7 @@ const initialState: UserState = {
   phonesLoaded: false,
   profile: {
     id: 1,
-    state: "init",
+    state: LoadingStates.unloaded,
     uploadingAvatarImage: false,
     user_id: "",
     profile_hash: "",
@@ -248,13 +249,17 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserProfile.pending, (state) => {
-      state.profile.state = "loading";
+      state.profile.state = LoadingStates.loading;
     });
     builder.addCase(fetchUserProfile.rejected, (state) => {
-      state.profile.state = "error";
+      state.profile.state = LoadingStates.error;
     });
     builder.addCase(fetchUserProfile.fulfilled, (state, { payload }) => {
-      state.profile = { ...state.profile, state: "loaded", ...payload };
+      state.profile = {
+        ...state.profile,
+        state: LoadingStates.loaded,
+        ...payload,
+      };
     });
 
     builder.addCase(uploadAvatarImage.pending, (state) => {

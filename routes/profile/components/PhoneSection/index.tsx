@@ -8,6 +8,7 @@ import {
   getUserPhonesLoaded,
   getUserProfile,
 } from "store/user";
+import { LoadingStates } from "types/DataStates.enum";
 import { SectionHeading, SectionWrapper } from "..";
 import { AddPhone, PhoneInfo } from "./components";
 
@@ -20,7 +21,8 @@ export default function PhoneSection() {
   const { state } = useSelector(getUserProfile);
 
   useEffect(() => {
-    if (state === "loaded" && !phonesLoaded) dispatch(fetchPhoneNumbers());
+    if (state === LoadingStates.loaded && !phonesLoaded)
+      dispatch(fetchPhoneNumbers());
   }, [state, phonesLoaded, dispatch]);
 
   return (

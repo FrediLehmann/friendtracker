@@ -108,6 +108,192 @@ export interface paths {
       };
     };
   };
+  "/friend_requests": {
+    get: {
+      parameters: {
+        query: {
+          requestor?: parameters["rowFilter.friend_requests.requestor"];
+          receiver?: parameters["rowFilter.friend_requests.receiver"];
+          created_at?: parameters["rowFilter.friend_requests.created_at"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["friend_requests"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** friend_requests */
+          friend_requests?: definitions["friend_requests"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          requestor?: parameters["rowFilter.friend_requests.requestor"];
+          receiver?: parameters["rowFilter.friend_requests.receiver"];
+          created_at?: parameters["rowFilter.friend_requests.created_at"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          requestor?: parameters["rowFilter.friend_requests.requestor"];
+          receiver?: parameters["rowFilter.friend_requests.receiver"];
+          created_at?: parameters["rowFilter.friend_requests.created_at"];
+        };
+        body: {
+          /** friend_requests */
+          friend_requests?: definitions["friend_requests"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/friends_list": {
+    get: {
+      parameters: {
+        query: {
+          created_at?: parameters["rowFilter.friends_list.created_at"];
+          friend_requestor?: parameters["rowFilter.friends_list.friend_requestor"];
+          friend_receiver?: parameters["rowFilter.friends_list.friend_receiver"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["friends_list"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** friends_list */
+          friends_list?: definitions["friends_list"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          created_at?: parameters["rowFilter.friends_list.created_at"];
+          friend_requestor?: parameters["rowFilter.friends_list.friend_requestor"];
+          friend_receiver?: parameters["rowFilter.friends_list.friend_receiver"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          created_at?: parameters["rowFilter.friends_list.created_at"];
+          friend_requestor?: parameters["rowFilter.friends_list.friend_requestor"];
+          friend_receiver?: parameters["rowFilter.friends_list.friend_receiver"];
+        };
+        body: {
+          /** friends_list */
+          friends_list?: definitions["friends_list"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/phone_numbers": {
     get: {
       parameters: {
@@ -306,6 +492,80 @@ export interface paths {
       };
     };
   };
+  "/rpc/get_id": {
+    post: {
+      parameters: {
+        body: {
+          args: { [key: string]: unknown };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/deny_friend_request": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: bigint */
+            request_sender: number;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/get_user_profile_id": {
+    post: {
+      parameters: {
+        body: {
+          args: { [key: string]: unknown };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/are_pending_friends": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: bigint */
+            target: number;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
   "/rpc/get_users": {
     post: {
       parameters: {
@@ -314,6 +574,63 @@ export interface paths {
             /** Format: text */
             query: string;
           };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/are_friends": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: bigint */
+            target: number;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/approve_friend_request": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: bigint */
+            request_sender: number;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/get_friend_list": {
+    post: {
+      parameters: {
+        body: {
+          args: { [key: string]: unknown };
         };
         header: {
           /** Preference */
@@ -346,6 +663,48 @@ export interface definitions {
     user_id: string;
     /** Format: text */
     email_address: string;
+  };
+  friend_requests: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `user_profiles.id`.<fk table='user_profiles' column='id'/>
+     */
+    requestor: number;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `user_profiles.id`.<fk table='user_profiles' column='id'/>
+     */
+    receiver: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+  };
+  friends_list: {
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `user_profiles.id`.<fk table='user_profiles' column='id'/>
+     */
+    friend_requestor: number;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `user_profiles.id`.<fk table='user_profiles' column='id'/>
+     */
+    friend_receiver: number;
   };
   /** @description Users phone numbers */
   phone_numbers: {
@@ -432,6 +791,22 @@ export interface parameters {
   "rowFilter.email_addresses.user_id": string;
   /** Format: text */
   "rowFilter.email_addresses.email_address": string;
+  /** @description friend_requests */
+  "body.friend_requests": definitions["friend_requests"];
+  /** Format: bigint */
+  "rowFilter.friend_requests.requestor": string;
+  /** Format: bigint */
+  "rowFilter.friend_requests.receiver": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.friend_requests.created_at": string;
+  /** @description friends_list */
+  "body.friends_list": definitions["friends_list"];
+  /** Format: timestamp with time zone */
+  "rowFilter.friends_list.created_at": string;
+  /** Format: bigint */
+  "rowFilter.friends_list.friend_requestor": string;
+  /** Format: bigint */
+  "rowFilter.friends_list.friend_receiver": string;
   /** @description phone_numbers */
   "body.phone_numbers": definitions["phone_numbers"];
   /** Format: bigint */

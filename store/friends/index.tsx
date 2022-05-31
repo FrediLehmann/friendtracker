@@ -1,70 +1,154 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { RootState } from "store";
 import { getUserProfile } from "store/user";
+import { LoadingStates } from "types/DataStates.enum";
 import { definitions } from "types/supabase";
 
-// export const fetchFriends = createAsyncThunk<any, any>(
-//   "friends/friends",
-//   async (for_hash: string) => {
-//     let { data, error } = await supabaseClient.from("");
+export const loadIncomingFriendRequests = createAsyncThunk<
+  definitions["user_profiles"][],
+  undefined,
+  { state: RootState }
+>("friends/incomingFriendRequests", async (_, { getState }) => {
+  const state = getState();
+  const userProfile = getUserProfile(state);
 
-//     if (error) throw error;
+  const { data: requests, error: requestsError } = await supabaseClient
+    .from("friend_requests")
+    .select("requestor")
+    .eq("receiver", userProfile.id);
 
-//     return data;
-//   }
-// );
+  if (requestsError) throw requestsError.message;
+  if (!requests || requests.length < 1) return [];
 
-// export const sendFriendRequest = createAsyncThunk<any, any>(
-//   "friends/request",
-//   async (target_id: number, { getState }) => {
-//     const { user_id } = getUserProfile(getState());
-//     let { data, error } = await supabaseClient
-//       .from("friend_requests")
-//       .insert([{ requestor: user_id, receiver: target_id }]);
+  const { data: profiles, error: profilesError } = await supabaseClient
+    .from("user_profiles")
+    .select("id, user_id, user_name, avatar_url, profile_hash")
+    .in(
+      "id",
+      requests.map((req) => req.requestor)
+    );
 
-//     if (error) throw error;
+  if (profilesError) throw profilesError.message;
+  if (!profiles || profiles.length < 1) return [];
 
-//     return data;
-//   }
-// );
+  return profiles;
+});
+
+export const loadPendingFriendRequests = createAsyncThunk<any, any>(
+  "friends/pendingFriendRequests",
+  async ({ getState }) => {
+    const state = getState();
+    const { id } = getUserProfile(state);
+
+    const { data: requests, error: requestsError } = await supabaseClient
+      .from("friend_requests")
+      .select("receiver")
+      .eq("requestor", id);
+
+    if (requestsError) throw requestsError.message;
+    if (!requests || requests.length < 1) return [];
+
+    const { data: profiles, error: profilesError } = await supabaseClient
+      .from("user_profiles")
+      .select("id, user_id, user_name, avatar_url, profile_hash")
+      .in(
+        "id",
+        requests.map((req) => req.requestor)
+      );
+
+    if (profilesError) throw profilesError.message;
+    if (!profiles || profiles.length < 1) return [];
+
+    return profiles;
+  }
+);
 
 type FriendsState = {
-  friends: any[];
-  loadingFriends: boolean;
-  loadingFriendsError: boolean;
-  pendingRequests: any[];
-  incomingRequests: any[];
+  friends: {
+    state: LoadingStates;
+    data: definitions["user_profiles"][];
+  };
+  requests: {
+    incoming: {
+      state: LoadingStates;
+      data: definitions["user_profiles"][];
+    };
+    pending: {
+      state: LoadingStates;
+      data: definitions["user_profiles"][];
+    };
+  };
 };
 
 const initialState: FriendsState = {
-  friends: [],
-  loadingFriends: false,
-  loadingFriendsError: false,
-  pendingRequests: [],
-  incomingRequests: [],
+  friends: {
+    state: LoadingStates.unloaded,
+    data: [],
+  },
+  requests: {
+    incoming: {
+      state: LoadingStates.unloaded,
+      data: [],
+    },
+    pending: {
+      state: LoadingStates.unloaded,
+      data: [],
+    },
+  },
 };
 
 const friendsSlice = createSlice({
   name: "friends",
   initialState,
-  reducers: {
-    addPendingRequest: (state, { payload }) => {
-      state.pendingRequests = [...state.pendingRequests, payload];
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    // builder.addCase(sendFriendRequest.pending, (state) => {
-    //   state.loadingFriends = true;
-    // });
-    // builder.addCase(sendFriendRequest.rejected, (state) => {
-    //   state.loadingFriendsError = true;
-    // });
-    // builder.addCase(sendFriendRequest.fulfilled, (state, { payload }) => {
-    //   state.friends = payload;
-    // });
+    builder.addCase(loadIncomingFriendRequests.pending, (state) => {
+      state.requests.incoming.state = LoadingStates.loading;
+    });
+    builder.addCase(loadIncomingFriendRequests.rejected, (state) => {
+      state.requests.incoming.state = LoadingStates.error;
+    });
+    builder.addCase(
+      loadIncomingFriendRequests.fulfilled,
+      (state, { payload }) => {
+        state.requests.incoming.state = LoadingStates.loaded;
+        state.requests.incoming.data = payload;
+      }
+    );
+    builder.addCase(loadPendingFriendRequests.pending, (state) => {
+      state.requests.pending.state = LoadingStates.loading;
+    });
+    builder.addCase(
+      loadPendingFriendRequests.rejected,
+      (state, { payload }) => {
+        state.requests.pending.state = LoadingStates.error;
+      }
+    );
+    builder.addCase(
+      loadPendingFriendRequests.fulfilled,
+      (state, { payload }) => {
+        state.requests.pending.state = LoadingStates.loaded;
+        state.requests.pending.data = payload;
+      }
+    );
   },
 });
 
-export const { addPendingRequest } = friendsSlice.actions;
+// export const {} = friendsSlice.actions;
 
 export default friendsSlice.reducer;
+
+//#region selectors
+
+export const getPendingFriendRequestsLoadingState = (state: RootState) =>
+  state.friends.requests.pending.state;
+export const getPendingFriendRequests = (state: RootState) =>
+  state.friends.requests.pending.data;
+
+export const getIncomingFriendRequestsLoadingState = (state: RootState) =>
+  state.friends.requests.incoming.state;
+export const getIncomingFriendRequests = (state: RootState) =>
+  state.friends.requests.incoming.data;
+
+//#endregion

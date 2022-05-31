@@ -17,6 +17,7 @@ import { fetchUserProfile, getUserProfile, setUserName } from "store/user";
 import DescriptionText from "./DescriptionText";
 import { FormField } from "./Form";
 import { object, string } from "yup";
+import { LoadingStates } from "types/DataStates.enum";
 
 export default function User({ children }: { children: React.ReactNode }) {
   const { t } = useTranslation("common");
@@ -28,11 +29,12 @@ export default function User({ children }: { children: React.ReactNode }) {
   const { state, user_id, user_name } = useSelector(getUserProfile);
 
   useEffect(() => {
-    if (user && state === "init") dispatch(fetchUserProfile(user.id));
+    if (user && state === LoadingStates.unloaded)
+      dispatch(fetchUserProfile(user.id));
   }, [dispatch, user, state]);
 
   useEffect(() => {
-    if (user && state === "loaded" && !user_name) {
+    if (user && state === LoadingStates.loaded && !user_name) {
       onOpen();
     }
   }, [user, state, onOpen, user_name]);

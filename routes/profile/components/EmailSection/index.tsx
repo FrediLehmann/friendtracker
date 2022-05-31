@@ -9,6 +9,7 @@ import {
   getUserEmail,
   getUserProfile,
 } from "store/user";
+import { LoadingStates } from "types/DataStates.enum";
 import { SectionHeading, SectionWrapper } from "..";
 import { AddEmail, EmailInfo } from "./components";
 
@@ -22,7 +23,7 @@ export default function EmailSection() {
   const { state } = useSelector(getUserProfile);
 
   useEffect(() => {
-    if (state === "loaded" && !emailsLoaded)
+    if (state === LoadingStates.loaded && !emailsLoaded)
       dispatch(fetchAdditionalEmailAddresses());
   }, [dispatch, emailsLoaded, state]);
 

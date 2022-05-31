@@ -3,50 +3,36 @@ import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
 import { Avatar } from "components";
 import { useTranslation } from "next-i18next";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getIncomingFriendRequests,
+  getIncomingFriendRequestsLoadingState,
+  loadIncomingFriendRequests,
+} from "store/friends";
 import { getUserProfile } from "store/user";
-
-interface FriendList {
-  id: number;
-  user_id: string;
-  user_name?: string;
-  avatar_url?: string;
-  profile_hash: string;
-}
+import { LoadingStates } from "types/DataStates.enum";
 
 export default function Requests() {
   const { t } = useTranslation("friends");
 
   const { user } = useUser();
 
-  const { id } = useSelector(getUserProfile);
+  const dispatch = useDispatch();
 
-  const [friendRequests, setFriendRequests] = useState<FriendList[]>();
+  const { state: profileLoadingState } = useSelector(getUserProfile);
+  const incomingRequests = useSelector(getIncomingFriendRequests);
+  const incomingRequestsState = useSelector(
+    getIncomingFriendRequestsLoadingState
+  );
+
   useEffect(() => {
-    const getRequests = async () => {
-      const { data: requests, error: requestsError } = await supabaseClient
-        .from("friend_requests")
-        .select("requestor")
-        .eq("receiver", id);
+    if (!user) return;
+    if (incomingRequestsState === LoadingStates.loaded) return;
+    if (profileLoadingState !== LoadingStates.loaded) return;
 
-      if (requestsError || !requests || requests.length < 1) return;
-
-      const { data, error } = await supabaseClient
-        .from("user_profiles")
-        .select("id, user_id, user_name, avatar_url, profile_hash")
-        .in(
-          "id",
-          requests.map((req) => req.requestor)
-        );
-
-      if (error) throw error;
-
-      setFriendRequests(data || []);
-    };
-
-    user && id && getRequests();
-  }, [user, id]);
+    dispatch(loadIncomingFriendRequests());
+  }, [dispatch, incomingRequestsState, profileLoadingState, user]);
 
   const acceptRequest = async (id: number) => {
     const { error } = await supabaseClient.rpc("approve_friend_request", {
@@ -54,6 +40,7 @@ export default function Requests() {
     });
 
     if (error) throw error;
+    dispatch(loadIncomingFriendRequests());
   };
 
   const denyRequest = async (id: number) => {
@@ -62,12 +49,15 @@ export default function Requests() {
     });
 
     if (error) throw error;
+    dispatch(loadIncomingFriendRequests());
   };
 
-  return friendRequests && friendRequests?.length > 0 ? (
+  if (!incomingRequests || incomingRequests.length < 1) return null;
+
+  return (
     <Box>
       <Text fontWeight="bold">{t("friendRequests.title")}</Text>
-      {friendRequests?.map((request) => (
+      {incomingRequests.map((request) => (
         <Flex
           key={request.profile_hash}
           align="center"
@@ -90,5 +80,5 @@ export default function Requests() {
         </Flex>
       ))}
     </Box>
-  ) : null;
+  );
 }
