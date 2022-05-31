@@ -65,6 +65,29 @@ export const loadPendingFriendRequests = createAsyncThunk<
   return profiles;
 });
 
+export const loadFriends = createAsyncThunk<
+  definitions["user_profiles"][],
+  undefined,
+  { state: RootState }
+>("friends/friends", async (_, { getState }) => {
+  const { data: friendList, error: friendListError } = await supabaseClient.rpc(
+    "get_friend_list"
+  );
+
+  if (friendListError) throw friendListError;
+  if (!friendList || friendList.length < 1) return [];
+
+  const { data: friends, error: friendsError } = await supabaseClient
+    .from("user_profiles")
+    .select("*")
+    .in("id", friendList);
+
+  if (friendsError) throw friendsError;
+  if (!friends || friends.length < 1) return [];
+
+  return friends;
+});
+
 type FriendsState = {
   friends: {
     state: LoadingStates;
@@ -117,6 +140,7 @@ const friendsSlice = createSlice({
         state.requests.incoming.data = payload;
       }
     );
+
     builder.addCase(loadPendingFriendRequests.pending, (state) => {
       state.requests.pending.state = LoadingStates.loading;
     });
@@ -133,6 +157,17 @@ const friendsSlice = createSlice({
         state.requests.pending.data = payload;
       }
     );
+
+    builder.addCase(loadFriends.pending, (state) => {
+      state.friends.state = LoadingStates.loading;
+    });
+    builder.addCase(loadFriends.rejected, (state, { payload }) => {
+      state.friends.state = LoadingStates.error;
+    });
+    builder.addCase(loadFriends.fulfilled, (state, { payload }) => {
+      state.friends.state = LoadingStates.loaded;
+      state.friends.data = payload;
+    });
   },
 });
 
@@ -151,5 +186,9 @@ export const getIncomingFriendRequestsLoadingState = (state: RootState) =>
   state.friends.requests.incoming.state;
 export const getIncomingFriendRequests = (state: RootState) =>
   state.friends.requests.incoming.data;
+
+export const getFriendsLoadingState = (state: RootState) =>
+  state.friends.friends.state;
+export const getFriends = (state: RootState) => state.friends.friends.data;
 
 //#endregion

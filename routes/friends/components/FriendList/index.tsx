@@ -1,12 +1,14 @@
 import { Center, Flex, Text } from "@chakra-ui/react";
-import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
 import { useTranslation } from "next-i18next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import friends, {
+import {
+  getFriends,
+  getFriendsLoadingState,
   getPendingFriendRequests,
   getPendingFriendRequestsLoadingState,
+  loadFriends,
   loadPendingFriendRequests,
 } from "store/friends";
 import { getUserProfile } from "store/user";
@@ -32,6 +34,7 @@ export default function FriendList() {
   const dispatch = useDispatch();
 
   const { state: profileLoadingState } = useSelector(getUserProfile);
+
   const pendingRequests = useSelector(getPendingFriendRequests);
   const pendingRequestsState = useSelector(
     getPendingFriendRequestsLoadingState
@@ -49,29 +52,25 @@ export default function FriendList() {
     dispatch(loadPendingFriendRequests());
   }, [dispatch, pendingRequestsState, profileLoadingState, user]);
 
-  // const [friends, setFriends] = useState<FriendList[]>();
+  const friends = useSelector(getFriends);
+  const friendsState = useSelector(getFriendsLoadingState);
 
-  // useEffect(() => {
-  //   const getFriends = async () => {
-  //     const { data: friendList, error: friendListError } =
-  //       await supabaseClient.rpc("get_friend_list");
+  useEffect(() => {
+    if (!user) return;
+    if (
+      friendsState === LoadingStates.loaded ||
+      friendsState === LoadingStates.error
+    )
+      return;
+    if (profileLoadingState !== LoadingStates.loaded) return;
 
-  //     if (friendListError || !friendList) return;
+    dispatch(loadFriends());
+  }, [dispatch, friendsState, profileLoadingState, user]);
 
-  //     const { data: friends, error: friendsError } = await supabaseClient
-  //       .from("user_profiles")
-  //       .select("*")
-  //       .in("id", friendList);
-
-  //     if (friendsError || !friends) return;
-
-  //     setFriends(friends);
-  //   };
-
-  //   user && profile_hash && getFriends();
-  // }, [user, profile_hash]);
-
-  if (!pendingRequests || pendingRequests.length < 1)
+  if (
+    (!pendingRequests || pendingRequests.length < 1) &&
+    (!friends || friends.length < 1)
+  )
     return (
       <Center mt={["8", "14"]}>
         <Text color="gray.600">{t("friendList.noFriends")}</Text>
@@ -91,6 +90,14 @@ export default function FriendList() {
             url={friend.profile_hash}
             avatar_url={friend.avatar_url || ""}
             isPending={true}
+          />
+        ))}
+        {friends.map((friend) => (
+          <Friend
+            key={friend.profile_hash}
+            name={friend.user_name || ""}
+            url={friend.profile_hash}
+            avatar_url={friend.avatar_url || ""}
           />
         ))}
       </Flex>
