@@ -65,7 +65,12 @@ export default function Requests() {
           justify="space-between"
         >
           <Flex align="center">
-            <Avatar url={request.avatar_url} mr="2" size="sm" />
+            <Avatar
+              name={request.user_name}
+              url={request.avatar_url}
+              mr="2"
+              size="sm"
+            />
             <Text>{request.user_name}</Text>
           </Flex>
           <ButtonGroup size="sm" spacing="4" variant="link">
