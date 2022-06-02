@@ -80,7 +80,10 @@ export const loadFriends = createAsyncThunk<
   const { data: friends, error: friendsError } = await supabaseClient
     .from("user_profiles")
     .select("*")
-    .in("id", friendList);
+    .in(
+      "id",
+      friendList.map((f) => f.friend_id)
+    );
 
   if (friendsError) throw friendsError;
   if (!friends || friends.length < 1) return [];

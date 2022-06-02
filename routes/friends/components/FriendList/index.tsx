@@ -80,7 +80,9 @@ export default function FriendList() {
   return (
     <>
       <Text textAlign="end" color="gray.600" fontSize="sm" mb="2">
-        {t("friendList.count", { count: friends?.length || 0 })}
+        {t("friendList.count", {
+          count: pendingRequests?.length + friends?.length || 0,
+        })}
       </Text>
       <Flex direction="column" gap="3">
         {pendingRequests.map((friend) => (

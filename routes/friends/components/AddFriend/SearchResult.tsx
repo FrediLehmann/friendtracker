@@ -4,6 +4,7 @@ import { Avatar } from "components";
 import { useTranslation } from "next-i18next";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { loadPendingFriendRequests } from "store/friends";
 import { getUserProfile } from "store/user";
 
 export default function SearchResult({
@@ -27,7 +28,7 @@ export default function SearchResult({
     e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLDivElement>
   ) {
     e.preventDefault();
-    const { data, error } = await supabaseClient
+    const { error } = await supabaseClient
       .from("friend_requests")
       .insert({ requestor: id, receiver: matchId });
 
@@ -42,6 +43,7 @@ export default function SearchResult({
       return;
     }
 
+    dispatch(loadPendingFriendRequests());
     resetSearch();
   }
 

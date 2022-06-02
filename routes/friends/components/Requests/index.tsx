@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getIncomingFriendRequests,
   getIncomingFriendRequestsLoadingState,
+  loadFriends,
   loadIncomingFriendRequests,
 } from "store/friends";
 import { getUserProfile } from "store/user";
@@ -45,6 +46,7 @@ export default function Requests() {
 
     if (error) throw error;
     dispatch(loadIncomingFriendRequests());
+    dispatch(loadFriends());
   };
 
   const denyRequest = async (id: number) => {
@@ -59,7 +61,7 @@ export default function Requests() {
   if (!incomingRequests || incomingRequests.length < 1) return null;
 
   return (
-    <Box>
+    <Box mb="6">
       <Text fontWeight="bold">{t("friendRequests.title")}</Text>
       {incomingRequests.map((request) => (
         <Flex
