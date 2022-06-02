@@ -9,23 +9,47 @@ import {
   LinkOverlay,
   Text,
 } from "@chakra-ui/react";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { Avatar } from "components";
 import { X } from "icons";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { loadFriends, loadPendingFriendRequests } from "store/friends";
+import { getUserProfile } from "store/user";
 
 export default function Friend({
   name,
+  id,
   url,
   avatar_url,
   isPending = false,
 }: {
   name: string;
+  id: number;
   url: string;
   avatar_url: string;
   isPending?: boolean;
 }) {
   const { t } = useTranslation("friends");
+
+  const dispatch = useDispatch();
+  const { id: userId } = useSelector(getUserProfile);
+
+  const removeFriend = async () => {
+    if (isPending) {
+      await supabaseClient
+        .from("friend_requests")
+        .delete()
+        .eq("requestor", userId)
+        .eq("receiver", id);
+
+      dispatch(loadPendingFriendRequests());
+    } else {
+      await supabaseClient.rpc("remove_friend", { friend: id });
+      dispatch(loadFriends());
+    }
+  };
 
   return (
     <Flex
@@ -59,9 +83,11 @@ export default function Friend({
               <LinkOverlay>{name}</LinkOverlay>
             </NextLink>
           </Heading>
-          <Text color="gray.600" fontSize="xs">
-            {isPending && t("friendList.pendingRequest")}
-          </Text>
+          {isPending && (
+            <Text color="gray.600" fontSize="xs">
+              {t("friendList.pendingRequest")}
+            </Text>
+          )}
         </Box>
       </LinkBox>
       <Flex h="40px" align="center" mr={["3", "5"]}>
@@ -71,6 +97,7 @@ export default function Friend({
           aria-label={t("friendList.removeFriend")}
           icon={<X boxSize="4" />}
           variant="ghost"
+          onClick={removeFriend}
         />
       </Flex>
     </Flex>

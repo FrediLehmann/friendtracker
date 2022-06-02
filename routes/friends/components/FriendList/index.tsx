@@ -88,6 +88,7 @@ export default function FriendList() {
         {pendingRequests.map((friend) => (
           <Friend
             key={friend.profile_hash}
+            id={friend.id}
             name={friend.user_name || ""}
             url={friend.profile_hash}
             avatar_url={friend.avatar_url || ""}
@@ -97,6 +98,7 @@ export default function FriendList() {
         {friends.map((friend) => (
           <Friend
             key={friend.profile_hash}
+            id={friend.id}
             name={friend.user_name || ""}
             url={friend.profile_hash}
             avatar_url={friend.avatar_url || ""}
