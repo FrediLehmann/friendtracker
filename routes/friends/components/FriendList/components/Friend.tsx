@@ -79,9 +79,13 @@ export default function Friend({
         </Avatar>
         <Box overflow="hidden">
           <Heading size="sm" isTruncated>
-            <NextLink href={`/friends/${url}`} passHref>
-              <LinkOverlay>{name}</LinkOverlay>
-            </NextLink>
+            {isPending ? (
+              name
+            ) : (
+              <NextLink href={`/friends/${url}`} passHref>
+                <LinkOverlay>{name}</LinkOverlay>
+              </NextLink>
+            )}
           </Heading>
           {isPending && (
             <Text color="gray.600" fontSize="xs">

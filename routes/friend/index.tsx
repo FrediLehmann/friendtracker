@@ -15,10 +15,16 @@ import Head from "next/head";
 import NextLink from "next/link";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getFriendByHash,
+  getFriendsLoadingState,
+  loadFriends,
+} from "store/friends";
+import { LoadingStates } from "types/DataStates.enum";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
-import { definitions } from "types/supabase";
 
 const Friend: NextPage = () => {
   const { t } = useTranslation(["friends", "common"]);
@@ -27,24 +33,27 @@ const Friend: NextPage = () => {
   const { user } = useUser();
 
   const router = useRouter();
-  const { identifier } = router.query;
+  const { identifier = "" } = router.query;
 
-  const [friend, setFriend] = useState<definitions["user_profiles"]>();
+  const dispatch = useDispatch();
+  const friend = useSelector(
+    getFriendByHash(typeof identifier === "string" ? identifier : identifier[0])
+  );
+
+  const friendsLoadedState = useSelector(getFriendsLoadingState);
   useEffect(() => {
-    const fetchFriend = async () => {
-      const { data, error } = await supabaseClient
-        .from("user_profiles")
-        .select("*")
-        .eq("profile_hash", identifier)
-        .single();
+    if (friendsLoadedState !== LoadingStates.unloaded) return;
 
-      if (error) throw error;
+    user && dispatch(loadFriends());
+  }, [dispatch, friendsLoadedState, user]);
 
-      setFriend(data);
-    };
+  const removeFriend = async () => {
+    if (!friend) return;
 
-    user && fetchFriend();
-  }, [user, identifier]);
+    await supabaseClient.rpc("remove_friend", { friend: friend.id });
+    dispatch(loadFriends());
+    router.push("/friends");
+  };
 
   return (
     <>
@@ -74,7 +83,12 @@ const Friend: NextPage = () => {
                 <ArrowLeft boxSize="4" mb="1" /> {t("backToFriends")}
               </Link>
             </NextLink>
-            <Button variant="outline" colorScheme="red" size="sm">
+            <Button
+              variant="outline"
+              colorScheme="red"
+              size="sm"
+              onClick={removeFriend}
+            >
               {t("friendList.removeFriend")}
             </Button>
           </Flex>

@@ -193,5 +193,7 @@ export const getIncomingFriendRequests = (state: RootState) =>
 export const getFriendsLoadingState = (state: RootState) =>
   state.friends.friends.state;
 export const getFriends = (state: RootState) => state.friends.friends.data;
+export const getFriendByHash = (hash: string) => (state: RootState) =>
+  state.friends.friends.data.find((f) => f.profile_hash === hash);
 
 //#endregion
