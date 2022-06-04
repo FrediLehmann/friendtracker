@@ -44,5 +44,9 @@
       "bad": "Bad"
     },
     "safe": "Save"
+  },
+  "posts": {
+    "createPost": "Create post",
+    "postContentPlaceholder": "Add your text here."
   }
 }

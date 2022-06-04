@@ -44,5 +44,9 @@
       "bad": "Schlecht"
     },
     "safe": "Speichern"
+  },
+  "posts": {
+    "createPost": "Post erstellen",
+    "postContentPlaceholder": "Fügen Sie hier Ihren Text ein."
   }
 }

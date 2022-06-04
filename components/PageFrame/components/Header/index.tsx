@@ -1,4 +1,5 @@
 import { Box, Container, Flex } from "@chakra-ui/react";
+import { CreatePost } from "components";
 import { Info, Language, LogoSection, Menu } from "./components";
 
 const Header = () => {
@@ -22,6 +23,7 @@ const Header = () => {
         <LogoSection />
         <Flex as="section">
           <Info />
+          <CreatePost />
           <Language />
           <Menu />
         </Flex>
