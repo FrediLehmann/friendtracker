@@ -1,4 +1,11 @@
-import { Box, Button, ButtonGroup, Flex, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Divider,
+  Flex,
+  Text,
+} from "@chakra-ui/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
 import { Avatar } from "components";
@@ -90,6 +97,7 @@ export default function Requests() {
           </ButtonGroup>
         </Flex>
       ))}
+      <Divider my="4" />
     </Box>
   );
 }
