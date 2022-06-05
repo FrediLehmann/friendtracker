@@ -47,6 +47,7 @@
   },
   "posts": {
     "createPost": "Post erstellen",
-    "postContentPlaceholder": "Fügen Sie hier Ihren Text ein."
+    "postContentPlaceholder": "Fügen Sie hier Ihren Text ein.",
+    "selectImage": "Bilder wählen"
   }
 }

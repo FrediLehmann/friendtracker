@@ -9,6 +9,7 @@ export { default as DollarSign } from "./DollarSign";
 export { default as Edit } from "./Edit";
 export { default as Facebook } from "./Facebook";
 export { default as Github } from "./Github";
+export { default as Image } from "./Image";
 export { default as Mail } from "./Mail";
 export { default as Menu } from "./Menu";
 export { default as MessageSquare } from "./MessageSquare";

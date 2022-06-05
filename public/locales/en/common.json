@@ -47,6 +47,7 @@
   },
   "posts": {
     "createPost": "Create post",
-    "postContentPlaceholder": "Add your text here."
+    "postContentPlaceholder": "Add your text here.",
+    "selectImage": "Choose images"
   }
 }
