@@ -1,8 +1,11 @@
 import { Box, Container, Flex } from "@chakra-ui/react";
 import { CreatePost } from "components";
+import { useSelector } from "react-redux";
+import { getUserLoggedIn } from "store/user";
 import { Info, Language, LogoSection, Menu } from "./components";
 
 const Header = () => {
+  const loggedIn = useSelector(getUserLoggedIn);
   return (
     <Box
       as="header"
@@ -22,8 +25,8 @@ const Header = () => {
       >
         <LogoSection />
         <Flex as="section">
-          <Info />
-          <CreatePost />
+          {!loggedIn && <Info />}
+          {loggedIn && <CreatePost />}
           <Language />
           <Menu />
         </Flex>

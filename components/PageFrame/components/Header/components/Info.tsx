@@ -8,8 +8,6 @@ import {
 import { DollarSign } from "icons";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-import { getUserLoggedIn } from "store/user";
 
 export default function Info() {
   const { t } = useTranslation("common");
@@ -18,9 +16,7 @@ export default function Info() {
     base: "icon",
     md: "full",
   });
-  const loggedIn = useSelector(getUserLoggedIn);
 
-  if (loggedIn) return <></>;
   if (buttonVariant === "full")
     return (
       <Flex gap="2" mr="2">
