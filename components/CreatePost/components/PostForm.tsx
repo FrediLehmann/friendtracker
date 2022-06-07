@@ -1,34 +1,22 @@
 import { Box, Textarea, VisuallyHiddenInput } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { Image as ImageIcon } from "icons";
-import { useState } from "react";
 import PostImagesPreview from "./PostImagesPreview";
 
-export default function PostForm() {
+export default function PostForm({
+  images,
+  text,
+  setText,
+  imageUpload,
+  removeImage,
+}: {
+  images: any[];
+  text: string;
+  setText: (_: string) => void;
+  imageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  removeImage: (index: number) => void;
+}) {
   const { t } = useTranslation("common");
-
-  const [images, setImages] = useState<any[]>([]);
-
-  const imageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files || event.target.files.length < 1) {
-      return;
-    }
-
-    for (let i = 0; i < event.target.files.length; i++) {
-      const name = event.target.files[i].name;
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        setImages((images) => [...images, { name, data: reader.result }]);
-      };
-
-      reader.readAsDataURL(event.target.files[i]);
-    }
-  };
-
-  const removeImage = (name: string) => {
-    setImages((images) => images.filter((img) => img.name !== name));
-  };
 
   return (
     <>
@@ -69,6 +57,8 @@ export default function PostForm() {
         mt="4"
         placeholder={t("posts.postContentPlaceholder")}
         size="md"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
       ></Textarea>
     </>
   );

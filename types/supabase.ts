@@ -390,6 +390,105 @@ export interface paths {
       };
     };
   };
+  "/user_posts": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_posts.id"];
+          created_at?: parameters["rowFilter.user_posts.created_at"];
+          text_content?: parameters["rowFilter.user_posts.text_content"];
+          media_content?: parameters["rowFilter.user_posts.media_content"];
+          user_id?: parameters["rowFilter.user_posts.user_id"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["user_posts"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** user_posts */
+          user_posts?: definitions["user_posts"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_posts.id"];
+          created_at?: parameters["rowFilter.user_posts.created_at"];
+          text_content?: parameters["rowFilter.user_posts.text_content"];
+          media_content?: parameters["rowFilter.user_posts.media_content"];
+          user_id?: parameters["rowFilter.user_posts.user_id"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_posts.id"];
+          created_at?: parameters["rowFilter.user_posts.created_at"];
+          text_content?: parameters["rowFilter.user_posts.text_content"];
+          media_content?: parameters["rowFilter.user_posts.media_content"];
+          user_id?: parameters["rowFilter.user_posts.user_id"];
+        };
+        body: {
+          /** user_posts */
+          user_posts?: definitions["user_posts"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/user_profiles": {
     get: {
       parameters: {
@@ -529,11 +628,14 @@ export interface paths {
       };
     };
   };
-  "/rpc/get_user_profile_id": {
+  "/rpc/get_id_for_user": {
     post: {
       parameters: {
         body: {
-          args: { [key: string]: unknown };
+          args: {
+            /** Format: uuid */
+            target_uuid: string;
+          };
         };
         header: {
           /** Preference */
@@ -613,6 +715,26 @@ export interface paths {
           args: {
             /** Format: bigint */
             request_sender: number;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/remove_friend": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            /** Format: bigint */
+            friend: number;
           };
         };
         header: {
@@ -724,6 +846,25 @@ export interface definitions {
     /** Format: text */
     phone_number: string;
   };
+  user_posts: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /** Format: text */
+    text_content?: string;
+    /** Format: ARRAY */
+    media_content: unknown[];
+    /** Format: uuid */
+    user_id: string;
+  };
   /** @description User Profiles */
   user_profiles: {
     /**
@@ -817,6 +958,18 @@ export interface parameters {
   "rowFilter.phone_numbers.user_id": string;
   /** Format: text */
   "rowFilter.phone_numbers.phone_number": string;
+  /** @description user_posts */
+  "body.user_posts": definitions["user_posts"];
+  /** Format: bigint */
+  "rowFilter.user_posts.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.user_posts.created_at": string;
+  /** Format: text */
+  "rowFilter.user_posts.text_content": string;
+  /** Format: ARRAY */
+  "rowFilter.user_posts.media_content": string;
+  /** Format: uuid */
+  "rowFilter.user_posts.user_id": string;
   /** @description user_profiles */
   "body.user_profiles": definitions["user_profiles"];
   /** Format: bigint */
